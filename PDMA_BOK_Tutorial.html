@@ -1,0 +1,382 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PDMA Body of Knowledge - Product Development Excellence</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); overflow: hidden; height: 100vh; }
+    .presentation { width: 100vw; height: 100vh; position: relative; }
+    .slide { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: none; padding: 60px 80px; background: white; opacity: 0; transition: opacity 0.5s ease-in-out; }
+    .slide.active { display: flex; flex-direction: column; opacity: 1; }
+    .slide-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 40px; margin: -60px -80px 40px -80px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .slide-header h1 { font-size: 48px; font-weight: 700; margin-bottom: 10px; }
+    .slide-header h2 { font-size: 36px; font-weight: 600; margin-bottom: 8px; }
+    .slide-header p { font-size: 20px; opacity: 0.9; }
+    .slide-content { flex: 1; overflow-y: auto; padding: 20px 0; }
+    .slide-content h3 { color: #667eea; font-size: 32px; margin: 30px 0 20px 0; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+    .slide-content h4 { color: #764ba2; font-size: 24px; margin: 20px 0 15px 0; }
+    .slide-content p, .slide-content li { font-size: 20px; line-height: 1.6; color: #333; margin-bottom: 15px; }
+    .slide-content ul { margin-left: 30px; }
+    .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .phase-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .phase-box h4 { color: white; margin: 0 0 10px 0; font-size: 22px; }
+    .phase-box p { color: white; margin: 0; font-size: 18px; }
+    .card { background: #f8f9fa; padding: 25px; border-radius: 10px; border-left: 5px solid #667eea; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .card h4 { color: #667eea; margin: 0 0 10px 0; font-size: 22px; }
+    .card p { margin: 0; font-size: 18px; }
+    .icon-list { list-style: none; margin-left: 0; }
+    .icon-list li { padding-left: 40px; position: relative; margin-bottom: 16px; }
+    .icon-list li:before { content: "✓"; position: absolute; left: 0; color: #667eea; font-size: 26px; font-weight: bold; }
+    .warning-list { list-style: none; margin-left: 0; }
+    .warning-list li { padding-left: 40px; position: relative; margin-bottom: 16px; }
+    .warning-list li:before { content: "⚠"; position: absolute; left: 0; color: #ff6b6b; font-size: 26px; }
+    .navigation { position: fixed; bottom: 30px; right: 30px; display: flex; gap: 15px; z-index: 1000; }
+    .nav-button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 15px 25px; border-radius: 8px; cursor: pointer; font-size: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: transform 0.2s; }
+    .nav-button:hover { transform: translateY(-2px); box-shadow: 0 6px 8px rgba(0,0,0,0.3); }
+    .nav-button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .slide-counter { position: fixed; bottom: 30px; left: 30px; background: rgba(102, 126, 234, 0.9); color: white; padding: 10px 20px; border-radius: 8px; font-size: 18px; z-index: 1000; }
+    .svg-graphic { margin: 30px auto; display: block; }
+    .center-content { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; }
+    .center-content h1 { font-size: 68px; color: #667eea; margin-bottom: 20px; }
+    .center-content h2 { font-size: 40px; color: #764ba2; margin-bottom: 30px; }
+    .center-content p { font-size: 26px; color: #555; max-width: 900px; }
+  </style>
+</head>
+<body>
+  <div class="presentation">
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+      <div class="center-content">
+        <svg width="220" height="220" viewBox="0 0 220 220" class="svg-graphic">
+          <circle cx="110" cy="110" r="95" fill="none" stroke="#667eea" stroke-width="8"/>
+          <circle cx="110" cy="110" r="65" fill="none" stroke="#764ba2" stroke-width="6"/>
+          <path d="M 110 45 L 110 175 M 45 110 L 175 110" stroke="#764ba2" stroke-width="3"/>
+          <circle cx="110" cy="110" r="16" fill="#667eea"/>
+        </svg>
+        <h1>PDMA Body of Knowledge</h1>
+        <h2>Foundations for Product Development Excellence</h2>
+        <p>A practical summary of PDMA’s BoK: domains, tools, and practices to build a high-performance innovation system.</p>
+      </div>
+    </div>
+
+    <!-- Slide 2: What is PDMA BoK -->
+    <div class="slide">
+      <div class="slide-header">
+        <h2>What is the PDMA BoK?</h2>
+        <p>Authoritative reference for product development practice and NPDP certification</p>
+      </div>
+      <div class="slide-content">
+        <div class="grid-2">
+          <div class="card">
+            <h4>Purpose</h4>
+            <p>Provide a common language, structure, and set of best practices across strategy, process, research, design, teams, and lifecycle.</p>
+          </div>
+          <div class="card">
+            <h4>Outcomes</h4>
+            <p>Higher success rates, better portfolio ROI, faster time-to-market, and more predictable launches.</p>
+          </div>
+        </div>
+        <svg width="800" height="180" viewBox="0 0 800 180" class="svg-graphic">
+          <defs>
+            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#667eea;stop-opacity:1"/>
+              <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1"/>
+            </linearGradient>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#667eea"/>
+            </marker>
+          </defs>
+          <rect x="60" y="50" width="140" height="80" rx="10" fill="url(#g1)"/>
+          <text x="130" y="95" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Strategy</text>
+          <path d="M 200 90 L 260 90" stroke="#667eea" stroke-width="4" marker-end="url(#arrow)"/>
+          <rect x="260" y="50" width="140" height="80" rx="10" fill="url(#g1)"/>
+          <text x="330" y="95" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Process</text>
+          <path d="M 400 90 L 460 90" stroke="#667eea" stroke-width="4" marker-end="url(#arrow)"/>
+          <rect x="460" y="50" width="140" height="80" rx="10" fill="url(#g1)"/>
+          <text x="530" y="95" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Design</text>
+          <path d="M 600 90 L 660 90" stroke="#667eea" stroke-width="4" marker-end="url(#arrow)"/>
+          <rect x="660" y="50" width="80" height="80" rx="10" fill="url(#g1)"/>
+          <text x="700" y="95" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Launch</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Slide 3: Core Domains diagram -->
+    <div class="slide">
+      <div class="slide-header">
+        <h2>Eight Core Domains (PDMA BoK)</h2>
+      </div>
+      <div class="slide-content">
+        <svg width="760" height="360" viewBox="0 0 760 360" class="svg-graphic" role="img" aria-label="PDMA BoK core domains diagram">
+          <!-- Outer ring -->
+          <circle cx="380" cy="180" r="120" fill="none" stroke="#667eea" stroke-width="4"/>
+          <!-- Center -->
+          <circle cx="380" cy="180" r="34" fill="#764ba2"/>
+          <text x="380" y="187" text-anchor="middle" fill="white" font-size="16" font-weight="bold">PDMA BoK</text>
+
+          <!-- Top -->
+          <circle cx="380" cy="40" r="16" fill="#667eea"/>
+          <text x="380" y="20" text-anchor="middle" fill="#333" font-size="16">Strategy</text>
+          <line x1="380" y1="60" x2="380" y2="72" stroke="#764ba2" stroke-width="3"/>
+
+          <!-- Bottom -->
+          <circle cx="380" cy="320" r="16" fill="#667eea"/>
+          <text x="380" y="345" text-anchor="middle" fill="#333" font-size="16">Launch & Lifecycle</text>
+          <line x1="380" y1="288" x2="380" y2="300" stroke="#764ba2" stroke-width="3"/>
+
+          <!-- Right upper -->
+          <circle cx="640" cy="110" r="16" fill="#667eea"/>
+          <text x="670" y="115" text-anchor="start" fill="#333" font-size="16">Process Models</text>
+          <line x1="460" y1="140" x2="624" y2="112" stroke="#764ba2" stroke-width="3"/>
+
+          <!-- Right lower -->
+          <circle cx="640" cy="250" r="16" fill="#667eea"/>
+          <text x="670" y="255" text-anchor="start" fill="#333" font-size="16">Tools & Metrics</text>
+          <line x1="460" y1="220" x2="624" y2="248" stroke="#764ba2" stroke-width="3"/>
+
+          <!-- Left upper -->
+          <circle cx="120" cy="110" r="16" fill="#667eea"/>
+          <text x="90" y="115" text-anchor="end" fill="#333" font-size="16">Market Research</text>
+          <line x1="300" y1="140" x2="136" y2="112" stroke="#764ba2" stroke-width="3"/>
+
+          <!-- Left lower -->
+          <circle cx="120" cy="250" r="16" fill="#667eea"/>
+          <text x="90" y="255" text-anchor="end" fill="#333" font-size="16">Teams & Culture</text>
+          <line x1="300" y1="220" x2="136" y2="248" stroke="#764ba2" stroke-width="3"/>
+
+          <!-- Mid-right -->
+          <circle cx="580" cy="180" r="16" fill="#667eea"/>
+          <text x="610" y="185" text-anchor="start" fill="#333" font-size="16">Design & Dev</text>
+          <line x1="500" y1="180" x2="564" y2="180" stroke="#764ba2" stroke-width="3"/>
+
+          <!-- Mid-left -->
+          <circle cx="180" cy="180" r="16" fill="#667eea"/>
+          <text x="150" y="185" text-anchor="end" fill="#333" font-size="16">Ethics & Pro</text>
+          <line x1="260" y1="180" x2="196" y2="180" stroke="#764ba2" stroke-width="3"/>
+        </svg>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Why a ring?</h4>
+            <p>Domains are interdependent—strategy informs process, research feeds design, and lifecycle data loops back.</p>
+          </div>
+          <div class="card">
+            <h4>Tailor to context</h4>
+            <p>Blend phase-gate governance with agile delivery; keep evidence-based decisions at gates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Strategy & Portfolio -->
+    <div class="slide">
+      <div class="slide-header"><h2>Strategy & Portfolio Management</h2></div>
+      <div class="slide-content">
+        <div class="two-column">
+          <div>
+            <h3>Key Practices</h3>
+            <ul class="icon-list">
+              <li>Opportunity identification & market mapping</li>
+              <li>Portfolio mix, scoring models, risk balance</li>
+              <li>Strategic roadmaps and option bets</li>
+              <li>Clear value propositions and target segments</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Metrics</h3>
+            <ul class="icon-list">
+              <li>NPV, IRR, Payback, R&D intensity</li>
+              <li>Hit rates, time-to-money, pipeline health</li>
+              <li>Strategic fit, technical risk, market risk</li>
+            </ul>
+          </div>
+        </div>
+        <svg width="740" height="140" viewBox="0 0 740 140" class="svg-graphic">
+          <rect x="40" y="30" width="100" height="80" fill="#667eea" opacity="0.25"/>
+          <rect x="160" y="20" width="100" height="90" fill="#667eea" opacity="0.5"/>
+          <rect x="280" y="10" width="100" height="100" fill="#667eea" opacity="0.75"/>
+          <rect x="400" y="5" width="100" height="105" fill="#667eea"/>
+          <rect x="520" y="0" width="100" height="110" fill="#764ba2"/>
+          <text x="620" y="130" text-anchor="middle" fill="#333" font-size="16" font-weight="bold">Portfolio Value Growth</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Slide 5: Process Models -->
+    <div class="slide">
+      <div class="slide-header"><h2>NPD Process Models</h2><p>Stage-Gate, Agile, Lean, and Hybrids</p></div>
+      <div class="slide-content">
+        <div class="grid-3">
+          <div class="card"><h4>Stage-Gate</h4><p>Phases with evidence-based gate decisions (Go/Kill/Hold/Recycle).</p></div>
+          <div class="card"><h4>Agile</h4><p>Iterative sprints, backlog-driven, empirical control (great for software).</p></div>
+          <div class="card"><h4>Lean</h4><p>Eliminate waste, rapid learning cycles, small bets before scale.</p></div>
+        </div>
+        <h3>Best of both</h3>
+        <ul class="icon-list">
+          <li>Use gates for governance; use Agile within development and validation phases.</li>
+          <li>Timebox experiments; promote evidence over opinions.</li>
+          <li>Calibrate rigor by risk and investment tier.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Slide 6: VoC & Tools -->
+    <div class="slide">
+      <div class="slide-header"><h2>Voice of the Customer & Analytical Tools</h2></div>
+      <div class="slide-content">
+        <div class="grid-3">
+          <div class="card"><h4>Discovery</h4><p>Contextual inquiry, JTBD interviews, ethnography, diary studies.</p></div>
+          <div class="card"><h4>Evaluation</h4><p>Concept tests, conjoint/MaxDiff, Kano, pricing research, usability.</p></div>
+          <div class="card"><h4>Planning</h4><p>Roadmapping, QFD/House of Quality, TRIZ, risk (FMEA), financials.</p></div>
+        </div>
+        <svg width="720" height="160" viewBox="0 0 720 160" class="svg-graphic">
+          <defs>
+            <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#764ba2;stop-opacity:1"/>
+              <stop offset="100%" style="stop-color:#667eea;stop-opacity:1"/>
+            </linearGradient>
+          </defs>
+          <rect x="40" y="40" width="200" height="80" rx="12" fill="url(#g2)"/>
+          <text x="140" y="86" text-anchor="middle" fill="white" font-weight="bold">VoC Inputs</text>
+          <path d="M 240 80 L 320 80" stroke="#667eea" stroke-width="4"/>
+          <rect x="320" y="40" width="160" height="80" rx="12" fill="#667eea" opacity="0.9"/>
+          <text x="400" y="86" text-anchor="middle" fill="white" font-weight="bold">Analysis</text>
+          <path d="M 480 80 L 560 80" stroke="#667eea" stroke-width="4"/>
+          <rect x="560" y="40" width="120" height="80" rx="12" fill="#764ba2"/>
+          <text x="620" y="86" text-anchor="middle" fill="white" font-weight="bold">Decisions</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Slide 7: Design & Development -->
+    <div class="slide">
+      <div class="slide-header"><h2>Design & Development</h2></div>
+      <div class="slide-content">
+        <div class="two-column">
+          <div>
+            <h3>Core Activities</h3>
+            <ul class="icon-list">
+              <li>Requirements, architecture, specs, risk (FMEA)</li>
+              <li>Iterative prototypes: feasibility → usability → pilot</li>
+              <li>DFM/DFA, quality planning, verification/validation</li>
+              <li>UX research, accessibility, service design</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Readiness Gates</h3>
+            <ul class="icon-list">
+              <li>Design Readiness (DR)</li>
+              <li>Manufacturing Readiness (MRL)</li>
+              <li>Launch Readiness (LR)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Teams & Culture -->
+    <div class="slide">
+      <div class="slide-header"><h2>Teams, Culture, and Organization</h2></div>
+      <div class="slide-content">
+        <div class="grid-3">
+          <div class="card"><h4>Governance</h4><p>Clear roles (sponsor, core team, gatekeepers), decision rights, and escalation paths.</p></div>
+          <div class="card"><h4>Ways of Working</h4><p>Collaboration rituals, visibility, WIP limits, and empowered cross-functional teams.</p></div>
+          <div class="card"><h4>Capability</h4><p>Training, communities of practice, NPDP, and onboarding playbooks.</p></div>
+        </div>
+        <ul class="icon-list" style="margin-top: 10px;">
+          <li>Align incentives to portfolio and product outcomes, not functions alone.</li>
+          <li>Psychological safety drives discovery and honest gate decisions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Slide 9: Launch & Lifecycle -->
+    <div class="slide">
+      <div class="slide-header"><h2>Launch & Lifecycle Management</h2><p>From commercialization to post-launch optimization</p></div>
+      <div class="slide-content">
+        <div class="two-column">
+          <div>
+            <h3>Commercialization</h3>
+            <ul class="icon-list">
+              <li>Positioning, messaging, pricing, channels</li>
+              <li>Sales enablement, readiness checks, supply chain ramp</li>
+              <li>Regulatory & compliance controls</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Lifecycle</h3>
+            <ul class="icon-list">
+              <li>KPIs: adoption, retention, NPS/CSAT, margin</li>
+              <li>Continuous improvement, A/B tests, PQCs</li>
+              <li>Line extensions, refreshes, EOL strategy</li>
+            </ul>
+          </div>
+        </div>
+        <svg width="740" height="140" viewBox="0 0 740 140" class="svg-graphic">
+          <rect x="60" y="40" width="120" height="80" rx="10" fill="#667eea"/>
+          <text x="120" y="86" text-anchor="middle" fill="white" font-weight="bold">Launch</text>
+          <path d="M 180 80 C 260 20, 340 140, 420 80 S 580 20, 660 80" stroke="#764ba2" stroke-width="4" fill="none"/>
+          <text x="400" y="120" text-anchor="middle" fill="#333" font-size="16" font-weight="bold">Adoption and Growth Curve</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Slide 10: Ethics & Wrap-up -->
+    <div class="slide">
+      <div class="slide-header"><h2>Ethics & Professionalism • Wrap-up</h2></div>
+      <div class="slide-content">
+        <div class="grid-2">
+          <div class="card">
+            <h4>Ethics</h4>
+            <p>Responsible research, data integrity, privacy, safety, sustainability, and transparency in claims.</p>
+          </div>
+          <div class="card">
+            <h4>Takeaways</h4>
+            <ul class="icon-list">
+              <li>Use the BoK as a capability model and common language.</li>
+              <li>Tailor rigor to risk; keep evidence-based gates.</li>
+              <li>Invest in skills: VoC, analysis, design, and governance.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-box" style="margin-top: 24px;">
+          <h4>Next Steps</h4>
+          <p>Assess your current practice vs. PDMA BoK, define your target “way we build products,” train teams, and measure outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">10</span></div>
+  <div class="navigation">
+    <button class="nav-button" id="prev-btn" onclick="previousSlide()">← Previous</button>
+    <button class="nav-button" id="next-btn" onclick="nextSlide()">Next →</button>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    document.getElementById('total-slides').textContent = totalSlides;
+
+    function showSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (n + totalSlides) % totalSlides;
+      slides[currentSlide].classList.add('active');
+      document.getElementById('current-slide').textContent = currentSlide + 1;
+      document.getElementById('prev-btn').disabled = currentSlide === 0;
+      document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+    }
+    function nextSlide() { if (currentSlide < totalSlides - 1) showSlide(currentSlide + 1); }
+    function previousSlide() { if (currentSlide > 0) showSlide(currentSlide - 1); }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      else if (e.key === 'ArrowLeft') previousSlide();
+    });
+    showSlide(0);
+  </script>
+</body>
+</html>

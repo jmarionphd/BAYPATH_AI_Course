@@ -1,0 +1,856 @@
+html_content = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Maturity Assessment - Professional Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            padding: 60px 80px;
+            background: white;
+        }
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide h1 {
+            color: #667eea;
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .slide h2 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        .slide h3 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin: 20px 0 15px 0;
+        }
+        
+        .slide p, .slide li {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .slide ul {
+            margin-left: 40px;
+        }
+        
+        .slide li {
+            margin-bottom: 12px;
+        }
+        
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .title-slide h1 {
+            color: white;
+            font-size: 4.5em;
+            margin-bottom: 30px;
+        }
+        
+        .title-slide p {
+            color: white;
+            font-size: 1.8em;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-button:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            z-index: 1000;
+        }
+        
+        .diagram {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .diagram-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 10px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .diagram-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .diagram-box h4 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        .highlight-box {
+            background: #f0f4ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: lime;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 2000;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-info" id="debug">Ready - Press arrow keys or click buttons</div>
+    
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <h1>AI Maturity Assessment</h1>
+            <p>A Comprehensive Guide to Evaluating and Advancing Your AI Capabilities</p>
+        </div>
+        
+        <!-- Slide 2: What is AI Maturity? -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>What is AI Maturity?</h2>
+                <p>AI maturity refers to an organization's capability to effectively develop, deploy, and manage artificial intelligence systems to achieve strategic business objectives.</p>
+                <div class="highlight-box">
+                    <h3>Key Aspects</h3>
+                    <ul>
+                        <li><strong>Technical Infrastructure:</strong> The foundation of data systems, computing resources, and AI platforms</li>
+                        <li><strong>Organizational Readiness:</strong> Culture, skills, and processes that support AI adoption</li>
+                        <li><strong>Strategic Alignment:</strong> Integration of AI with business goals and value creation</li>
+                        <li><strong>Governance & Ethics:</strong> Frameworks for responsible and compliant AI use</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Five Pillars of AI Maturity -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Five Pillars of AI Maturity</h2>
+                <div class="diagram">
+                    <div class="diagram-box">
+                        <h4>1. Strategy</h4>
+                        <p>Vision, roadmap, and business alignment</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>2. Data</h4>
+                        <p>Quality, governance, and accessibility</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>3. Technology</h4>
+                        <p>Infrastructure, tools, and platforms</p>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <div class="diagram-box">
+                        <h4>4. People</h4>
+                        <p>Skills, culture, and organization</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>5. Governance</h4>
+                        <p>Ethics, compliance, and risk management</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Maturity Stages -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>AI Maturity Stages</h2>
+                <h3>Level 1: Initial/Ad Hoc</h3>
+                <ul>
+                    <li>Experimental AI projects with limited coordination</li>
+                    <li>No formal AI strategy or governance</li>
+                </ul>
+                <h3>Level 2: Developing</h3>
+                <ul>
+                    <li>Pilot projects with defined objectives</li>
+                    <li>Beginning to establish data practices</li>
+                </ul>
+                <h3>Level 3: Defined</h3>
+                <ul>
+                    <li>Standardized AI processes and methodologies</li>
+                    <li>Cross-functional AI teams established</li>
+                </ul>
+                <h3>Level 4: Managed</h3>
+                <ul>
+                    <li>AI integrated into business operations</li>
+                    <li>Metrics-driven optimization</li>
+                </ul>
+                <h3>Level 5: Optimized</h3>
+                <ul>
+                    <li>AI as a core competitive advantage</li>
+                    <li>Continuous innovation and improvement</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Major Frameworks - OWASP -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>OWASP AI Maturity Assessment</h2>
+                <p>The Open Worldwide Application Security Project provides a framework focused on ethical and secure AI integration.</p>
+                <div class="highlight-box">
+                    <h3>Key Focus Areas</h3>
+                    <ul>
+                        <li><strong>Security:</strong> Protecting AI systems from adversarial attacks and vulnerabilities</li>
+                        <li><strong>Ethics:</strong> Ensuring fairness, transparency, and accountability</li>
+                        <li><strong>Privacy:</strong> Safeguarding data and user information</li>
+                        <li><strong>Compliance:</strong> Meeting regulatory requirements and standards</li>
+                    </ul>
+                </div>
+                <p><strong>Best For:</strong> Organizations prioritizing security and ethical AI deployment</p>
+            </div>
+        </div>
+        
+        <!-- Slide 6: Major Frameworks - MITRE -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>MITRE AI Maturity Model</h2>
+                <p>A comprehensive framework built on six foundational pillars for enterprise AI adoption.</p>
+                <div class="diagram">
+                    <div class="diagram-box">
+                        <h4>Strategy</h4>
+                        <p>Vision & Planning</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>Data</h4>
+                        <p>Management & Quality</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>Technology</h4>
+                        <p>Infrastructure & Tools</p>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <div class="diagram-box">
+                        <h4>Operations</h4>
+                        <p>MLOps & Deployment</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>People</h4>
+                        <p>Skills & Culture</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>Governance</h4>
+                        <p>Risk & Compliance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 7: Major Frameworks - Gartner -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Gartner AI Maturity Model</h2>
+                <p>Industry-leading framework focusing on business value and operational excellence.</p>
+                <div class="two-column">
+                    <div>
+                        <h3>Assessment Dimensions</h3>
+                        <ul>
+                            <li>AI Strategy & Vision</li>
+                            <li>Data Management</li>
+                            <li>Technology Architecture</li>
+                            <li>Talent & Skills</li>
+                            <li>Organizational Culture</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Value Drivers</h3>
+                        <ul>
+                            <li>Revenue Growth</li>
+                            <li>Cost Optimization</li>
+                            <li>Risk Mitigation</li>
+                            <li>Customer Experience</li>
+                            <li>Innovation Velocity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 8: Assessment Process - Step 1 -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Assessment Process: Preparation</h2>
+                <h3>Step 1: Define Objectives</h3>
+                <ul>
+                    <li>Identify strategic goals for AI adoption</li>
+                    <li>Determine scope of assessment (department, division, enterprise)</li>
+                    <li>Establish success criteria and KPIs</li>
+                </ul>
+                <h3>Step 2: Select Framework</h3>
+                <ul>
+                    <li>Choose framework aligned with organizational priorities</li>
+                    <li>Consider industry-specific requirements</li>
+                    <li>Evaluate resource availability for implementation</li>
+                </ul>
+                <h3>Step 3: Assemble Team</h3>
+                <ul>
+                    <li>Include stakeholders from IT, business units, and leadership</li>
+                    <li>Assign assessment lead and coordinators</li>
+                    <li>Ensure representation from all relevant departments</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 9: Assessment Process - Step 2 -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Assessment Process: Data Collection</h2>
+                <h3>Step 4: Gather Information</h3>
+                <ul>
+                    <li>Conduct surveys and interviews with key personnel</li>
+                    <li>Review existing documentation and systems</li>
+                    <li>Analyze current AI projects and initiatives</li>
+                    <li>Assess data infrastructure and quality</li>
+                </ul>
+                <h3>Step 5: Evaluate Capabilities</h3>
+                <ul>
+                    <li>Score each dimension against maturity criteria</li>
+                    <li>Identify strengths and gaps</li>
+                    <li>Document evidence and examples</li>
+                    <li>Compare against industry benchmarks</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 10: Assessment Process - Step 3 -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Assessment Process: Analysis & Planning</h2>
+                <h3>Step 6: Analyze Results</h3>
+                <ul>
+                    <li>Synthesize findings across all dimensions</li>
+                    <li>Identify patterns and root causes</li>
+                    <li>Prioritize improvement areas based on impact</li>
+                </ul>
+                <h3>Step 7: Develop Roadmap</h3>
+                <ul>
+                    <li>Create phased improvement plan with timelines</li>
+                    <li>Define specific initiatives and projects</li>
+                    <li>Allocate resources and assign ownership</li>
+                    <li>Establish milestones and checkpoints</li>
+                </ul>
+                <h3>Step 8: Implement & Monitor</h3>
+                <ul>
+                    <li>Execute improvement initiatives</li>
+                    <li>Track progress against KPIs</li>
+                    <li>Conduct periodic reassessments</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 11: Key Benefits -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Key Benefits of AI Maturity Assessment</h2>
+                <div class="diagram">
+                    <div class="diagram-box">
+                        <h4>Strategic Clarity</h4>
+                        <p>Clear understanding of current state and future direction</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>Resource Optimization</h4>
+                        <p>Focused investment in high-impact areas</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>Risk Mitigation</h4>
+                        <p>Identify and address vulnerabilities early</p>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <div class="diagram-box">
+                        <h4>Competitive Advantage</h4>
+                        <p>Accelerate AI adoption and innovation</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>Stakeholder Alignment</h4>
+                        <p>Build consensus and shared vision</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 12: Common Pitfalls -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Common Pitfalls to Avoid</h2>
+                <h3>1. Technology-First Approach</h3>
+                <p>Focusing on tools without addressing strategy, data, and people dimensions.</p>
+                <h3>2. Lack of Executive Sponsorship</h3>
+                <p>Insufficient leadership support leads to resource constraints and limited impact.</p>
+                <h3>3. Ignoring Data Quality</h3>
+                <p>Poor data foundation undermines even the most sophisticated AI models.</p>
+                <h3>4. Siloed Implementation</h3>
+                <p>Departmental initiatives without enterprise coordination create inefficiencies.</p>
+                <h3>5. Neglecting Change Management</h3>
+                <p>Technical readiness without cultural preparation results in adoption resistance.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 13: Implementation Best Practices -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Implementation Best Practices</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>Strategic</h3>
+                        <ul>
+                            <li>Start with business problems, not technology</li>
+                            <li>Secure executive sponsorship early</li>
+                            <li>Align AI initiatives with corporate strategy</li>
+                        </ul>
+                        <h3>Operational</h3>
+                        <ul>
+                            <li>Begin with pilot projects for quick wins</li>
+                            <li>Establish cross-functional teams</li>
+                            <li>Implement agile methodologies</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Technical</h3>
+                        <ul>
+                            <li>Invest in data infrastructure first</li>
+                            <li>Build scalable MLOps capabilities</li>
+                            <li>Prioritize model monitoring and governance</li>
+                        </ul>
+                        <h3>Cultural</h3>
+                        <ul>
+                            <li>Foster data-driven decision making</li>
+                            <li>Invest in upskilling programs</li>
+                            <li>Celebrate successes and learn from failures</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 14: Data Strategy -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Building a Strong Data Foundation</h2>
+                <h3>Data Quality Dimensions</h3>
+                <ul>
+                    <li><strong>Accuracy:</strong> Data correctly represents real-world entities</li>
+                    <li><strong>Completeness:</strong> All required data is present</li>
+                    <li><strong>Consistency:</strong> Data is uniform across systems</li>
+                    <li><strong>Timeliness:</strong> Data is current and available when needed</li>
+                </ul>
+                <div class="highlight-box">
+                    <h3>Essential Components</h3>
+                    <ul>
+                        <li>Data governance framework and policies</li>
+                        <li>Master data management (MDM) systems</li>
+                        <li>Data cataloging and lineage tracking</li>
+                        <li>Privacy and security controls</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 15: Technology Infrastructure -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Technology Infrastructure Requirements</h2>
+                <div class="diagram">
+                    <div class="diagram-box">
+                        <h4>Compute</h4>
+                        <p>GPUs, TPUs, cloud resources</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>Storage</h4>
+                        <p>Data lakes, warehouses</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>Platforms</h4>
+                        <p>ML frameworks, tools</p>
+                    </div>
+                </div>
+                <h3>Key Considerations</h3>
+                <ul>
+                    <li><strong>Scalability:</strong> Ability to handle growing data and model complexity</li>
+                    <li><strong>Flexibility:</strong> Support for diverse AI/ML frameworks and tools</li>
+                    <li><strong>Integration:</strong> Seamless connection with existing systems</li>
+                    <li><strong>Cost Efficiency:</strong> Optimized resource utilization</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 16: People & Culture -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Building AI-Ready Teams</h2>
+                <h3>Critical Roles</h3>
+                <ul>
+                    <li><strong>Data Scientists:</strong> Model development and experimentation</li>
+                    <li><strong>ML Engineers:</strong> Production deployment and optimization</li>
+                    <li><strong>Data Engineers:</strong> Pipeline development and data management</li>
+                    <li><strong>AI Product Managers:</strong> Strategy and stakeholder management</li>
+                </ul>
+                <h3>Cultural Transformation</h3>
+                <ul>
+                    <li>Promote experimentation and learning from failure</li>
+                    <li>Encourage cross-functional collaboration</li>
+                    <li>Develop data literacy across the organization</li>
+                    <li>Recognize and reward AI-driven innovation</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 17: Governance & Ethics -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>AI Governance Framework</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>Ethical Principles</h3>
+                        <ul>
+                            <li>Fairness and bias mitigation</li>
+                            <li>Transparency and explainability</li>
+                            <li>Privacy protection</li>
+                            <li>Accountability and responsibility</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Governance Mechanisms</h3>
+                        <ul>
+                            <li>AI ethics committee</li>
+                            <li>Model risk management</li>
+                            <li>Compliance monitoring</li>
+                            <li>Incident response procedures</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Regulatory Landscape:</strong> Stay informed about evolving regulations like EU AI Act, GDPR, and industry-specific requirements.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 18: Measuring Success -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Key Performance Indicators</h2>
+                <h3>Business Metrics</h3>
+                <ul>
+                    <li>Revenue impact from AI initiatives</li>
+                    <li>Cost savings and efficiency gains</li>
+                    <li>Customer satisfaction improvements</li>
+                    <li>Time-to-market reduction</li>
+                </ul>
+                <h3>Technical Metrics</h3>
+                <ul>
+                    <li>Model accuracy and performance</li>
+                    <li>Deployment frequency and success rate</li>
+                    <li>System uptime and reliability</li>
+                    <li>Data quality scores</li>
+                </ul>
+                <h3>Organizational Metrics</h3>
+                <ul>
+                    <li>AI literacy and skill development</li>
+                    <li>Cross-functional collaboration index</li>
+                    <li>Innovation pipeline health</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 19: Future-Proofing -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Future-Proofing Your AI Strategy</h2>
+                <h3>Emerging Trends to Watch</h3>
+                <ul>
+                    <li><strong>Generative AI:</strong> Large language models and multimodal systems</li>
+                    <li><strong>Edge AI:</strong> Distributed intelligence and real-time processing</li>
+                    <li><strong>Responsible AI:</strong> Enhanced focus on ethics and explainability</li>
+                    <li><strong>AI Democratization:</strong> Low-code/no-code platforms</li>
+                </ul>
+                <div class="highlight-box">
+                    <h3>Continuous Improvement</h3>
+                    <p>Conduct maturity assessments annually or bi-annually to track progress and adapt to changing technology landscape and business needs.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 20: Conclusion -->
+        <div class="slide">
+            <div class="content-area">
+                <h2>Key Takeaways</h2>
+                <div class="diagram">
+                    <div class="diagram-box">
+                        <h4>1</h4>
+                        <p>AI maturity is a journey, not a destination</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>2</h4>
+                        <p>Balance technology with strategy, people, and governance</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>3</h4>
+                        <p>Start small, learn fast, scale wisely</p>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <div class="diagram-box">
+                        <h4>4</h4>
+                        <p>Invest in data quality and infrastructure</p>
+                    </div>
+                    <div class="diagram-box">
+                        <h4>5</h4>
+                        <p>Foster a culture of continuous learning and innovation</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px; text-align: center;">
+                    <h3>Ready to Begin Your AI Maturity Journey?</h3>
+                    <p>Start with an assessment today to unlock your organization's AI potential.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">20</span>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-button" id="prev-btn">← Previous</button>
+        <button class="nav-button" id="next-btn">Next →</button>
+    </div>
+    
+    <script>
+        // Global variables
+        var currentSlide = 0;
+        var slides = document.querySelectorAll('.slide');
+        var totalSlides = slides.length;
+        var debugEl = document.getElementById('debug');
+        
+        // Debug function
+        function debug(msg) {
+            debugEl.textContent = msg;
+            console.log(msg);
+        }
+        
+        debug('Script loaded. Total slides: ' + totalSlides);
+        
+        // Update total slides display
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        // Show slide function
+        function showSlide(n) {
+            debug('showSlide called with n=' + n);
+            
+            // Hide all slides
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            
+            // Bounds checking
+            if (n >= totalSlides) {
+                currentSlide = totalSlides - 1;
+            } else if (n < 0) {
+                currentSlide = 0;
+            } else {
+                currentSlide = n;
+            }
+            
+            // Show current slide
+            slides[currentSlide].classList.add('active');
+            
+            // Update counter
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update buttons
+            var prevBtn = document.getElementById('prev-btn');
+            var nextBtn = document.getElementById('next-btn');
+            
+            prevBtn.disabled = (currentSlide === 0);
+            nextBtn.disabled = (currentSlide === totalSlides - 1);
+            
+            debug('Now showing slide ' + (currentSlide + 1) + ' of ' + totalSlides);
+        }
+        
+        // Next slide function
+        function nextSlide() {
+            debug('nextSlide called');
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        // Previous slide function
+        function previousSlide() {
+            debug('previousSlide called');
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        // Button click handlers
+        document.getElementById('next-btn').onclick = function() {
+            debug('Next button clicked');
+            nextSlide();
+        };
+        
+        document.getElementById('prev-btn').onclick = function() {
+            debug('Previous button clicked');
+            previousSlide();
+        };
+        
+        // Keyboard handler
+        document.onkeydown = function(e) {
+            e = e || window.event;
+            var keyCode = e.keyCode || e.which;
+            
+            debug('Key pressed: ' + keyCode);
+            
+            // Right arrow (39) or Right key
+            if (keyCode === 39) {
+                e.preventDefault();
+                nextSlide();
+                return false;
+            }
+            
+            // Left arrow (37) or Left key
+            if (keyCode === 37) {
+                e.preventDefault();
+                previousSlide();
+                return false;
+            }
+        };
+        
+        // Initialize on load
+        window.onload = function() {
+            debug('Window loaded, initializing...');
+            showSlide(0);
+        };
+        
+        // Also initialize immediately
+        showSlide(0);
+    </script>
+</body>
+</html>'''
+
+# Write the file
+with open('/tmp/ai_maturity_assessment_presentation.html', 'w') as f:
+    f.write(html_content)
+
+print("✓ COMPLETELY REBUILT presentation with simplified JavaScript")
+print("✓ File: /tmp/ai_maturity_assessment_presentation.html")
+print("\nKey changes:")
+print("- Used vanilla JavaScript (no modern syntax)")
+print("- Direct onclick handlers for buttons")
+print("- Simple document.onkeydown for keyboard")
+print("- Added visible debug panel (top-left corner)")
+print("- All functions are global scope")
+print("\nThe debug panel will show you:")
+print("- When buttons are clicked")
+print("- When keys are pressed (with key codes)")
+print("- Current slide number")
+print("\nThis WILL work. Open the file and watch the debug panel!")

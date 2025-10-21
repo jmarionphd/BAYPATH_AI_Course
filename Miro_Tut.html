@@ -1,0 +1,606 @@
+html_content = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miro for Collaborative Mapping</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow-y: auto;
+        }
+        
+        .slide.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        h3 {
+            font-size: 1.8em;
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #7f8c8d;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        li {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #34495e;
+            margin: 15px 0;
+            padding-left: 40px;
+            position: relative;
+        }
+        
+        li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+        
+        .column {
+            padding: 20px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .prev-btn {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .next-btn {
+            background: #667eea;
+            color: white;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            z-index: 1000;
+        }
+        
+        .debug {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: #0f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9em;
+            z-index: 2000;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>Miro for Collaborative Mapping</h1>
+            <p class="subtitle">Transforming Team Collaboration Through Visual Workspace Innovation</p>
+            <div style="text-align: center; margin-top: 80px;">
+                <p style="font-size: 1.4em; color: #7f8c8d;">A Comprehensive Guide to Visual Collaboration</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: What is Miro? -->
+        <div class="slide">
+            <h2>What is Miro?</h2>
+            <ul>
+                <li>Cloud-based visual collaboration platform designed for distributed teams</li>
+                <li>Infinite canvas workspace that enables real-time brainstorming and planning</li>
+                <li>Supports over 50 million users worldwide across various industries</li>
+                <li>Integrates with 100+ popular tools including Slack, Microsoft Teams, and Jira</li>
+                <li>Provides templates for workshops, agile workflows, and strategic planning</li>
+            </ul>
+            <div class="highlight-box">
+                <h3>Core Value Proposition</h3>
+                <p style="font-size: 1.2em; line-height: 1.8;">Miro transforms how teams collaborate by providing a shared visual space where ideas can be captured, organized, and developed in real-time, regardless of location.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Key Features -->
+        <div class="slide">
+            <h2>Key Features for Collaborative Mapping</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Visual Tools</h3>
+                    <ul>
+                        <li>Sticky notes and cards</li>
+                        <li>Mind maps and flowcharts</li>
+                        <li>Wireframes and diagrams</li>
+                        <li>Drawing and annotation tools</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Collaboration Features</h3>
+                    <ul>
+                        <li>Real-time cursors and editing</li>
+                        <li>Video chat integration</li>
+                        <li>Voting and feedback tools</li>
+                        <li>Comments and mentions</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p style="font-size: 1.2em;"><strong>Smart Features:</strong> AI-powered clustering, automatic diagramming, and intelligent content suggestions enhance productivity.</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Types of Collaborative Mapping -->
+        <div class="slide">
+            <h2>Types of Collaborative Mapping in Miro</h2>
+            <ul>
+                <li><strong>Process Mapping:</strong> Visualize workflows, identify bottlenecks, and optimize operations</li>
+                <li><strong>Journey Mapping:</strong> Chart customer experiences across touchpoints and channels</li>
+                <li><strong>Mind Mapping:</strong> Brainstorm ideas and explore connections between concepts</li>
+                <li><strong>Concept Mapping:</strong> Illustrate relationships between ideas and knowledge domains</li>
+                <li><strong>Story Mapping:</strong> Plan product development with user stories and features</li>
+                <li><strong>Empathy Mapping:</strong> Understand user perspectives, needs, and pain points</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Customer Journey Mapping -->
+        <div class="slide">
+            <h2>Customer Journey Mapping with Miro</h2>
+            <h3>Why Use Miro for Journey Maps?</h3>
+            <ul>
+                <li>Pre-built templates accelerate the mapping process</li>
+                <li>Collaborative editing allows cross-functional input from marketing, sales, and support</li>
+                <li>Visual elements like icons and images bring personas to life</li>
+                <li>Easy to update and iterate as customer insights evolve</li>
+            </ul>
+            <div class="highlight-box">
+                <h3>Best Practice</h3>
+                <p style="font-size: 1.2em; line-height: 1.8;">Start with customer research data, involve stakeholders from different departments, and use color coding to highlight pain points and opportunities throughout the journey.</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Process Mapping Excellence -->
+        <div class="slide">
+            <h2>Process Mapping Excellence</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Current State Mapping</h3>
+                    <ul>
+                        <li>Document existing workflows</li>
+                        <li>Identify inefficiencies</li>
+                        <li>Gather team feedback</li>
+                        <li>Measure current metrics</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Future State Design</h3>
+                    <ul>
+                        <li>Envision optimized processes</li>
+                        <li>Remove unnecessary steps</li>
+                        <li>Automate where possible</li>
+                        <li>Define success metrics</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p style="font-size: 1.2em;"><strong>Pro Tip:</strong> Use swimlanes to show responsibilities across departments and highlight handoff points where delays often occur.</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Best Practices -->
+        <div class="slide">
+            <h2>Best Practices for Collaborative Mapping</h2>
+            <ul>
+                <li><strong>Set Clear Objectives:</strong> Define what you want to achieve before starting the mapping session</li>
+                <li><strong>Prepare Templates:</strong> Use or customize Miro templates to save time and maintain consistency</li>
+                <li><strong>Facilitate Effectively:</strong> Assign a facilitator to guide the session and keep discussions focused</li>
+                <li><strong>Use Timers:</strong> Leverage Miro's timer feature to keep activities on track</li>
+                <li><strong>Encourage Participation:</strong> Use voting and anonymous feedback to gather honest input</li>
+                <li><strong>Document Decisions:</strong> Capture action items and next steps directly on the board</li>
+            </ul>
+        </div>
+
+        <!-- Slide 8: Remote Workshop Facilitation -->
+        <div class="slide">
+            <h2>Remote Workshop Facilitation</h2>
+            <h3>Making Virtual Collaboration Effective</h3>
+            <ul>
+                <li>Use breakout frames to divide large groups into smaller working teams</li>
+                <li>Enable video chat for face-to-face connection during sessions</li>
+                <li>Leverage the timer and voting features to maintain engagement</li>
+                <li>Create clear instructions using text boxes and visual guides</li>
+                <li>Use attention management to bring participants to specific areas</li>
+            </ul>
+            <div class="highlight-box">
+                <h3>Engagement Strategy</h3>
+                <p style="font-size: 1.2em; line-height: 1.8;">Start with an icebreaker activity, use interactive elements throughout, and end with a clear summary and action plan to maintain energy and focus.</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Use Cases Across Industries -->
+        <div class="slide">
+            <h2>Use Cases Across Industries</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Technology & Product</h3>
+                    <ul>
+                        <li>Sprint planning</li>
+                        <li>User story mapping</li>
+                        <li>Technical architecture</li>
+                        <li>Product roadmaps</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Business & Strategy</h3>
+                    <ul>
+                        <li>Strategic planning</li>
+                        <li>Business model canvas</li>
+                        <li>Market analysis</li>
+                        <li>Organizational design</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Design & UX</h3>
+                    <ul>
+                        <li>Wireframing</li>
+                        <li>User research synthesis</li>
+                        <li>Design systems</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Education & Training</h3>
+                    <ul>
+                        <li>Lesson planning</li>
+                        <li>Collaborative learning</li>
+                        <li>Knowledge mapping</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Advanced Features -->
+        <div class="slide">
+            <h2>Advanced Features for Power Users</h2>
+            <ul>
+                <li><strong>Smart Meetings:</strong> AI-powered meeting assistant that generates summaries and action items</li>
+                <li><strong>Talktrack:</strong> Record video walkthroughs of your boards for asynchronous communication</li>
+                <li><strong>Private Mode:</strong> Work on ideas privately before sharing with the team</li>
+                <li><strong>Board Permissions:</strong> Control who can view, comment, or edit specific boards</li>
+                <li><strong>Version History:</strong> Track changes and restore previous versions of your work</li>
+                <li><strong>Custom Templates:</strong> Create and share templates across your organization</li>
+            </ul>
+        </div>
+
+        <!-- Slide 11: Integration Ecosystem -->
+        <div class="slide">
+            <h2>Integration Ecosystem</h2>
+            <h3>Connect Miro to Your Workflow</h3>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Communication</h3>
+                    <ul>
+                        <li>Slack notifications</li>
+                        <li>Microsoft Teams tabs</li>
+                        <li>Zoom app integration</li>
+                        <li>Google Meet companion</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Project Management</h3>
+                    <ul>
+                        <li>Jira sync</li>
+                        <li>Asana integration</li>
+                        <li>Monday.com connector</li>
+                        <li>Azure DevOps</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p style="font-size: 1.2em;"><strong>Seamless Workflow:</strong> Integrations enable you to create Jira tickets from sticky notes, embed boards in Confluence, and sync data bidirectionally.</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Security and Compliance -->
+        <div class="slide">
+            <h2>Security and Compliance</h2>
+            <h3>Enterprise-Grade Protection</h3>
+            <ul>
+                <li><strong>Data Encryption:</strong> End-to-end encryption for data in transit and at rest</li>
+                <li><strong>Compliance Certifications:</strong> SOC 2 Type II, ISO 27001, GDPR compliant</li>
+                <li><strong>Single Sign-On:</strong> SAML-based SSO with major identity providers</li>
+                <li><strong>Access Controls:</strong> Role-based permissions and team management</li>
+                <li><strong>Audit Logs:</strong> Comprehensive activity tracking for enterprise accounts</li>
+                <li><strong>Data Residency:</strong> Options for data storage location compliance</li>
+            </ul>
+        </div>
+
+        <!-- Slide 13: Pricing and Plans -->
+        <div class="slide">
+            <h2>Pricing and Plans</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Free Plan</h3>
+                    <ul>
+                        <li>3 editable boards</li>
+                        <li>Unlimited team members</li>
+                        <li>Pre-made templates</li>
+                        <li>Core collaboration features</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Starter Plan</h3>
+                    <ul>
+                        <li>Unlimited boards</li>
+                        <li>Custom templates</li>
+                        <li>Attention management</li>
+                        <li>Private boards</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Business Plan</h3>
+                    <ul>
+                        <li>Advanced integrations</li>
+                        <li>SSO and security features</li>
+                        <li>Smart Meetings</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Enterprise Plan</h3>
+                    <ul>
+                        <li>Dedicated support</li>
+                        <li>Custom data residency</li>
+                        <li>Advanced admin controls</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Success Stories -->
+        <div class="slide">
+            <h2>Success Stories</h2>
+            <h3>Real-World Impact</h3>
+            <div class="highlight-box">
+                <h3>Cisco</h3>
+                <p style="font-size: 1.2em; line-height: 1.8;">Reduced meeting time by 50% and improved cross-team collaboration by using Miro for strategic planning and product development workshops.</p>
+            </div>
+            <div class="highlight-box">
+                <h3>Upwork</h3>
+                <p style="font-size: 1.2em; line-height: 1.8;">Scaled their design process globally, enabling 200+ designers to collaborate seamlessly across time zones using Miro boards.</p>
+            </div>
+            <div class="highlight-box">
+                <h3>Qantas</h3>
+                <p style="font-size: 1.2em; line-height: 1.8;">Transformed customer experience design by mapping end-to-end journeys and identifying key improvement opportunities across touchpoints.</p>
+            </div>
+        </div>
+
+        <!-- Slide 15: Conclusion -->
+        <div class="slide">
+            <h2>Getting Started with Miro</h2>
+            <h3>Your Next Steps</h3>
+            <ul>
+                <li>Sign up for a free account at miro.com</li>
+                <li>Explore the template library to find relevant starting points</li>
+                <li>Invite your team and start with a simple brainstorming session</li>
+                <li>Experiment with different mapping techniques for your use cases</li>
+                <li>Join the Miro Community to learn from other users and experts</li>
+                <li>Consider upgrading to paid plans as your needs grow</li>
+            </ul>
+            <div class="highlight-box">
+                <h3>Remember</h3>
+                <p style="font-size: 1.3em; line-height: 1.8; text-align: center;">The best way to learn Miro is by doing. Start small, experiment often, and let your team's creativity flourish on the infinite canvas!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="current">1</span> / <span id="total">15</span>
+    </div>
+
+    <div class="navigation">
+        <button class="prev-btn" onclick="previousSlide()">← Previous</button>
+        <button class="next-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <div class="debug" id="debug">
+        Ready | Press ← → or click buttons
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        function updateDebug(message) {
+            document.getElementById('debug').textContent = message;
+        }
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current').textContent = currentSlide + 1;
+            updateDebug(`Slide ${currentSlide + 1}/${totalSlides}`);
+            
+            // Update button states
+            document.querySelector('.prev-btn').disabled = currentSlide === 0;
+            document.querySelector('.next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+                updateDebug(`Next clicked - Slide ${currentSlide + 1}`);
+            }
+        }
+        
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+                updateDebug(`Previous clicked - Slide ${currentSlide + 1}`);
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            updateDebug(`Key pressed: ${e.key}`);
+            if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+        
+        // Initialize
+        document.getElementById('total').textContent = totalSlides;
+        showSlide(0);
+        updateDebug('Presentation loaded - 15 slides ready');
+    </script>
+</body>
+</html>'''
+
+# Write the file
+with open('/tmp/miro_collaborative_mapping_presentation.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("✅ Miro for Collaborative Mapping presentation created successfully!")
+print("📁 File: /tmp/miro_collaborative_mapping_presentation.html")
+print("📊 Total slides: 15")
+print("\n🎯 Presentation includes:")
+print("   • Introduction to Miro")
+print("   • Key features and capabilities")
+print("   • Types of collaborative mapping")
+print("   • Customer journey mapping")
+print("   • Process mapping excellence")
+print("   • Best practices")
+print("   • Remote workshop facilitation")
+print("   • Industry use cases")
+print("   • Advanced features")
+print("   • Integration ecosystem")
+print("   • Security and compliance")
+print("   • Pricing plans")
+print("   • Success stories")
+print("   • Getting started guide")
+print("\n✨ Features: Landscape mode, arrow key navigation, professional design, debug panel")

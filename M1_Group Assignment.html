@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TransformCo Group Assignment</title>
+  <style>
+    :root{
+      --bg:#0e2a2f;          /* deep teal */
+      --panel:#123a40;       /* darker teal */
+      --accent:#18b59b;      /* mint/teal accent */
+      --accent-2:#7be0cf;    /* light mint */
+      --text:#eaf7f4;        /* near-white */
+      --muted:#b9d9d2;       /* muted text */
+      --warn:#ffc857;        /* warm highlight */
+      --ok:#78e08f;          /* success green */
+      --shadow: rgba(0,0,0,0.25);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      margin:0;
+      background: radial-gradient(1200px 700px at 70% -20%, #104047 0%, #0e2a2f 60%, #0b2327 100%);
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol";
+      overflow:hidden;
+    }
+    /* Stage */
+    .stage{
+      position:fixed; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      padding:24px;
+    }
+    /* Slide container */
+    .slide{
+      width: 1180px; height: 680px;  /* 16:9-ish landscape */
+      background: linear-gradient(180deg, rgba(18,58,64,0.9), rgba(12,34,38,0.9));
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:18px;
+      box-shadow: 0 18px 60px var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.04);
+      display:flex; flex-direction:column;
+      overflow:hidden;
+      position:relative;
+    }
+    .slide-header{
+      display:flex; align-items:center; gap:14px;
+      padding:18px 22px;
+      background: linear-gradient(90deg, rgba(24,181,155,0.10), rgba(24,181,155,0.04), transparent 60%);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .logo-dot{
+      width:14px; height:14px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, var(--accent-2), var(--accent));
+      box-shadow: 0 0 12px rgba(123,224,207,0.6);
+      flex: 0 0 auto;
+    }
+    .title{
+      font-size:22px; font-weight:700; letter-spacing:0.2px;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.35);
+    }
+    .subtitle{
+      margin-left:auto; font-size:14px; color:var(--muted)
+    }
+
+    /* Scrollable content area */
+    .slide-body{
+      flex:1;
+      display:grid;
+      grid-template-rows:auto 1fr;
+      min-height:0; /* Required so the inner scroll works */
+    }
+    .hero{
+      padding:18px 22px 8px 22px;
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    }
+    .hero h2{
+      font-size:28px; margin:0; font-weight:800; letter-spacing:0.3px;
+      background: linear-gradient(90deg, #eaf7f4, #7be0cf);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .hero .tag{
+      font-size:12px; color:#063e36; background: linear-gradient(180deg, #7be0cf, #31c8ae);
+      border-radius:999px; padding:6px 10px; font-weight:700; letter-spacing:0.3px;
+      box-shadow: 0 6px 20px rgba(49,200,174,0.35);
+    }
+
+    .content{
+      min-height:0; /* NOTE: critical for overflow:auto to work in grid */
+      overflow:auto;
+      padding:0 22px 18px 22px;
+      scrollbar-width:thin;
+      scrollbar-color: var(--accent) rgba(255,255,255,0.05);
+    }
+    /* Custom scrollbar for WebKit */
+    .content::-webkit-scrollbar{ width:10px; }
+    .content::-webkit-scrollbar-track{ background:rgba(255,255,255,0.06); border-radius:10px; }
+    .content::-webkit-scrollbar-thumb{
+      background: linear-gradient(180deg, #31c8ae, #18b59b);
+      border-radius:10px;
+      border:2px solid rgba(255,255,255,0.15);
+    }
+
+    /* Cards and layout helpers */
+    .grid-2{
+      display:grid; gap:16px; grid-template-columns: 1fr 1fr;
+    }
+    .grid-3{
+      display:grid; gap:16px; grid-template-columns: 1fr 1fr 1fr;
+    }
+    .stack{ display:flex; flex-direction:column; gap:12px; }
+    .card{
+      background: linear-gradient(180deg, rgba(10,30,34,0.7), rgba(18,58,64,0.6));
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:14px; padding:14px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .card h3{
+      margin:0 0 8px 0; font-size:18px;
+    }
+    .muted{ color:var(--muted); }
+    ul,ol{ margin:8px 0 0 20px }
+    li{ margin:6px 0; }
+
+    .badge{
+      display:inline-block; padding:4px 8px; border-radius:999px;
+      background: rgba(24,181,155,0.16); color: var(--accent-2);
+      font-size:12px; font-weight:700; letter-spacing:0.3px;
+    }
+    .callout{
+      border-left:4px solid var(--accent);
+      padding:10px 12px; background: rgba(24,181,155,0.08); border-radius:10px;
+    }
+    .warn{ color: var(--warn); font-weight:700; }
+
+    /* Navigation footer */
+    .footer{
+      position:absolute; bottom:10px; left:0; right:0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 14px; color:var(--muted); font-size:12px;
+    }
+    .kbd{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-width:22px; padding:2px 6px; border-radius:6px;
+      background: rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      margin-left:6px; font-weight:700; color:var(--text);
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25);
+    }
+    .dots{
+      display:flex; gap:6px; align-items:center;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background: rgba(255,255,255,0.25);
+    }
+    .dot.active{
+      background: radial-gradient(circle at 30% 30%, var(--accent-2), var(--accent));
+      box-shadow: 0 0 10px rgba(49,200,174,0.8);
+    }
+
+    /* Matrix visual */
+    .matrix{
+      display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+      gap:10px; height:260px;
+      background: linear-gradient(180deg, rgba(18,58,64,0.5), rgba(10,30,34,0.5));
+      border:1px dashed rgba(255,255,255,0.12);
+      border-radius:12px; padding:10px;
+    }
+    .quad{
+      border-radius:10px; display:flex; align-items:center; justify-content:center;
+      color:var(--muted); border:1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      text-align:center; padding:8px;
+    }
+    .quad strong{ color:var(--text) }
+
+    /* Timeline like rows (used earlier; kept for visual variety in slides) */
+    .row{
+      display:flex; align-items:flex-start; gap:10px; padding:8px 0;
+      border-bottom:1px dashed rgba(255,255,255,0.08);
+    }
+    .row:last-child{ border-bottom:none }
+    .step{
+      font-weight:800; color:var(--accent-2); min-width:26px; text-align:center;
+    }
+
+    /* Checklist styles (for final slide) */
+    .checklist{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .check-item{
+      display:flex; gap:10px; align-items:flex-start;
+      background: rgba(24,181,155,0.08);
+      border:1px solid rgba(24,181,155,0.25);
+      border-radius:10px; padding:10px 12px;
+    }
+    .check-item .box{
+      width:18px; height:18px; border-radius:4px;
+      border:2px solid var(--accent-2);
+      display:flex; align-items:center; justify-content:center;
+      font-size:14px; color:#063e36; background: linear-gradient(180deg,#7be0cf,#31c8ae);
+      box-shadow: 0 4px 10px rgba(49,200,174,0.25);
+    }
+    .check-item .meta{
+      margin-left:auto; font-size:12px; color:var(--muted)
+    }
+    .pill{
+      display:inline-block; padding:4px 8px; border-radius:999px;
+      background: rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+      font-size:12px; margin-left:8px; color:var(--muted)
+    }
+
+    /* Small helpers */
+    a { color: var(--accent-2); text-decoration: none; border-bottom: 1px dashed rgba(123,224,207,0.5); }
+    a:hover { border-bottom-style: solid; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="slide" id="slide">
+      <div class="slide-header">
+        <div class="logo-dot"></div>
+        <div class="title">TransformCo — Group Assignment</div>
+        <div class="subtitle">Stakeholders • Governance • Roadmap</div>
+      </div>
+
+      <div class="slide-body">
+        <!-- Hero (dynamic per slide) -->
+        <div class="hero" id="hero">
+          <h2>Overview & Objectives</h2>
+          <span class="tag">v2 — Final slide is a one-week deliverables checklist</span>
+        </div>
+
+        <!-- Scrollable content -->
+        <div class="content" id="content">
+          <!-- Slide 1 content -->
+          <div class="stack">
+            <div class="card">
+              <h3>Purpose</h3>
+              <div class="muted">
+                This deck guides your group through three integrated deliverables for TransformCo:
+              </div>
+              <ul>
+                <li>Map key stakeholders on an Innovation / AI Readiness matrix.</li>
+                <li>Propose an integrated governance structure spanning innovation and AI.</li>
+                <li>Create a practical roadmap with process and technology milestones.</li>
+              </ul>
+            </div>
+            <div class="grid-3">
+              <div class="card">
+                <h3>Deliverable 1 <span class="badge">Stakeholders</span></h3>
+                <div class="muted">Identify, categorize, and place stakeholders on a 2×2 readiness matrix.</div>
+              </div>
+              <div class="card">
+                <h3>Deliverable 2 <span class="badge">Governance</span></h3>
+                <div class="muted">Define roles, forums, and decision flows bridging innovation and AI.</div>
+              </div>
+              <div class="card">
+                <h3>Deliverable 3 <span class="badge">Roadmap</span></h3>
+                <div class="muted">Sequence process and technology milestones with clear owners.</div>
+              </div>
+            </div>
+            <div class="callout">
+              Tip: Keep the three deliverables aligned—stakeholder needs should inform governance,
+              which should constrain and enable the roadmap.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer with navigation hint -->
+      <div class="footer">
+        <div>Use arrow keys <span class="kbd">←</span><span class="kbd">→</span> to navigate</div>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Slides data model
+    // Each slide: { heroTitle, heroTag, html }
+    const slides = [
+      {
+        heroTitle: "Overview & Objectives",
+        heroTag: "v2 — Final slide is a one-week deliverables checklist",
+        html: `
+          <div class="stack">
+            <div class="card">
+              <h3>Purpose</h3>
+              <div class="muted">
+                This deck guides your group through three integrated deliverables for TransformCo:
+              </div>
+              <ul>
+                <li>Map key stakeholders on an Innovation / AI Readiness matrix.</li>
+                <li>Propose an integrated governance structure spanning innovation and AI.</li>
+                <li>Create a practical roadmap with process and technology milestones.</li>
+              </ul>
+            </div>
+            <div class="grid-3">
+              <div class="card">
+                <h3>Deliverable 1 <span class="badge">Stakeholders</span></h3>
+                <div class="muted">Identify, categorize, and place stakeholders on a 2×2 readiness matrix.</div>
+              </div>
+              <div class="card">
+                <h3>Deliverable 2 <span class="badge">Governance</span></h3>
+                <div class="muted">Define roles, forums, and decision flows bridging innovation and AI.</div>
+              </div>
+              <div class="card">
+                <h3>Deliverable 3 <span class="badge">Roadmap</span></h3>
+                <div class="muted">Sequence process and technology milestones with clear owners.</div>
+              </div>
+            </div>
+            <div class="callout">
+              Tip: Keep the three deliverables aligned—stakeholder needs should inform governance,
+              which should constrain and enable the roadmap.
+            </div>
+          </div>
+        `
+      },
+
+      {
+        heroTitle: "Understanding TransformCo",
+        heroTag: "Context for consistent assumptions",
+        html: `
+          <div class="grid-2">
+            <div class="card">
+              <h3>Context Assumptions</h3>
+              <ul>
+                <li>Mid-to-large enterprise undergoing digital and AI transformation.</li>
+                <li>Multiple business units with varied data maturity.</li>
+                <li>Central IT, Data/Analytics, and Innovation functions exist but are loosely coupled.</li>
+                <li>Regulatory considerations (privacy, model risk) apply in select units.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Implications</h3>
+              <ul>
+                <li>Stakeholder incentives may conflict (speed vs. risk, central vs. BU autonomy).</li>
+                <li>Governance should be federated: central standards, local execution.</li>
+                <li>Roadmap must balance quick wins with platform foundations.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">Agree on this context as a group to avoid rework later.</div>
+        `
+      },
+
+      {
+        heroTitle: "Stakeholder Mapping — 2×2 Readiness Matrix",
+        heroTag: "Interest vs. Readiness",
+        html: `
+          <div class="grid-2">
+            <div class="card">
+              <h3>Matrix Definition</h3>
+              <div class="matrix">
+                <div class="quad"><div><strong>Champions</strong><br/><span class="muted">High interest · High readiness</span></div></div>
+                <div class="quad"><div><strong>Explorers</strong><br/><span class="muted">High interest · Low readiness</span></div></div>
+                <div class="quad"><div><strong>Pragmatists</strong><br/><span class="muted">Low interest · High readiness</span></div></div>
+                <div class="quad"><div><strong>Hesitant</strong><br/><span class="muted">Low interest · Low readiness</span></div></div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>How to Place Stakeholders</h3>
+              <ol>
+                <li>List roles: Execs, BU leaders, IT, Data, Risk/Legal, HR, Finance, Frontline.</li>
+                <li>Assess interest (qualitative) and readiness (skills, data, processes).</li>
+                <li>Validate with at least 2 viewpoints to reduce bias.</li>
+                <li>Document rationale and potential movement paths (e.g., training, pilots).</li>
+              </ol>
+            </div>
+          </div>
+          <div class="callout">Outcome: A shared view of who needs support and who can sponsor momentum.</div>
+        `
+      },
+
+      {
+        heroTitle: "Stakeholder Examples",
+        heroTag: "Seed list to adapt",
+        html: `
+          <div class="grid-2">
+            <div class="card">
+              <h3>Potential Champions</h3>
+              <ul>
+                <li>Chief Digital/Innovation Officer</li>
+                <li>Head of Data & Analytics</li>
+                <li>BU GM with revenue pressure and data-savvy team</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Potential Explorers</h3>
+              <ul>
+                <li>Marketing leader keen on GenAI but with limited data pipelines</li>
+                <li>HR lead exploring AI-assisted recruiting</li>
+                <li>Operations manager interested in RPA/AI for efficiency</li>
+              </ul>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Potential Pragmatists</h3>
+              <ul>
+                <li>Platform engineering with strong tooling but limited business alignment</li>
+                <li>Data governance team focused on compliance</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Potential Hesitant</h3>
+              <ul>
+                <li>Risk/Legal with model risk concerns</li>
+                <li>Finance cautious on ROI and spend</li>
+                <li>Frontline teams wary of workflow changes</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+
+      {
+        heroTitle: "Governance — Design Principles",
+        heroTag: "Federated, outcome-driven",
+        html: `
+          <div class="grid-2">
+            <div class="card">
+              <h3>Principles</h3>
+              <ul>
+                <li>Federated model: central standards, decentralized execution.</li>
+                <li>Single “front door” for initiatives to ensure visibility.</li>
+                <li>Risk-right-sized: controls match use-case risk levels.</li>
+                <li>Transparency and metrics: decisions and exceptions are logged.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Non-Goals</h3>
+              <ul>
+                <li>Not a bottleneck—governance accelerates by removing ambiguity.</li>
+                <li>Not “AI-only”—governance spans innovation and technology change.</li>
+                <li>Not static—governance evolves with learning and scale.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">Outcome: Clear principles to resolve design debates and guide trade-offs.</div>
+        `
+      },
+
+      {
+        heroTitle: "Governance — Structure (Example)",
+        heroTag: "Roles and forums",
+        html: `
+          <div class="grid-2">
+            <div class="card">
+              <h3>Core Bodies</h3>
+              <ul>
+                <li><strong>Innovation & AI Council (Exec)</strong> — Strategy, funding, priorities.</li>
+                <li><strong>Architecture & Risk Board</strong> — Standards, model risk, data, privacy.</li>
+                <li><strong>Portfolio Review Forum</strong> — Intake, prioritization, status, value.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Operating Roles</h3>
+              <ul>
+                <li><strong>Product Owners</strong> — Value delivery, stakeholder alignment.</li>
+                <li><strong>Tech Leads / MLEs</strong> — Build, integrate, and operate solutions.</li>
+                <li><strong>Data Stewards</strong> — Data quality, lineage, access.</li>
+                <li><strong>Risk Partners</strong> — Controls by design, early in the cycle.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">Adapt titles and membership to TransformCo’s org—keep functions, not names.</div>
+        `
+      },
+
+      {
+        heroTitle: "Governance — Decision Flows",
+        heroTag: "From idea to value",
+        html: `
+          <div class="stack">
+            <div class="card">
+              <h3>Key Decisions</h3>
+              <div class="row"><div class="step">1</div><div><strong>Intake</strong> — Do we track this? Required info template + sponsor.</div></div>
+              <div class="row"><div class="step">2</div><div><strong>Qualification</strong> — Problem fit, data availability, risk category.</div></div>
+              <div class="row"><div class="step">3</div><div><strong>Prioritization</strong> — Impact, effort, strategic alignment, capacity.</div></div>
+              <div class="row"><div class="step">4</div><div><strong>Funding</strong> — Council approves budgets for tranches/milestones.</div></div>
+              <div class="row"><div class="step">5</div><div><strong>Controls</strong> — Architecture, privacy, model risk sign-offs as needed.</div></div>
+              <div class="row"><div class="step">6</div><div><strong>Delivery</strong> — Stage gates with value and risk checks.</div></div>
+              <div class="row"><div class="step">7</div><div><strong>Operate</strong> — Monitoring, drift, periodic re-approval if high risk.</div></div>
+            </div>
+            <div class="card">
+              <h3>Artifacts</h3>
+              <ul>
+                <li>Intake form • Business case lite • Risk categorization</li>
+                <li>Architecture decision record (ADR) • Model cards</li>
+                <li>Runbook • Monitoring plan • Value tracking dashboard</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+
+      {
+        heroTitle: "Roadmap — Approach",
+        heroTag: "From quick wins to foundations",
+        html: `
+          <div class="grid-2">
+            <div class="card">
+              <h3>Sequencing</h3>
+              <ul>
+                <li>Phase 0: Align strategy, agree governance, pick pilots.</li>
+                <li>Phase 1: Quick wins with measurable value (60–90 days).</li>
+                <li>Phase 2: Platform capabilities (data, MLOps, guardrails).</li>
+                <li>Phase 3: Scale governable patterns across BUs.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Milestone Qualities</h3>
+              <ul>
+                <li>Value or risk reduced—clearly stated KPI or control outcome.</li>
+                <li>Named owner and forum for decisions.</li>
+                <li>Definition of done (DoD) and evidence requirements.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">Outcome: A 2–3 quarter view balancing outcomes and capability building.</div>
+        `
+      },
+
+      {
+        heroTitle: "Roadmap — Example Milestones",
+        heroTag: "Process + Technology",
+        html: `
+          <div class="grid-2">
+            <div class="card">
+              <h3>Process Milestones</h3>
+              <ul>
+                <li>Intake form v1 + triage SLAs approved by Council.</li>
+                <li>Risk categorization rubric (Low/Med/High) adopted.</li>
+                <li>Portfolio dashboard live (status, value, risk).</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Technology Milestones</h3>
+              <ul>
+                <li>Data access policy + steward model operational.</li>
+                <li>MLOps baseline (experimentation → deployment → monitoring).</li>
+                <li>GenAI guardrails (prompt/privacy/policy) in place.</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+
+      {
+        heroTitle: "Group Collaboration",
+        heroTag: "How to work effectively",
+        html: `
+          <div class="grid-2">
+            <div class="card">
+              <h3>Working Model</h3>
+              <ul>
+                <li>Assign owners for each deliverable + an overall integrator.</li>
+                <li>Timebox research and converge on assumptions early.</li>
+                <li>Review artifacts together at least twice before finalization.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Quality Checks</h3>
+              <ul>
+                <li>Consistency of stakeholder labels across slides.</li>
+                <li>Governance roles align with roadmap approvals.</li>
+                <li>KPIs and definitions of done are specific and measurable.</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+
+      // FINAL SLIDE — One-week deliverables checklist (revised)
+      {
+        heroTitle: "One-Week Deliverables Checklist",
+        heroTag: "All work done by the group within one week",
+        html: `
+          <div class="stack">
+            <div class="card">
+              <h3>Scope & Timeline <span class="pill">Week 1</span></h3>
+              <div class="muted">Target: Complete all artifacts below within seven days. Use daily 15-minute standups.</div>
+            </div>
+
+            <div class="card">
+              <h3>Checklist</h3>
+              <div class="checklist">
+                <div class="check-item">
+                  <div class="box">✓</div>
+                  <div>
+                    <strong>Stakeholder Inventory Finalized</strong>
+                    <div class="muted">List of roles, owners, and contact points. Agree on classification criteria.</div>
+                  </div>
+                  <div class="meta">Owner: Stakeholder Lead</div>
+                </div>
+
+                <div class="check-item">
+                  <div class="box">✓</div>
+                  <div>
+                    <strong>Readiness Matrix Completed</strong>
+                    <div class="muted">Each stakeholder placed with rationale; movement levers identified.</div>
+                  </div>
+                  <div class="meta">Owner: Stakeholder Lead</div>
+                </div>
+
+                <div class="check-item">
+                  <div class="box">✓</div>
+                  <div>
+                    <strong>Governance Principles Approved</strong>
+                    <div class="muted">Federation, risk-right-sizing, metrics, and transparency agreed.</div>
+                  </div>
+                  <div class="meta">Owner: Governance Lead</div>
+                </div>
+
+                <div class="check-item">
+                  <div class="box">✓</div>
+                  <div>
+                    <strong>Governance Structure Drafted</strong>
+                    <div class="muted">Council/Boards/Forums defined with membership and cadences.</div>
+                  </div>
+                  <div class="meta">Owner: Governance Lead</div>
+                </div>
+
+                <div class="check-item">
+                  <div class="box">✓</div>
+                  <div>
+                    <strong>Decision Flow & Artifacts Mapped</strong>
+                    <div class="muted">Intake → Qualification → Prioritization → Funding → Controls → Delivery → Operate.</div>
+                  </div>
+                  <div class="meta">Owner: Integrator</div>
+                </div>
+
+                <div class="check-item">
+                  <div class="box">✓</div>
+                  <div>
+                    <strong>Roadmap Milestones Sequenced</strong>
+                    <div class="muted">Process and technology milestones with KPIs and DoD for each.</div>
+                  </div>
+                  <div class="meta">Owner: Roadmap Lead</div>
+                </div>
+
+                <div class="check-item">
+                  <div class="box">✓</div>
+                  <div>
+                    <strong>Final Integration Review</strong>
+                    <div class="muted">Cross-check labels, owners, and dependencies across all deliverables.</div>
+                  </div>
+                  <div class="meta">Owner: Integrator</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Submission Package</h3>
+              <ul>
+                <li>Slides export (PDF or HTML) with all sections complete.</li>
+                <li>Matrix image or embedded component.</li>
+                <li>Governance one-pager (principles + structure + key flows).</li>
+                <li>Roadmap one-pager (milestones, owners, dates, KPIs).</li>
+              </ul>
+            </div>
+
+            <div class="callout">
+              Tip: Lock the checklist first meeting; track status daily. If blocked, reduce scope—don’t slip the week.
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    // Rendering and navigation
+    const heroEl = document.getElementById('hero');
+    const contentEl = document.getElementById('content');
+    const dotsEl = document.getElementById('dots');
+
+    let idx = 0;
+
+    function renderDots() {
+      dotsEl.innerHTML = '';
+      slides.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === idx ? ' active' : '');
+        d.title = 'Slide ' + (i+1);
+        d.addEventListener('click', () => { idx = i; render(); });
+        dotsEl.appendChild(d);
+      });
+    }
+
+    function render() {
+      const s = slides[idx];
+      heroEl.innerHTML = `
+        <h2>${s.heroTitle}</h2>
+        <span class="tag">${s.heroTag || ''}</span>
+      `;
+      contentEl.innerHTML = s.html;
+      renderDots();
+      // Scroll to top on slide change
+      contentEl.scrollTop = 0;
+    }
+
+    function next(){ idx = (idx + 1) % slides.length; render(); }
+    function prev(){ idx = (idx - 1 + slides.length) % slides.length; render(); }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    // Initial render
+    render();
+  </script>
+</body>
+</html>

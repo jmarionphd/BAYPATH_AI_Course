@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miro Account Setup Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            max-height: 85vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 35px 45px;
+            position: relative;
+            animation: slideIn 0.5s ease-out;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        h1 {
+            color: #050038;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: #4262ff;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #ffd02f;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #050038;
+            font-size: 1.4em;
+            margin: 20px 0 12px 0;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        p, li {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin-left: 35px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        ol {
+            margin-left: 35px;
+        }
+
+        ol li {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: -10px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: #4262ff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(66, 98, 255, 0.3);
+        }
+
+        .nav-button:hover {
+            background: #3451e6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 98, 255, 0.4);
+        }
+
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #050038;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .flow-step {
+            background: white;
+            border: 3px solid #4262ff;
+            border-radius: 12px;
+            padding: 15px 20px;
+            text-align: center;
+            min-width: 150px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .flow-step:hover {
+            transform: scale(1.05);
+        }
+
+        .flow-step h4 {
+            color: #4262ff;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .flow-step p {
+            color: #666;
+            font-size: 0.95em;
+            margin: 0;
+        }
+
+        .arrow {
+            color: #4262ff;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffd02f 0%, #ffaa00 100%);
+            border-left: 5px solid #ff8800;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 170, 0, 0.2);
+        }
+
+        .highlight-box p {
+            color: #050038;
+            font-weight: 600;
+            margin: 0;
+            font-size: 1.05em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h4 {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1em;
+            margin: 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .step-number {
+            background: #4262ff;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .keyboard-hint {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 0.95em;
+            color: #666;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .keyboard-hint kbd {
+            background: #4262ff;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 0 3px;
+        }
+
+        .checklist {
+            background: #f0f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .checklist li {
+            list-style: none;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4262ff;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: #4262ff;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 1em;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover {
+            background: #f5f7fa;
+        }
+
+        .title-icon {
+            font-size: 4em;
+            text-align: center;
+            margin: 30px 0 20px 0;
+        }
+
+        .title-list {
+            list-style: none;
+            font-size: 1.3em;
+            line-height: 2.2;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="keyboard-hint">
+        Use <kbd>←</kbd> <kbd>→</kbd> arrow keys to navigate
+    </div>
+
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">10</span>
+    </div>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>🎨 Miro Account Setup Tutorial</h1>
+            <p class="subtitle">Your Complete Guide to Getting Started with Miro's Visual Collaboration Platform</p>
+            
+            <div class="title-icon">🚀</div>
+            <h3 style="text-align: center;">Learn How To:</h3>
+            <ul class="title-list">
+                <li>✓ Create a free Miro account</li>
+                <li>✓ Set up your workspace</li>
+                <li>✓ Navigate the platform</li>
+                <li>✓ Start collaborating with your team</li>
+            </ul>
+
+            <div class="highlight-box" style="margin-top: 40px;">
+                <p style="text-align: center;">💡 No credit card required • Unlimited team members • Free forever</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: What is Miro? -->
+        <div class="slide">
+            <h2>What is Miro?</h2>
+            
+            <p style="font-size: 1.2em; margin-bottom: 20px;">Miro is an <strong>AI-powered visual collaboration platform</strong> that enables teams to work together on an infinite canvas.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="icon">🎨</span>
+                    <h4>Infinite Canvas</h4>
+                    <p>Unlimited space for brainstorming, planning, and visualizing ideas</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">👥</span>
+                    <h4>Real-Time Collaboration</h4>
+                    <p>Work together with your team from anywhere in the world</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📊</span>
+                    <h4>300+ Templates</h4>
+                    <p>Pre-built templates for diagrams, workflows, and project management</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🔗</span>
+                    <h4>130+ Integrations</h4>
+                    <p>Connect with tools like Jira, Slack, Google Drive, and more</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <p>🌟 Used by over 100 million users worldwide including teams at Microsoft, Cisco, and Deloitte</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Sign Up Process Overview -->
+        <div class="slide">
+            <h2>Sign Up Process Overview</h2>
+            
+            <div class="diagram">
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <h4>Step 1</h4>
+                        <p>Visit Signup Page</p>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-step">
+                        <h4>Step 2</h4>
+                        <p>Choose Sign-Up Method</p>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-step">
+                        <h4>Step 3</h4>
+                        <p>Verify Email</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin: 15px 0;">
+                    <div class="arrow" style="transform: rotate(90deg); display: inline-block;">→</div>
+                </div>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <h4>Step 4</h4>
+                        <p>Create/Join Team</p>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-step">
+                        <h4>Step 5</h4>
+                        <p>Start Creating!</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 30px;">⏱️ Time Required</h3>
+            <p style="font-size: 1.3em; color: #4262ff; font-weight: 600;">Less than 5 minutes from start to finish!</p>
+
+            <div class="highlight-box" style="margin-top: 25px;">
+                <p>💼 Pro Tip: Use your work email to keep your professional and personal workspaces separate</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Step 1 - Creating Your Account -->
+        <div class="slide">
+            <h2><span class="step-number">1</span> Creating Your Account</h2>
+            
+            <h3>Sign-Up Options</h3>
+            
+            <div class="two-column">
+                <div>
+                    <h4 style="color: #4262ff; font-size: 1.3em; margin-bottom: 15px;">📧 Email Sign-Up</h4>
+                    <ol style="font-size: 1.05em;">
+                        <li>Go to <a href="https://miro.com/signup/" style="color: #4262ff;">miro.com/signup</a></li>
+                        <li>Enter your name</li>
+                        <li>Enter your work email</li>
+                        <li>Create a password</li>
+                        <li>Accept Terms & Privacy Policy</li>
+                        <li>Click "Get started now"</li>
+                    </ol>
+                </div>
+                <div>
+                    <h4 style="color: #4262ff; font-size: 1.3em; margin-bottom: 15px;">🔐 Quick Sign-Up Options</h4>
+                    <ul style="list-style: none; font-size: 1.1em; line-height: 2;">
+                        <li>🔵 <strong>Google</strong> - Sign up with Gmail</li>
+                        <li>🟦 <strong>Office 365</strong> - Use Microsoft account</li>
+                        <li>🟪 <strong>Slack</strong> - Connect via Slack</li>
+                        <li>⚫ <strong>Apple ID</strong> - Sign in with Apple</li>
+                        <li>🔷 <strong>Facebook</strong> - Use Facebook login</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <p>⚡ Quick sign-up options are faster and don't require creating a new password!</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Step 2 - Email Verification -->
+        <div class="slide">
+            <h2><span class="step-number">2</span> Email Verification</h2>
+            
+            <div class="diagram">
+                <h3 style="text-align: center; color: #4262ff; margin-bottom: 20px;">Verification Process</h3>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <h4>📧</h4>
+                        <p>Check your inbox for confirmation email</p>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-step">
+                        <h4>🔢</h4>
+                        <p>Find your confirmation code</p>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="flow-step">
+                        <h4>✅</h4>
+                        <p>Enter code or click "Confirm your email"</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 35px;">Important Notes</h3>
+            <div class="checklist">
+                <ul>
+                    <li>You have <strong>7 days</strong> to confirm your email</li>
+                    <li>Check your spam folder if you don't see the email</li>
+                    <li>You can click the button in the email OR enter the code manually</li>
+                    <li>Unconfirmed profiles are automatically deleted after 7 days</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <p>🔍 Can't find the email? Check your spam/junk folder or request a new confirmation code</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Step 3 - Creating or Joining a Team -->
+        <div class="slide">
+            <h2><span class="step-number">3</span> Creating or Joining a Team</h2>
+            
+            <p style="font-size: 1.15em; margin-bottom: 20px;">A <strong>team</strong> in Miro is your workspace where you create, store, and share boards with collaborators.</p>
+
+            <div class="two-column">
+                <div style="background: #f0f9ff; padding: 20px; border-radius: 12px;">
+                    <h3 style="color: #4262ff;">🆕 Create New Team</h3>
+                    <p><strong>Choose this if:</strong></p>
+                    <ul style="font-size: 1em;">
+                        <li>You're starting fresh</li>
+                        <li>You want to be the team admin</li>
+                        <li>You're setting up for your company</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>You can:</strong></p>
+                    <ul style="font-size: 1em;">
+                        <li>Name your team</li>
+                        <li>Invite collaborators immediately</li>
+                        <li>Start with a free plan</li>
+                    </ul>
+                </div>
+                <div style="background: #fff4e6; padding: 20px; border-radius: 12px;">
+                    <h3 style="color: #ff8800;">🤝 Join Existing Team</h3>
+                    <p><strong>Choose this if:</strong></p>
+                    <ul style="font-size: 1em;">
+                        <li>Your company already uses Miro</li>
+                        <li>You received an invitation</li>
+                        <li>You want to join a corporate team</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>You can:</strong></p>
+                    <ul style="font-size: 1em;">
+                        <li>Request access to teams</li>
+                        <li>Join open teams in your domain</li>
+                        <li>Wait for admin approval</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <p>💡 You can be a member of multiple teams and switch between them easily!</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Understanding the Free Plan -->
+        <div class="slide">
+            <h2>Understanding the Free Plan</h2>
+            
+            <h3 style="color: #4262ff; text-align: center; margin-bottom: 20px;">What You Get for FREE</h3>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>Free Plan</th>
+                </tr>
+                <tr>
+                    <td><strong>Team Members</strong></td>
+                    <td>✅ Unlimited</td>
+                </tr>
+                <tr>
+                    <td><strong>Total Boards</strong></td>
+                    <td>✅ Unlimited (3 active at a time)</td>
+                </tr>
+                <tr>
+                    <td><strong>Templates</strong></td>
+                    <td>✅ Access to 300+ templates</td>
+                </tr>
+                <tr>
+                    <td><strong>Collaboration</strong></td>
+                    <td>✅ Real-time editing</td>
+                </tr>
+                <tr>
+                    <td><strong>Screen Sharing</strong></td>
+                    <td>✅ Included</td>
+                </tr>
+                <tr>
+                    <td><strong>Private Boards</strong></td>
+                    <td>❌ Upgrade required</td>
+                </tr>
+                <tr>
+                    <td><strong>Video Chat</strong></td>
+                    <td>❌ Upgrade required</td>
+                </tr>
+            </table>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <p>🎯 The free plan is perfect for small teams, personal projects, and trying out Miro!</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Setting Up Your Profile -->
+        <div class="slide">
+            <h2><span class="step-number">4</span> Setting Up Your Profile</h2>
+            
+            <h3>Complete Your Profile</h3>
+            <p style="font-size: 1.15em; margin-bottom: 20px;">Make it easy for teammates to recognize and connect with you!</p>
+
+            <div class="checklist">
+                <ul style="font-size: 1.05em;">
+                    <li>Add a profile photo (helps team members identify you)</li>
+                    <li>Update your display name</li>
+                    <li>Add your job title or role</li>
+                    <li>Set your time zone for better collaboration</li>
+                    <li>Configure notification preferences</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 30px;">🔐 Security Settings</h3>
+            <div class="two-column">
+                <div style="background: #f0f9ff; padding: 20px; border-radius: 12px;">
+                    <h4 style="color: #4262ff; margin-bottom: 12px;">Account Security</h4>
+                    <ul style="font-size: 1em;">
+                        <li>Enable two-factor authentication</li>
+                        <li>Review connected apps</li>
+                        <li>Manage login sessions</li>
+                    </ul>
+                </div>
+                <div style="background: #f0f9ff; padding: 20px; border-radius: 12px;">
+                    <h4 style="color: #4262ff; margin-bottom: 12px;">Privacy Settings</h4>
+                    <ul style="font-size: 1em;">
+                        <li>Control who can find you</li>
+                        <li>Manage email notifications</li>
+                        <li>Set board sharing defaults</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <p>⚠️ You'll be automatically logged out after 2 weeks of inactivity for security</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Getting Started with Your First Board -->
+        <div class="slide">
+            <h2><span class="step-number">5</span> Creating Your First Board</h2>
+            
+            <div class="diagram">
+                <h3 style="text-align: center; color: #4262ff; margin-bottom: 20px;">Quick Start Guide</h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div class="flow-step" style="width: 100%;">
+                        <h4>1. Click "New Board" from Dashboard</h4>
+                        <p>Start with a blank canvas or choose a template</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="arrow" style="transform: rotate(90deg); display: inline-block;">→</div>
+                    </div>
+                    <div class="flow-step" style="width: 100%;">
+                        <h4>2. Name Your Board</h4>
+                        <p>Give it a descriptive name for easy searching</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="arrow" style="transform: rotate(90deg); display: inline-block;">→</div>
+                    </div>
+                    <div class="flow-step" style="width: 100%;">
+                        <h4>3. Invite Collaborators</h4>
+                        <p>Click "Share" to add team members</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="arrow" style="transform: rotate(90deg); display: inline-block;">→</div>
+                    </div>
+                    <div class="flow-step" style="width: 100%;">
+                        <h4>4. Start Creating!</h4>
+                        <p>Use sticky notes, shapes, text, and more</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <p>🎨 Pro Tip: Start with a template to save time! Browse 300+ templates for brainstorming, planning, and more</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Next Steps & Resources -->
+        <div class="slide">
+            <h2>🎉 You're All Set!</h2>
+            
+            <h3 style="text-align: center; color: #4262ff; margin-bottom: 20px;">Next Steps to Master Miro</h3>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="icon">🎓</span>
+                    <h4>Miro Academy</h4>
+                    <p>Free video courses and tutorials to level up your skills</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📚</span>
+                    <h4>Help Center</h4>
+                    <p>Comprehensive guides and troubleshooting resources</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">👥</span>
+                    <h4>Community Forum</h4>
+                    <p>Connect with other Miro users and share tips</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📺</span>
+                    <h4>YouTube Channel</h4>
+                    <p>500+ video tutorials on every feature and use case</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 30px; text-align: center;">🔗 Useful Links</h3>
+            <div style="text-align: center; font-size: 1.1em; line-height: 2.2;">
+                <p>🌐 <a href="https://miro.com/signup/" style="color: #4262ff;">Sign Up for Miro</a></p>
+                <p>📖 <a href="https://help.miro.com/" style="color: #4262ff;">Miro Help Center</a></p>
+                <p>🎓 <a href="https://academy.miro.com/" style="color: #4262ff;">Miro Academy</a></p>
+                <p>💬 <a href="https://community.miro.com/" style="color: #4262ff;">Miro Community</a></p>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 30px;">
+                <p style="text-align: center;">🚀 Ready to transform how your team collaborates? Start creating today!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prev-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-button" id="next-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update button states
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>

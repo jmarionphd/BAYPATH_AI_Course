@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Scenario: Two Crises, One Solution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            overscroll-behavior: none;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+        .slide-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 3rem 4rem;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .day-badge {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            height: 1rem;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background-color: #ef4444;
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 0.5s ease-in-out;
+        }
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #4f46e5;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1rem;
+            color: #64748b;
+        }
+        .arrow-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+        .arrow-nav button {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .arrow-nav button:hover {
+            background-color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        ul li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        .character-interaction {
+            background-color: #eef2ff;
+            border-left: 4px solid #4f46e5;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: #4338ca;
+        }
+    </style>
+</head>
+<body>
+    <!-- Company Logo -->
+    <div class="logo">TransformCo</div>
+
+    <!-- Slide 1: Title -->
+    <div id="slide1" class="slide active" style="background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Background');">
+        <div class="slide-content text-center">
+            <h1 class="text-5xl mb-4 text-gray-800">Two Crises, One Solution</h1>
+            <p class="text-2xl text-gray-600">Innovation management running case</p>
+            <p class="mt-8 text-lg">Use Left/Right Arrow Keys to Navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Monday - The Double Diagnosis -->
+    <div id="slide2" class="slide" style="background-image: url('https://placehold.co/1920x1080/1a2a45/FFFFFF?text=Dilemma');">
+        <div class="slide-content">
+            <span class="day-badge">MONDAY</span>
+            <h2 class="text-4xl mb-6">The Double Diagnosis</h2>
+            <p class="text-xl mb-6">Delores, the new Chief Strategy Officer, arrives to find TransformCo at a critical crossroads, facing two interconnected challenges that threaten its future.</p>
+            <ul class="text-lg space-y-3">
+                <li><strong>Innovation Crisis:</strong> Ideas are sporadic. Without formal processes, project selection is driven by intuition and internal politics, not strategy.</li>
+                <li><strong>Technology Gap:</strong> Market data reveals competitors are leveraging AI, launching new products 40% faster and capturing market share.</li>
+            </ul>
+            <div class="character-interaction">
+                "We're throwing darts in the dark," Delores remarked to Marcus, the head of R&D. "And our competitors have floodlights. We can't solve our innovation problem without addressing our tech deficit. They're two sides of the same coin."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Tuesday - Dual Assessment Workshop -->
+    <div id="slide3" class="slide" style="background-image: url('https://placehold.co/1920x1080/4a76a8/FFFFFF?text=Assessment');">
+        <div class="slide-content">
+            <span class="day-badge">TUESDAY</span>
+            <h2 class="text-4xl mb-6">Dual Assessment Workshop</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl mb-4">Morning: Innovation Maturity</h3>
+                    <div class="space-y-3">
+                        <p>NPD Strategy: 1/5</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width: 20%;"></div></div>
+                        <p>Portfolio Management: 1/5</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width: 20%;"></div></div>
+                        <p>Process: 2/5</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width: 40%; background-color: #f59e0b;"></div></div>
+                        <p>Culture: 1/5</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width: 20%;"></div></div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl mb-4">Afternoon: AI Readiness</h3>
+                    <div class="space-y-3">
+                        <p>Data Infrastructure: 2/5</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width: 40%; background-color: #f59e0b;"></div></div>
+                        <p>Analytics Capabilities: 2/5</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width: 40%; background-color: #f59e0b;"></div></div>
+                        <p>Leadership Alignment: 2/5</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width: 40%; background-color: #f59e0b;"></div></div>
+                        <p>Governance: 1/5</p>
+                        <div class="progress-bar-container"><div class="progress-bar" style="width: 20%;"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="character-interaction">
+                During the workshop, Delores noted, "The scores are bleak, but they're not telling us two different stories. They're telling one story of a company that lacks structure, both in how it creates and how it uses information."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Wednesday - The Integration Insight -->
+    <div id="slide4" class="slide" style="background-image: url('https://placehold.co/1920x1080/5d4a78/FFFFFF?text=Insight');">
+        <div class="slide-content">
+            <span class="day-badge">WEDNESDAY</span>
+            <h2 class="text-4xl mb-6">The Integration Insight</h2>
+            <p class="text-xl mb-6">Armed with data, Marcus and Delores develop a unified approach. The solution isn't to run two separate initiatives, but to weave them together into a single, powerful strategy.</p>
+            <ul class="text-lg space-y-3">
+                <li><strong>One Process to Rule Them All:</strong> A formal Stage-Gate process will now guide ALL initiatives, from incremental improvements to moonshot projects.</li>
+                <li><strong>AI as an Enabler, Not a Project:</strong> AI tools won't be a separate silo. They will be integrated directly into the Stage-Gate process where they add the most value.</li>
+            </ul>
+             <div class="character-interaction">
+                Marcus sketched on a whiteboard, connecting two diagrams. "Look," he explained to a skeptical team, "We don't just do empathy interviews *or* sentiment analysis. We do both. Our human insight guides the AI's focus, and the AI scales our understanding across millions of data points. It's a feedback loop."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Thursday - Stakeholder Mapping -->
+    <div id="slide5" class="slide" style="background-image: url('https://placehold.co/1920x1080/2c5d6c/FFFFFF?text=Alignment');">
+        <div class="slide-content">
+            <span class="day-badge">THURSDAY</span>
+            <h2 class="text-4xl mb-6">Stakeholder Mapping & Alignment</h2>
+            <p class="text-xl mb-6">A cross-functional session reveals that the integrated approach resonates deeply, solving multiple pain points across the leadership team.</p>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg">Patricia (R&D)</h3>
+                    <p>Wants a systematic R&D process AND AI-driven acceleration.</p>
+                </div>
+                 <div class="bg-green-100 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg">George (Marketing)</h3>
+                    <p>Needs a clear customer insights process AND predictive analytics.</p>
+                </div>
+                 <div class="bg-yellow-100 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg">Baldemar (Operations)</h3>
+                    <p>Seeks operational excellence through lean methods AND AI optimization.</p>
+                </div>
+            </div>
+            <div class="character-interaction">
+                 "I've been fighting for a structured R&D budget for years," Patricia confessed. "And George, you've been asking for better customer data. Baldemar, you need to predict supply chain issues. This... this actually gives all of us what we need." George nodded enthusiastically. "Exactly. This isn't a compromise; it's a force multiplier."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Friday - The Integrated Vision -->
+    <div id="slide6" class="slide" style="background-image: url('https://placehold.co/1920x1080/8a4a58/FFFFFF?text=Vision');">
+        <div class="slide-content">
+            <span class="day-badge">FRIDAY</span>
+            <h2 class="text-4xl mb-6">A New Vision: Project Synthesis</h2>
+            <p class="text-xl mb-6">With universal buy-in, CEO Virginia announces "Project Synthesis" to the entire company, framing it not as a reaction to crisis, but as a proactive evolution.</p>
+            <ul class="text-lg space-y-3">
+                <li><strong>The Mission:</strong> To build a world-class, systematic innovation capability.</li>
+                <li><strong>The Tool:</strong> To strategically integrate artificial intelligence as a core enabler of that capability.</li>
+                <li><strong>The Targets:</strong> Achieve <strong>25%</strong> of revenue from new innovations and enhance <strong>50%</strong> of our core processes with AI within three years.</li>
+            </ul>
+            <div class="character-interaction">
+                In her address, Virginia was clear: "Today, we stop talking about innovation and technology as separate things. They are the left and right foot of our march forward. Project Synthesis is our commitment to learning to run."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Conclusion -->
+    <div id="slide7" class="slide" style="background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=The+Future');">
+        <div class="slide-content text-center">
+            <h2 class="text-5xl mb-4">One Integrated Solution</h2>
+            <p class="text-2xl text-gray-600">By addressing the process and technology crises simultaneously, TransformCo turned two weaknesses into a single, unified strength, paving the way for sustainable growth and a competitive edge.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="slide-number" class="slide-number">1 / 7</div>
+    <div class="arrow-nav">
+        <button id="prevBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="nextBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberElement = document.getElementById('slide-number');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach((slide, index) => {
+                if (index === n) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            slideNumberElement.textContent = `${n + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Initialize first slide
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
+
