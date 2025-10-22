@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 Individual Assignment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-gray-800 via-slate-800 to-zinc-700 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Module 4 Individual Assignment</h1>
+                <p class="text-xl md:text-2xl opacity-90">Designing the AI-Augmented Team</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Assignment Goal -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                    <svg viewBox="0 0 100 100" class="w-full max-w-sm">
+                        <!-- Inputs -->
+                        <rect x="2" y="10" width="40" height="25" rx="5" fill="#a7f3d0"/>
+                        <text x="22" y="25" font-size="6" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="22" dy="-3.5">Human</tspan>
+                            <tspan x="22" dy="7">Expertise</tspan>
+                        </text>
+                        
+                        <rect x="58" y="10" width="40" height="25" rx="5" fill="#a5f3fc"/>
+                        <text x="78" y="25" font-size="6" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="78" dy="-3.5">AI</tspan>
+                            <tspan x="78" dy="7">Augmentation</tspan>
+                        </text>
+
+                        <!-- Arrows -->
+                        <path d="M22 35 L 40 55" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-m4)"/>
+                        <path d="M78 35 L 60 55" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-m4)"/>
+
+                        <!-- Core Team -->
+                        <rect x="30" y="55" width="40" height="35" rx="5" fill="#e0e7ff"/>
+                        <text x="50" y="75" font-size="6" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="50" dy="-4">Augmented</tspan>
+                            <tspan x="50" dy="8">Team</tspan>
+                        </text>
+                        
+                        <defs><marker id="arrow-m4" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#9ca3af"/></marker></defs>
+                    </svg>
+                 </div>
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Your Mission</h2>
+                    <p class="text-xl text-gray-600">This week, your task is to design a blueprint for a high-performing, AI-augmented team. You will define the team structure, select the right AI tools, establish collaboration rules, and create a plan to ensure everyone is equipped for success.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: Task 1 - Design Augmented Team Structure -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Task 1: Design the Team Structure</h2>
+                <p class="text-lg text-gray-600 mb-6 text-center max-w-3xl">Go beyond traditional roles. Define how AI integrates into the team's workflow—not as a separate tool, but as a core collaborator. Select an initiative from the running case or propose your own to frame your design.</p>
+                <div class="w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg">
+                    <h3 class="font-semibold text-xl mb-2 text-center">Example: Product Launch Team</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div><div class="p-3 bg-indigo-100 rounded-lg font-semibold">Project Manager</div><p class="text-sm text-gray-500 mt-1">Tracks progress, reports on status</p></div>
+                        <div><div class="p-3 bg-indigo-100 rounded-lg font-semibold">Marketing Lead</div><p class="text-sm text-gray-500 mt-1">Develops campaign messaging</p></div>
+                        <div><div class="p-3 bg-indigo-100 rounded-lg font-semibold">Engineer</div><p class="text-sm text-gray-500 mt-1">Writes & tests feature code</p></div>
+                        <div class="md:col-span-3 text-2xl text-center text-gray-400 my-2">+</div>
+                        <div><div class="p-3 bg-cyan-100 rounded-lg font-semibold">AI Assistant: Research</div><p class="text-sm text-gray-500 mt-1">Summarizes market data</p></div>
+                        <div><div class="p-3 bg-cyan-100 rounded-lg font-semibold">AI Assistant: Content</div><p class="text-sm text-gray-500 mt-1">Generates draft copy</p></div>
+                        <div><div class="p-3 bg-cyan-100 rounded-lg font-semibold">AI Assistant: Code</div><p class="text-sm text-gray-500 mt-1">Suggests & debugs code</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Task 2 - Identify AI Tools -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Task 2: Identify AI Tools for Each Role</h2>
+                <p class="text-lg text-gray-600 mb-6 text-center max-w-3xl">Map specific, real-world AI tools to the roles you defined. Justify why each tool is the right choice for augmenting that role's key responsibilities.</p>
+                <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50 border-b">
+                            <tr>
+                                <th class="p-4 font-semibold">Role</th>
+                                <th class="p-4 font-semibold">Augmented Task</th>
+                                <th class="p-4 font-semibold">Example AI Tool</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b"><td class="p-4">Project Manager</td><td class="p-4">Generating status reports, summarizing risks</td><td class="p-4">Notion AI / Asana AI</td></tr>
+                            <tr class="border-b"><td class="p-4">UX/UI Designer</td><td class="p-4">Creating mood boards, generating UI mockups</td><td class="p-4">Miro AI / Midjourney</td></tr>
+                            <tr class="border-b"><td class="p-4">Developer</td><td class="p-4">Code completion, writing unit tests, debugging</td><td class="p-4">GitHub Copilot</td></tr>
+                            <tr><td class="p-4">Marketer</td><td class="p-4">Drafting ad copy, analyzing campaign data</td><td class="p-4">Jasper / ChatGPT</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Task 3 - Create Collaboration Protocols -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Task 3: Create Collaboration Protocols</h2>
+                <p class="text-lg text-gray-600 mb-6 text-center max-w-3xl">Define the "rules of the road" for working with AI. How does the team ensure quality, maintain accountability, and use AI ethically?</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg text-gray-700 mb-1">Principle of Verification</h3><p class="text-gray-600">All AI-generated output (code, text, data) must be reviewed and verified by a human expert before being finalized.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg text-gray-700 mb-1">Protocol for Attribution</h3><p class="text-gray-600">Team members must indicate when AI was used as a significant contributor to a piece of work (e.g., via a tag or comment).</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg text-gray-700 mb-1">Guideline for Data Privacy</h3><p class="text-gray-600">No proprietary or personally identifiable information (PII) should be entered into public AI models.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg text-gray-700 mb-1">Human-in-the-Loop for Decisions</h3><p class="text-gray-600">AI can inform and provide options, but final strategic decisions must be made by human team members.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Task 4 - Develop Training Plan -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Task 4: Develop a Training Plan</h2>
+                <p class="text-lg text-gray-600 mb-6 text-center max-w-3xl">Outline a training program to upskill your team. What do they need to learn to be effective and responsible users of the new AI tools?</p>
+                <div class="w-full max-w-3xl">
+                    <div class="relative pl-8 py-4 border-l-2 border-gray-300">
+                        <!-- Step 1 -->
+                        <div class="absolute -left-4 top-4 w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                        <h3 class="text-xl font-semibold">Foundational AI Literacy</h3>
+                        <p class="text-gray-600">Basic concepts of AI/ML, understanding limitations and biases, and principles of ethical AI use.</p>
+                        <!-- Step 2 -->
+                        <div class="absolute -left-4 top-28 w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                        <h3 class="text-xl font-semibold mt-8">Tool-Specific Workshops</h3>
+                        <p class="text-gray-600">Hands-on training for the specific AI tools selected for each role (e.g., a GitHub Copilot masterclass for developers).</p>
+                        <!-- Step 3 -->
+                        <div class="absolute -left-4 top-52 w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                        <h3 class="text-xl font-semibold mt-8">Advanced Prompt Engineering</h3>
+                        <p class="text-gray-600">Training on how to write effective prompts to get the best possible output from generative AI tools.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-gray-300"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M9 12h6"></path><path d="M9 16h6"></path><path d="M9 8h2"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Final Deliverable</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Submit a comprehensive document or presentation that details your complete blueprint for the AI-augmented team, covering all four assignment tasks.</p>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-gray-800 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

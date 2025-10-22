@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Copilot for Technical Teams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-900 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M9 12.75 11.25 15 15 9.75"></path><path d="M20.25 12a8.25 8.25 0 0 1-8.25 8.25c-4.42 0-8.25-3.58-8.25-8.25S7.42 3.75 12 3.75c1.76 0 3.37.55 4.7 1.54"></path><path d="M16 8.25a3 3 0 0 0-3-3H9"></path></svg>
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">GitHub Copilot for Technical Teams</h1>
+                <p class="text-xl md:text-2xl opacity-90">Your AI Pair Programmer</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: What is GitHub Copilot? -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">What is GitHub Copilot?</h2>
+                    <p class="text-xl text-gray-600">GitHub Copilot is an AI-powered code completion tool developed by GitHub and OpenAI. It integrates directly into your code editor (IDE) and provides real-time suggestions, from single lines of code to entire functions and classes, based on the context of your project.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                    <div class="w-full max-w-md p-4 bg-gray-800 rounded-lg shadow-2xl font-mono text-sm">
+                        <p class="text-green-400"># Function to calculate the distance between two points</p>
+                        <p class="text-cyan-400">def <span class="text-yellow-300">calculate_distance</span>(point1, point2):</p>
+                        <div class="p-3 bg-gray-700 rounded my-2 text-gray-400">
+                            """Calculates the distance between two points in 2D space."""
+                            <br>
+                            x1, y1 = point1
+                            <br>
+                            x2, y2 = point2
+                            <br>
+                            return ((x2 - x1)**2 + (y2 - y1)**2)**0.5
+                        </div>
+                         <p><span class="text-gray-500">|</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: How It Transforms Team Workflows -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">How It Transforms Team Workflows</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-gray-700 mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg><div><h3 class="font-semibold text-lg">Speed Up Development</h3><p class="text-gray-600">Automate boilerplate code, generate unit tests, and complete repetitive tasks in seconds.</p></div></div>
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-gray-700 mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div><h3 class="font-semibold text-lg">Improve Code Quality</h3><p class="text-gray-600">Get suggestions based on best practices from countless open-source projects.</p></div></div>
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-gray-700 mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.373 3.373 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg><div><h3 class="font-semibold text-lg">Reduce Cognitive Load</h3><p class="text-gray-600">Stay in the flow without context-switching to look up syntax or documentation.</p></div></div>
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-gray-700 mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18" /></svg><div><h3 class="font-semibold text-lg">Accelerate Onboarding</h3><p class="text-gray-600">Help new developers get up to speed faster by providing context-aware code examples.</p></div></div>
+                </div>
+            </div>
+            
+            <!-- Slide 4: Tutorial: Setting Up Copilot -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Tutorial: Setting Up Copilot</h2>
+                <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow"><div class="text-3xl font-bold text-gray-600 bg-gray-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">1</div><h3 class="font-semibold text-lg">Get a Subscription</h3><p class="text-gray-600">Sign up for a Copilot plan (Individual or Business) with your GitHub account.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><div class="text-3xl font-bold text-gray-600 bg-gray-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">2</div><h3 class="font-semibold text-lg">Install Extension</h3><p class="text-gray-600">Find and install the "GitHub Copilot" extension from your IDE's marketplace (VS Code, JetBrains, etc.).</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><div class="text-3xl font-bold text-gray-600 bg-gray-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">3</div><h3 class="font-semibold text-lg">Authenticate</h3><p class="text-gray-600">Follow the prompts in your IDE to sign in and authorize the extension with your GitHub account.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Best Practices for Teams -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Best Practices for Teams</h2>
+                <div class="w-full max-w-3xl space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
+                        <h3 class="font-semibold text-lg">Review All Suggestions</h3>
+                        <p class="text-gray-600">Treat AI-generated code as a suggestion from a junior developer. Always review it for correctness, performance, and security.</p>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow border-l-4 border-green-500">
+                        <h3 class="font-semibold text-lg">Write Good Context</h3>
+                        <p class="text-gray-600">Copilot thrives on context. Write clear function names, comments, and docstrings to get higher-quality suggestions.</p>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red-500">
+                        <h3 class="font-semibold text-lg">Don't Trust Blindly with Security</h3>
+                        <p class="text-gray-600">Be extra critical of suggestions for security-sensitive areas like authentication, authorization, or data validation.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-gray-300"><path d="M10.25 2.75 4 9l6.25 6.25"></path><path d="M13.75 21.25 20 15l-6.25-6.25"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">More Than Autocomplete</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">GitHub Copilot is a powerful force multiplier for technical teams. It handles the routine, accelerates development, and allows engineers to focus their creativity on solving the most challenging problems.</p>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-gray-800 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>

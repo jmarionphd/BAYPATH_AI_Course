@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Scenario: Breaking Down the Silos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            overscroll-behavior: none;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+        .slide-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 3rem 4rem;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .day-badge {
+            background-color: #6d28d9; /* New color for this module */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #5b21b6;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1rem;
+            color: #64748b;
+        }
+        .arrow-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+        .arrow-nav button {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .arrow-nav button:hover {
+            background-color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        ul li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        ul li::before {
+            content: '»';
+            position: absolute;
+            left: 0;
+            color: #6d28d9;
+            font-weight: bold;
+        }
+        .character-interaction {
+            background-color: #f5f3ff;
+            border-left: 4px solid #8b5cf6;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: #5b21b6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Company Logo -->
+    <div class="logo">TransformCo</div>
+
+    <!-- Slide 1: Title -->
+    <div id="slide1" class="slide active" style="background-image: url('https://placehold.co/1920x1080/4c1d95/FFFFFF?text=Data+Architecture');">
+        <div class="slide-content text-center">
+            <h1 class="text-5xl mb-4 text-gray-800">Breaking Down the Silos</h1>
+            <p class="text-2xl text-gray-600">Module 3 Running Case</p>
+            <p class="mt-8 text-lg">Use Left/Right Arrow Keys to Navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Monday - The Data Disaster -->
+    <div id="slide2" class="slide" style="background-image: url('https://placehold.co/1920x1080/5b21b6/FFFFFF?text=Chaos');">
+        <div class="slide-content">
+            <span class="day-badge">MONDAY</span>
+            <h2 class="text-4xl mb-6">The Data Disaster</h2>
+            <p class="text-xl mb-6">Robert, the exasperated CIO, lays bare the chaotic state of TransformCo's data infrastructure. It's not a data lake; it's a data swamp.</p>
+            <ul class="text-lg space-y-3">
+                <li><strong>47 different systems</strong> of record, unable to communicate.</li>
+                <li>Customer data stored in <strong>6 incompatible formats</strong>.</li>
+                <li><strong>30% of product SKUs</strong> have inconsistent, conflicting identifiers.</li>
+                <li>No single source of truth exists for even basic sales data.</li>
+            </ul>
+            <div class="character-interaction">
+                "It's not that we don't have data, Delores," Robert said, pointing to a complex, messy diagram. "We're drowning in it. But asking a simple question like 'Who was our most valuable customer last year?' would take a team of analysts six weeks to even attempt an answer."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Tuesday - The Alliance Forms -->
+    <div id="slide3" class="slide" style="background-image: url('https://placehold.co/1920x1080/7c3aed/FFFFFF?text=Partnership');">
+        <div class="slide-content">
+            <span class="day-badge">TUESDAY</span>
+            <h2 class="text-4xl mb-6">The Alliance Forms</h2>
+            <p class="text-xl mb-6">Instead of pointing fingers, Delores sees a foundational problem. She and Robert agree that technology and strategy must be addressed together.</p>
+             <ul class="text-lg space-y-3">
+                <li><strong>A Strategic Partnership:</strong> Robert will lead the technical architecture, while Delores drives business adoption and identifies high-value use cases.</li>
+                <li><strong>The Big Ask:</strong> They agree to jointly pitch a $15M investment for a unified data platform.</li>
+                <li><strong>New Foundation:</strong> Their first act is to charter a new, joint Data & AI Center of Excellence to guide the transformation.</li>
+             </ul>
+            <div class="character-interaction">
+                 "You build the pipes, I'll make sure the business knows how to get value from what flows through them," Delores proposed. Robert nodded, relieved. "Finally. A business leader who gets that infrastructure isn't just a cost center. It's the launchpad for everything you want to do."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Wednesday - The Factory Floor Revelation -->
+    <div id="slide4" class="slide" style="background-image: url('https://placehold.co/1920x1080/8b5cf6/FFFFFF?text=Discovery');">
+        <div class="slide-content">
+            <span class="day-badge">WEDNESDAY</span>
+            <h2 class="text-4xl mb-6">The Factory Floor Revelation</h2>
+            <p class="text-xl mb-6">Baldemar, Head of Operations, skeptically shows Delores a "data treasure chest": five years of sensor data from factory equipment, sitting on a server, completely untouched.</p>
+            <p class="mt-4">Within hours, Delores's team runs a pilot analysis, demonstrating:</p>
+            <ul class="text-lg space-y-2 mt-2">
+                <li>A predictive maintenance model that could have prevented a <strong>$500K breakdown</strong> last year.</li>
+                <li>Pattern recognition to identify quality issues <strong>3 hours earlier</strong>.</li>
+                <li>An energy optimization model to reduce costs by <strong>12%</strong>.</li>
+            </ul>
+             <div class="character-interaction">
+                Baldemar stared at the screen, jaw agape. "I thought this AI stuff was about replacing my people. But this... this doesn't replace them. It tells them exactly where to look. It's giving them superpowers." He instantly becomes the project's most vocal champion.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Thursday - Customer Data Goldmine -->
+    <div id="slide5" class="slide" style="background-image: url('https://placehold.co/1920x1080/a78bfa/FFFFFF?text=Opportunity');">
+        <div class="slide-content">
+            <span class="day-badge">THURSDAY</span>
+            <h2 class="text-4xl mb-6">The Customer Data Goldmine</h2>
+            <p class="text-xl mb-6">Inspired, George from Marketing investigates his own data silos. He and Delores uncover a massive, dormant asset.</p>
+             <ul class="text-lg space-y-3">
+                <li><strong>10 million unique customer records</strong> spanning 15 years of company history.</li>
+                <li>Rich data on purchase patterns, preferences, and feedback, completely unutilized.</li>
+                <li>Clear potential for a recommendation engine, churn prediction, and personalization.</li>
+                <li><strong>A Hurdle:</strong> George, wearing his legal counsel hat, insists on a full privacy and compliance audit before any data can be used, a critical and necessary step.</li>
+             </ul>
+            <div class="character-interaction">
+                 "The potential here is staggering," George mused, "but we have to do this right. Our customers trusted us with this data. Step one is to prove we're worthy of that trust by ensuring its privacy. Then we can unlock its value."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Friday - The Data Mesh Decision -->
+    <div id="slide6" class="slide" style="background-image: url('https://placehold.co/1920x1080/c4b5fd/FFFFFF?text=Strategy');">
+        <div class="slide-content">
+            <span class="day-badge">FRIDAY</span>
+            <h2 class="text-4xl mb-6">The Data Mesh Decision</h2>
+            <p class="text-xl mb-6">The leadership team debates the right architectural approach: a single, centralized data lake, or a decentralized, federated data mesh.</p>
+            <h3 class="text-2xl mt-4">Delores proposes a hybrid "best of both worlds" approach:</h3>
+             <ul class="text-lg space-y-2 mt-2">
+                <li><strong>Central Governance:</strong> A central team (the new CoE) provides tools, security standards, and best practices.</li>
+                <li><strong>Distributed Ownership:</strong> Each business division (Operations, Marketing, etc.) owns its data as a "product" and is responsible for its quality and accessibility.</li>
+             </ul>
+             <div class="character-interaction">
+                "We can't have Robert's team be a bottleneck for the entire company," Delores argued to the board. "Let's empower the experts in each domain to manage their own data, but give them a common playbook to follow. It's federated execution with centralized strategy." The board approves the phased investment.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Conclusion -->
+    <div id="slide7" class="slide" style="background-image: url('https://placehold.co/1920x1080/4c1d95/FFFFFF?text=Unified');">
+        <div class="slide-content text-center">
+            <h2 class="text-5xl mb-4">From Silos to Synergy</h2>
+            <p class="text-2xl text-gray-600">TransformCo realized that a modern data strategy isn't just about technology. It's a socio-technical challenge requiring shared ownership, central governance, and a clear focus on creating business value.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="slide-number" class="slide-number">1 / 7</div>
+    <div class="arrow-nav">
+        <button id="prevBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="nextBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberElement = document.getElementById('slide-number');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach((slide, index) => {
+                if (index === n) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            slideNumberElement.textContent = `${n + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Initialize first slide
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

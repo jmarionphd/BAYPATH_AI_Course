@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Scenario: The Customer Truth, Amplified</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            overscroll-behavior: none;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+        .slide-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 3rem 4rem;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .day-badge {
+            background-color: #059669; /* New color for this module */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #047857;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1rem;
+            color: #64748b;
+        }
+        .arrow-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+        .arrow-nav button {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .arrow-nav button:hover {
+            background-color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        ul li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #059669;
+            font-weight: bold;
+        }
+        .character-interaction {
+            background-color: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: #065f46;
+        }
+    </style>
+</head>
+<body>
+    <!-- Company Logo -->
+    <div class="logo">TransformCo</div>
+
+    <!-- Slide 1: Title -->
+    <div id="slide1" class="slide active" style="background-image: url('https://placehold.co/1920x1080/064e3b/FFFFFF?text=Customer+Focus');">
+        <div class="slide-content text-center">
+            <h1 class="text-5xl mb-4 text-gray-800">The Customer Truth, Amplified</h1>
+            <p class="text-2xl text-gray-600">Module 2 Running Case</p>
+            <p class="mt-8 text-lg">Use Left/Right Arrow Keys to Navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Monday - Methods Integration Training -->
+    <div id="slide2" class="slide" style="background-image: url('https://placehold.co/1920x1080/065f46/FFFFFF?text=Learning');">
+        <div class="slide-content">
+            <span class="day-badge">MONDAY</span>
+            <h2 class="text-4xl mb-6">Methods Integration Training</h2>
+            <p class="text-xl mb-6">The week begins with intensive training, designed to bridge the gap between human-centric design and data-driven analytics.</p>
+            <ul class="text-lg space-y-3">
+                <li><strong>Morning Session:</strong> Teams immerse themselves in Stanford d.school empathy techniques, learning to see the world through customers' eyes.</li>
+                <li><strong>Afternoon Session:</strong> A deep dive into the power of AI-powered customer analytics, exploring tools for sentiment analysis and pattern recognition.</li>
+            </ul>
+            <div class="character-interaction">
+                George from Marketing turned to a data scientist. "So, you're telling me my team's ethnographic research can actually guide your algorithms?" The data scientist smiled. "Exactly. You provide the 'why,' and we can find the 'how many' at a massive scale."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Tuesday - Dual Discovery Launch -->
+    <div id="slide3" class="slide" style="background-image: url('https://placehold.co/1920x1080/115e59/FFFFFF?text=Discovery');">
+        <div class="slide-content">
+            <span class="day-badge">TUESDAY</span>
+            <h2 class="text-4xl mb-6">Dual Discovery Launch</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl mb-4 text-center">Human-Centered Discovery</h3>
+                    <ul class="text-lg space-y-2">
+                        <li>In-home observations with real customers</li>
+                        <li>Deep, one-on-one empathy interviews</li>
+                        <li>Visual journey mapping workshops</li>
+                        <li>Qualitative pain point identification</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl mb-4 text-center">AI-Enhanced Analysis</h3>
+                    <ul class="text-lg space-y-2">
+                        <li>Sentiment analysis of 100,000+ reviews</li>
+                        <li>Purchase pattern and customer clustering</li>
+                        <li>Predictive churn modeling and risk scoring</li>
+                        <li>Real-time social listening for trends</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="character-interaction">
+                 A junior designer confessed, "I was worried the AI part would feel cold, but seeing it analyze thousands of reviews gives us a scope we could never achieve just by talking to people. It's like having a superpower."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Wednesday - Synthesis Session -->
+    <div id="slide4" class="slide" style="background-image: url('https://placehold.co/1920x1080/134e4a/FFFFFF?text=Synthesis');">
+        <div class="slide-content">
+            <span class="day-badge">WEDNESDAY</span>
+            <h2 class="text-4xl mb-6">Synthesis Session: The "Aha!" Moment</h2>
+            <p class="text-xl mb-6">The two teams reconvene to share their findings. The magic happens when the qualitative "why" meets the quantitative "what," revealing insights invisible to either method alone.</p>
+            <ul class="text-lg space-y-3">
+                <li><strong>AI identifies patterns humans miss:</strong> The algorithm flags a strange correlation between rainy weather and a drop in product usage.</li>
+                <li><strong>Interviews explain WHY patterns exist:</strong> The design team's interviews reveal customers find the product's packaging difficult to open with damp hands, a nuance no dataset could capture.</li>
+            </ul>
+             <div class="character-interaction">
+                Marcus stood at the whiteboard, circling the two data points. "This is it, everyone. The AI gave us a signal, but our interviews gave us the story. We're not just seeing what's happening; we're understanding it."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Thursday - Problem Prioritization -->
+    <div id="slide5" class="slide" style="background-image: url('https://placehold.co/1920x1080/0f766e/FFFFFF?text=Prioritization');">
+        <div class="slide-content">
+            <span class="day-badge">THURSDAY</span>
+            <h2 class="text-4xl mb-6">Integrated Problem Prioritization</h2>
+            <p class="text-xl mb-6">With a rich, unified understanding of the customer, Marcus facilitates an opportunity scoring session, ensuring decisions are based on a complete picture.</p>
+             <div class="bg-gray-100 p-6 rounded-lg text-center mt-4">
+                <p class="text-lg"><strong class="text-blue-600">Human Insights</strong> (Problem Severity)</p>
+                <p class="text-3xl font-bold">+</p>
+                <p class="text-lg"><strong class="text-green-600">AI Analytics</strong> (Market Size & Frequency)</p>
+                <p class="text-3xl font-bold">=</p>
+                <p class="text-xl font-bold text-gray-800">Data-Driven Opportunity Ranking</p>
+             </div>
+            <div class="character-interaction">
+                 "In the past, we'd argue over which problems felt bigger," Delores observed. "Now, we're not guessing. We can see the emotional weight of a problem from our interviews and combine it with the hard data on how many people it affects. It's defensible and customer-centric."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Friday - Reframing with Both Lenses -->
+    <div id="slide6" class="slide" style="background-image: url('https://placehold.co/1920x1080/0d9488/FFFFFF?text=Reframing');">
+        <div class="slide-content">
+            <span class="day-badge">FRIDAY</span>
+            <h2 class="text-4xl mb-6">Reframing the Challenge</h2>
+            <p class="text-xl mb-6">The combined insights lead the team to a profound realization: they were solving the wrong problem.</p>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                <div class="border-l-4 border-red-400 pl-4">
+                    <h3 class="text-2xl font-bold text-red-600">Original Problem</h3>
+                    <p class="text-lg italic">"Implement AI for customer service to reduce call volume."</p>
+                </div>
+                <div class="border-l-4 border-green-500 pl-4">
+                    <h3 class="text-2xl font-bold text-green-700">Reframed Opportunity</h3>
+                    <p class="text-lg italic">"How might we proactively educate customers so they feel confident and successful before problems even arise?"</p>
+                </div>
+            </div>
+             <div class="character-interaction">
+                CEO Virginia reviewed the new problem statement. "Brilliant. We've shifted from a cost-cutting mindset to a value-creation mindset. This is what happens when you truly listen to your customers with every tool you have."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Conclusion -->
+    <div id="slide7" class="slide" style="background-image: url('https://placehold.co/1920x1080/047857/FFFFFF?text=Amplified');">
+        <div class="slide-content text-center">
+            <h2 class="text-5xl mb-4">The Customer Truth, Amplified</h2>
+            <p class="text-2xl text-gray-600">By fusing human empathy with machine intelligence, TransformCo didn't just find better answers; they started asking better questions, unlocking a deeper, more actionable understanding of their customers.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="slide-number" class="slide-number">1 / 7</div>
+    <div class="arrow-nav">
+        <button id="prevBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="nextBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberElement = document.getElementById('slide-number');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach((slide, index) => {
+                if (index === n) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            slideNumberElement.textContent = `${n + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Initialize first slide
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

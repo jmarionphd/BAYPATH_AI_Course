@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovation Communities of Practice Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-purple-800 via-indigo-700 to-slate-900 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Innovation Communities of Practice</h1>
+                <p class="text-xl md:text-2xl opacity-90">Cultivating Collective Genius</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: What is a Community of Practice? -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">What is a Community of Practice (CoP)?</h2>
+                    <p class="text-xl text-gray-600">A CoP is a group of people who share a passion or a concern for something they do, and who learn how to do it better as they interact regularly. It's an organic, social structure for collective learning.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 100 100" class="w-full max-w-sm">
+                        <!-- Center -->
+                        <circle cx="50" cy="50" r="15" fill="#a78bfa"/>
+                        <text x="50" y="52" font-size="6" fill="white" text-anchor="middle">Shared</text>
+                        <text x="50" y="58" font-size="6" fill="white" text-anchor="middle">Interest</text>
+                        <!-- Members -->
+                        <circle cx="20" cy="20" r="8" fill="#c4b5fd"/><path d="M26,26 L 40,40" stroke="#ddd6fe" stroke-width="2"/>
+                        <circle cx="80" cy="20" r="8" fill="#c4b5fd"/><path d="M74,26 L 60,40" stroke="#ddd6fe" stroke-width="2"/>
+                        <circle cx="20" cy="80" r="8" fill="#c4b5fd"/><path d="M26,74 L 40,60" stroke="#ddd6fe" stroke-width="2"/>
+                        <circle cx="80" cy="80" r="8" fill="#c4b5fd"/><path d="M74,74 L 60,60" stroke="#ddd6fe" stroke-width="2"/>
+                        <circle cx="50" cy="10" r="8" fill="#c4b5fd"/><path d="M50,18 L 50,35" stroke="#ddd6fe" stroke-width="2"/>
+                        <circle cx="50" cy="90" r="8" fill="#c4b5fd"/><path d="M50,82 L 50,65" stroke="#ddd6fe" stroke-width="2"/>
+                     </svg>
+                </div>
+            </div>
+
+            <!-- Slide 3: Why an Innovation CoP? -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Why an <span class="text-indigo-600">Innovation</span> CoP?</h2>
+                <p class="text-lg text-gray-600 text-center mb-6 max-w-3xl">While a traditional CoP might focus on improving existing skills, an Innovation CoP is a forward-looking engine for organizational change.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-indigo-700 mb-2">Cross-Pollinate Ideas</h3><p class="text-gray-600">Break down departmental silos by connecting passionate people from across the organization to share diverse perspectives.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-indigo-700 mb-2">Build Capabilities</h3><p class="text-gray-600">Create a space for members to collectively learn and master new innovation tools, methods (like Design Thinking), and technologies (like AI).</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-indigo-700 mb-2">Accelerate Adoption</h3><p class="text-gray-600">Develop a grassroots network of internal champions who can model new behaviors and help spread new ways of working.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-indigo-700 mb-2">Foster Culture</h3><p class="text-gray-600">Make innovation a shared, voluntary responsibility, building a culture where curiosity and experimentation are encouraged.</p></div>
+                </div>
+            </div>
+            
+            <!-- Slide 4: Anatomy of a Thriving CoP -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">The Three Pillars</h2>
+                    <p class="text-lg text-gray-600">A successful Community of Practice is built on three essential foundations that reinforce each other.</p>
+                 </div>
+                 <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                    <svg viewBox="0 0 100 100" class="w-full max-w-sm">
+                        <circle cx="50" cy="35" r="20" fill="#c4b5fd" />
+                        <text x="50" y="37" font-size="8" text-anchor="middle" class="font-semibold">Domain</text>
+                        <circle cx="30" cy="70" r="20" fill="#a78bfa" />
+                        <text x="30" y="72" font-size="7" text-anchor="middle" class="font-semibold text-white">Community</text>
+                        <circle cx="70" cy="70" r="20" fill="#8b5cf6" />
+                        <text x="70" y="72" font-size="8" text-anchor="middle" class="font-semibold text-white">Practice</text>
+                    </svg>
+                 </div>
+            </div>
+
+            <!-- Slide 5: Activities and Rituals -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Activities that Fuel the Community</h2>
+                <div class="w-full max-w-4xl">
+                    <div class="relative pl-8 py-4 border-l-2 border-gray-300">
+                        <div class="mb-8"><div class="absolute -left-4 top-4 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">1</div><h3 class="text-xl font-semibold">Regular Meetups</h3><p class="text-gray-600">Scheduled, recurring events (e.g., monthly "Lunch & Learns") that create a reliable rhythm for the community.</p></div>
+                        <div class="mb-8"><div class="absolute -left-4 top-28 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">2</div><h3 class="text-xl font-semibold">Show & Tells / Demos</h3><p class="text-gray-600">Members share recent work, interesting discoveries, or a new tool they're exploring in short, informal presentations.</p></div>
+                        <div class="mb-8"><div class="absolute -left-4 top-52 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">3</div><h3 class="text-xl font-semibold">Shared Resource Hub</h3><p class="text-gray-600">A central, living repository for knowledge, such as a Slack channel, wiki page, or shared folder with articles, templates, and recordings.</p></div>
+                        <div class="mb-8"><div class="absolute -left-4 top-72 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">4</div><h3 class="text-xl font-semibold">Problem-Solving Sessions</h3><p class="text-gray-600">A member brings a real-world challenge to the group for collaborative brainstorming and advice.</p></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-indigo-300"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">An Engine for Growth</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Innovation Communities of Practice are more than just clubs; they are strategic assets. By connecting passionate practitioners, they create a powerful, self-sustaining engine for learning, capability-building, and cultural change that formal, top-down programs often struggle to achieve.</p>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-indigo-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+

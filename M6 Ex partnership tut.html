@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External Partnerships for Expertise Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-slate-700 via-gray-800 to-zinc-900 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">External Partnerships for Expertise</h1>
+                <p class="text-xl md:text-2xl opacity-90">Looking Outside to Grow Within</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: The Build vs. Partner Dilemma -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">The "Build vs. Partner" Dilemma</h2>
+                <p class="text-lg text-gray-600 text-center mb-6 max-w-3xl">When a new capability is needed, organizations face a critical choice: invest time and resources to build it internally, or partner to acquire it quickly?</p>
+                <div class="w-full max-w-4xl flex flex-col md:flex-row gap-8">
+                    <div class="w-full md:w-1/2 p-6 bg-white rounded-lg shadow">
+                        <h3 class="font-bold text-2xl mb-2">Build Internally</h3>
+                        <p class="text-gray-600">Develops long-term, proprietary knowledge but is often slow, expensive, and carries the risk of failure.</p>
+                    </div>
+                    <div class="w-full md:w-1/2 p-6 bg-gray-50 rounded-lg shadow border-2 border-gray-200">
+                        <h3 class="font-bold text-2xl mb-2 text-gray-700">Partner Externally</h3>
+                        <p class="text-gray-600">Provides immediate access to world-class expertise and accelerates learning, but requires careful management to ensure knowledge transfer.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3: The Strategic Advantages of Partnering -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">The Strategic Advantages of Partnering</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-gray-700 mb-2">Speed</h3><p class="text-gray-600">Instantly access the skills and knowledge you need to tackle a challenge, bypassing long internal learning curves.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-gray-700 mb-2">World-Class Expertise</h3><p class="text-gray-600">Engage with leading experts and specialists who have solved similar problems for many other organizations.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-gray-700 mb-2">Fresh Perspectives</h3><p class="text-gray-600">Break free from internal groupthink and challenge existing assumptions with an objective, outside-in point of view.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-gray-700 mb-2">Flexibility & Focus</h3><p class="text-gray-600">Use external expertise for specialized, short-term needs, allowing your internal teams to focus on core business activities.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Common Partnership Models -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Common Partnership Models</h2>
+                 <div class="w-full max-w-4xl space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-lg">Consultants & Agencies</h3><p class="text-gray-600">Engage specialized firms for structured projects, from strategic advice to implementation of new systems or processes.</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-lg">University Collaborations</h3><p class="text-gray-600">Partner with academic institutions for cutting-edge research, access to emerging talent, and executive education programs.</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-lg">Industry Consortia & Associations</h3><p class="text-gray-600">Join groups of peer companies to share best practices, benchmark performance, and collaboratively solve common industry challenges.</p></div>
+                     <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-lg">Freelance Experts & Gig Platforms</h3><p class="text-gray-600">Leverage platforms like Toptal or Upwork to bring in individual specialists for highly specific, on-demand tasks.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 5: A Framework for Successful Partnership -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">A Framework for Successful Partnership</h2>
+                <div class="w-full max-w-4xl">
+                    <div class="relative pl-8 py-4 border-l-2 border-gray-300">
+                        <div class="mb-8"><div class="absolute -left-4 top-4 w-8 h-8 bg-slate-600 text-white rounded-full flex items-center justify-center font-bold">1</div><h3 class="text-xl font-semibold">Define the Knowledge Gap</h3><p class="text-gray-600">Be precise about what you need to learn. Is it a specific technical skill, a strategic framework, or market insight?</p></div>
+                        <div class="mb-8"><div class="absolute -left-4 top-28 w-8 h-8 bg-slate-600 text-white rounded-full flex items-center justify-center font-bold">2</div><h3 class="text-xl font-semibold">Identify & Vet Partners</h3><p class="text-gray-600">Look for partners with proven, relevant experience. Check references and case studies. Is their expertise theoretical or practical?</p></div>
+                        <div class="mb-8"><div class="absolute -left-4 top-52 w-8 h-8 bg-slate-600 text-white rounded-full flex items-center justify-center font-bold">3</div><h3 class="text-xl font-semibold">Structure for Knowledge Transfer</h3><p class="text-gray-600">Don't just buy a solution. The contract must include explicit knowledge transfer activities, like workshops, paired work, and documentation.</p></div>
+                        <div class="mb-8"><div class="absolute -left-4 top-72 w-8 h-8 bg-slate-600 text-white rounded-full flex items-center justify-center font-bold">4</div><h3 class="text-xl font-semibold">Assign an Internal "Owner"</h3><p class="text-gray-600">Designate an internal team or champion responsible for absorbing, documenting, and disseminating the knowledge from the partner.</p></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-gray-300"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Learn from the Best, to Be the Best</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">In a rapidly changing world, no organization can be the best at everything. Strategic external partnerships are a core competency of a modern learning organization. They act as a powerful accelerator, enabling companies to acquire critical knowledge, build new capabilities, and stay ahead of the curve.</p>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-gray-800 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer Learning Programs Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-teal-700 via-green-700 to-emerald-800 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Peer Learning Programs</h1>
+                <p class="text-xl md:text-2xl opacity-90">Unlocking Your Organization's Collective Genius</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: What is Peer Learning? -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Learning, Reimagined</h2>
+                <div class="w-full max-w-4xl flex flex-col md:flex-row gap-8">
+                    <div class="w-full md:w-1/2 p-6 bg-white rounded-lg shadow">
+                        <h3 class="font-bold text-2xl mb-2">Traditional Training</h3>
+                        <p class="text-gray-600">A top-down approach where an expert broadcasts information to a group of learners.</p>
+                        <svg viewBox="0 0 100 60" class="mt-4"><circle cx="50" cy="15" r="8" fill="#a7f3d0"/><text x="50" y="17" font-size="5" text-anchor="middle">Expert</text><path d="M50 23 L 20 50" stroke="#9ca3af" stroke-width="2"/><path d="M50 23 L 50 50" stroke="#9ca3af" stroke-width="2"/><path d="M50 23 L 80 50" stroke="#9ca3af" stroke-width="2"/><circle cx="20" cy="50" r="5" fill="#e0e7ff"/><circle cx="50" cy="50" r="5" fill="#e0e7ff"/><circle cx="80" cy="50" r="5" fill="#e0e7ff"/></svg>
+                    </div>
+                    <div class="w-full md:w-1/2 p-6 bg-green-50 rounded-lg shadow border-2 border-green-200">
+                        <h3 class="font-bold text-2xl mb-2 text-green-700">Peer Learning</h3>
+                        <p class="text-gray-600">A collaborative, networked approach where colleagues learn from and with each other.</p>
+                        <svg viewBox="0 0 100 60" class="mt-4"><circle cx="25" cy="15" r="7" fill="#bbf7d0"/><circle cx="75" cy="15" r="7" fill="#bbf7d0"/><circle cx="50" cy="45" r="7" fill="#bbf7d0"/><path d="M32 15 L 68 15" stroke="#9ca3af" stroke-width="2"/><path d="M28 21 L 47 40" stroke="#9ca3af" stroke-width="2"/><path d="M72 21 L 53 40" stroke="#9ca3af" stroke-width="2"/></svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3: Why It's a Superpower -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">The Superpower of Peer Learning</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-emerald-700 mb-2">Scales Knowledge</h3><p class="text-gray-600">Taps into the vast expertise already inside your organization that formal training can't reach.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-emerald-700 mb-2">Builds Connectivity</h3><p class="text-gray-600">Strengthens relationships and breaks down silos as employees connect across teams and departments.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-emerald-700 mb-2">Highly Relevant</h3><p class="text-gray-600">Learning is grounded in real-world, on-the-job challenges, making it immediately applicable.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-emerald-700 mb-2">Fosters Culture</h3><p class="text-gray-600">Shifts the organizational mindset from "being trained" to "continuously learning" as a team sport.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Common Program Formats -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Common Formats for Peer Learning</h2>
+                 <div class="w-full max-w-4xl space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-lg">Learning Circles / Study Groups</h3><p class="text-gray-600">Small groups (4-6 people) who meet regularly to discuss a shared learning resource, like a book, a series of articles, or an online course.</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-lg">Peer Mentoring & Coaching</h3><p class="text-gray-600">Pairing individuals (or small groups) to provide mutual support, share skills, and offer feedback on professional challenges.</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-lg">Lunch & Learns / Show & Tells</h3><p class="text-gray-600">Informal, often voluntary, sessions where one employee shares their expertise, a recent project, or a new tool with a wider group.</p></div>
+                     <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-lg">Communities of Practice (CoP)</h3><p class="text-gray-600">A cross-functional group of passionate practitioners dedicated to a specific topic (e.g., AI, Project Management) who meet to advance their collective knowledge.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Designing a Successful Program -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Blueprint for a Successful Program</h2>
+                <div class="w-full max-w-4xl">
+                    <div class="relative pl-8 py-4 border-l-2 border-gray-300">
+                        <div class="mb-8"><div class="absolute -left-4 top-4 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold">1</div><h3 class="text-xl font-semibold">Identify the Goal</h3><p class="text-gray-600">Start with a clear purpose. What specific skill, knowledge gap, or business challenge are you trying to address?</p></div>
+                        <div class="mb-8"><div class="absolute -left-4 top-28 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold">2</div><h3 class="text-xl font-semibold">Choose a Format</h3><p class="text-gray-600">Select the right program type based on your goal, audience size, and desired level of interactivity.</p></div>
+                        <div class="mb-8"><div class="absolute -left-4 top-52 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold">3</div><h3 class="text-xl font-semibold">Provide Light Structure</h3><p class="text-gray-600">Don't over-engineer it, but provide guardrails: a clear schedule, discussion guides, a dedicated Slack channel, and shared resources.</p></div>
+                        <div class="mb-8"><div class="absolute -left-4 top-72 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold">4</div><h3 class="text-xl font-semibold">Empower Champions</h3><p class="text-gray-600">Find and support enthusiastic employees who can act as facilitators, evangelists, and role models for the program.</p></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-emerald-300"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Learn Together, Grow Together</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Peer learning is a powerful, cost-effective strategy for building a resilient and adaptable organization. It recognizes that the most valuable knowledge often resides within the team itself, and creates the structures needed to unlock and share that collective genius.</p>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-emerald-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+

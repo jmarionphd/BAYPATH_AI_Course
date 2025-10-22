@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Mapping + Predictive Analytics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            padding: 60px 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide h1 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .slide h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border-bottom: 4px solid rgba(255,255,255,0.3);
+            padding-bottom: 20px;
+        }
+
+        .slide h3 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #ffd700;
+        }
+
+        .slide p {
+            font-size: 1.5em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .slide ul {
+            font-size: 1.4em;
+            line-height: 2;
+            margin-left: 40px;
+            list-style: none;
+        }
+
+        .slide ul li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .slide ul li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-size: 0.8em;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            font-size: 1.2em;
+            opacity: 0.7;
+        }
+
+        .navigation-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            font-size: 1em;
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .arrow-icon {
+            display: inline-block;
+            padding: 5px 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-slide h1 {
+            font-size: 5em;
+            margin-bottom: 40px;
+        }
+
+        .title-slide p {
+            font-size: 2em;
+            opacity: 0.9;
+        }
+
+        .content-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .column {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .highlight-box {
+            background: rgba(255,215,0,0.2);
+            border-left: 5px solid #ffd700;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .icon-item {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .icon-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .icon-item .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .icon-item h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .icon-item p {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .process-step {
+            flex: 1;
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: #ffd700;
+        }
+
+        .process-step .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #ffd700;
+            color: #667eea;
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .process-step h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #ffd700;
+        }
+
+        .metric-card h4 {
+            font-size: 1.5em;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .metric-card ul {
+            margin-left: 0;
+        }
+
+        .metric-card ul li {
+            font-size: 1.1em;
+            padding-left: 30px;
+        }
+
+        .conclusion-slide {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            text-align: center;
+            justify-content: center;
+        }
+
+        .conclusion-slide h2 {
+            border: none;
+        }
+
+        .key-takeaway {
+            background: rgba(255,255,255,0.2);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            font-size: 1.6em;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 40px;
+            }
+            .slide h1 {
+                font-size: 3em;
+            }
+            .slide h2 {
+                font-size: 2.5em;
+            }
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            .icon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <h1>Journey Mapping + Predictive Analytics</h1>
+            <p>Transforming Customer Experience Through Data-Driven Insights</p>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+                <span>Use arrow keys to navigate</span>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide content-slide">
+            <h2>What is Journey Mapping?</h2>
+            <p>A strategic tool that visualizes the complete customer experience across all touchpoints and channels.</p>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon">📍</div>
+                    <h4>Touchpoints</h4>
+                    <p>Every interaction between customer and organization</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">💭</div>
+                    <h4>Emotions</h4>
+                    <p>How customers feel at each stage</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">⚠️</div>
+                    <h4>Pain Points</h4>
+                    <p>Obstacles and frustrations encountered</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">💡</div>
+                    <h4>Opportunities</h4>
+                    <p>Areas for improvement and innovation</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🌐</div>
+                    <h4>Channels</h4>
+                    <p>Digital, physical, phone interactions</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🎯</div>
+                    <h4>Goals</h4>
+                    <p>Customer objectives at each stage</p>
+                </div>
+            </div>
+            <div class="slide-number">2</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 3: Predictive Analytics -->
+        <div class="slide content-slide">
+            <h2>What is Predictive Analytics?</h2>
+            <p>Using historical data, statistical algorithms, and machine learning to identify the likelihood of future outcomes.</p>
+            <ul>
+                <li>Forecast customer behavior patterns</li>
+                <li>Identify customers at risk of churning</li>
+                <li>Predict which touchpoints have the highest impact on satisfaction</li>
+                <li>Anticipate future needs and preferences</li>
+                <li>Optimize resource allocation across the journey</li>
+            </ul>
+            <div class="highlight-box">
+                <p><strong>Key Insight:</strong> Predictive analytics transforms reactive customer service into proactive customer success.</p>
+            </div>
+            <div class="slide-number">3</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Synergy -->
+        <div class="slide content-slide">
+            <h2>Why Combine Them?</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Traditional Journey Mapping</h3>
+                    <ul>
+                        <li>Retrospective</li>
+                        <li>Qualitative insights</li>
+                        <li>Shows what happened</li>
+                        <li>Human-centered</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Predictive Analytics</h3>
+                    <ul>
+                        <li>Forward-looking</li>
+                        <li>Quantitative data</li>
+                        <li>Shows what will happen</li>
+                        <li>Data-driven</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <h3>Combined Power</h3>
+                <p>Validates assumptions • Prioritizes actions • Personalizes experiences • Measures impact • Enables proactivity</p>
+            </div>
+            <div class="slide-number">4</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 5: Implementation Framework -->
+        <div class="slide content-slide">
+            <h2>Implementation Framework</h2>
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Foundation</h4>
+                    <p>Create baseline journey map</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Data Integration</h4>
+                    <p>Collect & unify sources</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Model Development</h4>
+                    <p>Build predictions</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Enhancement</h4>
+                    <p>Overlay insights</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h4>Optimization</h4>
+                    <p>Continuous improvement</p>
+                </div>
+            </div>
+            <div class="slide-number">5</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 6: Phase 1 & 2 -->
+        <div class="slide content-slide">
+            <h2>Phase 1 & 2: Foundation & Data</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Foundation Building</h3>
+                    <ul>
+                        <li>Customer interviews & surveys</li>
+                        <li>Observational research</li>
+                        <li>Employee feedback</li>
+                        <li>Persona development</li>
+                        <li>Document all touchpoints</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Data Integration</h3>
+                    <ul>
+                        <li>CRM systems</li>
+                        <li>Web analytics</li>
+                        <li>Customer feedback (NPS, CSAT)</li>
+                        <li>Support tickets</li>
+                        <li>Transaction data</li>
+                        <li>Social media sentiment</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">6</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 7: Predictive Models -->
+        <div class="slide content-slide">
+            <h2>Phase 3: Predictive Model Development</h2>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon">🚪</div>
+                    <h4>Churn Prediction</h4>
+                    <p>Identify customers likely to leave</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🎯</div>
+                    <h4>Next Best Action</h4>
+                    <p>Recommend optimal touchpoint</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">💰</div>
+                    <h4>Lifetime Value</h4>
+                    <p>Predict long-term worth</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">📈</div>
+                    <h4>Conversion Probability</h4>
+                    <p>Score likelihood of purchase</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">😊</div>
+                    <h4>Satisfaction Prediction</h4>
+                    <p>Anticipate experience ratings</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🤖</div>
+                    <h4>ML Techniques</h4>
+                    <p>Random forests, neural networks, gradient boosting</p>
+                </div>
+            </div>
+            <div class="slide-number">7</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 8: Journey Enhancement -->
+        <div class="slide content-slide">
+            <h2>Phase 4: Journey Enhancement</h2>
+            <p>Overlay predictive insights onto journey maps to create actionable intelligence:</p>
+            <ul>
+                <li>Highlight high-risk journey stages where churn is likely</li>
+                <li>Identify touchpoints with highest impact on satisfaction</li>
+                <li>Segment journeys based on predicted behavior</li>
+                <li>Create intervention points for at-risk customers</li>
+                <li>Design personalized paths based on predictions</li>
+            </ul>
+            <div class="highlight-box">
+                <p><strong>Result:</strong> Transform static journey maps into dynamic, predictive customer experience engines.</p>
+            </div>
+            <div class="slide-number">8</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 9: Key Metrics -->
+        <div class="slide content-slide">
+            <h2>Key Metrics & KPIs</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Journey Metrics</h4>
+                    <ul>
+                        <li>Customer Effort Score (CES)</li>
+                        <li>Net Promoter Score (NPS)</li>
+                        <li>Customer Satisfaction (CSAT)</li>
+                        <li>Time to resolution</li>
+                        <li>Touchpoint completion rates</li>
+                    </ul>
+                </div>
+                <div class="metric-card">
+                    <h4>Predictive Metrics</h4>
+                    <ul>
+                        <li>Model accuracy & precision</li>
+                        <li>Churn rate reduction</li>
+                        <li>Conversion rate improvement</li>
+                        <li>Customer lifetime value increase</li>
+                        <li>Prediction confidence scores</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">9</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 10: Real-World Applications -->
+        <div class="slide content-slide">
+            <h2>Real-World Applications</h2>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon">🛒</div>
+                    <h4>Retail</h4>
+                    <p>Predict cart abandonment and trigger personalized recovery journeys</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🏦</div>
+                    <h4>Banking</h4>
+                    <p>Identify loan needs based on life events, proactively offer products</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🏥</div>
+                    <h4>Healthcare</h4>
+                    <p>Anticipate patient no-shows and implement reminder strategies</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">💻</div>
+                    <h4>SaaS</h4>
+                    <p>Detect churn risk during onboarding, trigger support interventions</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">📱</div>
+                    <h4>Telecom</h4>
+                    <p>Predict service issues before they occur, proactive solutions</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">✈️</div>
+                    <h4>Travel</h4>
+                    <p>Personalize recommendations based on predicted preferences</p>
+                </div>
+            </div>
+            <div class="slide-number">10</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 11: Tools & Technologies -->
+        <div class="slide content-slide">
+            <h2>Tools & Technologies</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Journey Mapping Tools</h3>
+                    <ul>
+                        <li>Miro, Lucidchart, Smaply</li>
+                        <li>Qualtrics, Medallia</li>
+                        <li>UserTesting</li>
+                        <li>Adobe XD</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Predictive Analytics</h3>
+                    <ul>
+                        <li>Python (scikit-learn, TensorFlow)</li>
+                        <li>R for statistical modeling</li>
+                        <li>Tableau, Power BI</li>
+                        <li>Salesforce Einstein</li>
+                        <li>Google Analytics 4</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">11</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 12: Best Practices -->
+        <div class="slide content-slide">
+            <h2>Best Practices</h2>
+            <ul>
+                <li><strong>Start with Business Outcomes:</strong> Define what you want to predict and why it matters</li>
+                <li><strong>Ensure Data Quality:</strong> Clean, complete data is essential for accurate predictions</li>
+                <li><strong>Involve Cross-Functional Teams:</strong> Combine marketing, data science, operations expertise</li>
+                <li><strong>Test and Learn:</strong> Start with pilot programs before full-scale implementation</li>
+                <li><strong>Maintain Ethical Standards:</strong> Be transparent about data usage and respect privacy</li>
+                <li><strong>Keep Humans in the Loop:</strong> Use predictions to augment, not replace, human judgment</li>
+                <li><strong>Update Regularly:</strong> Customer behavior evolves; models and maps must too</li>
+            </ul>
+            <div class="slide-number">12</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 13: Challenges & Solutions -->
+        <div class="slide content-slide">
+            <h2>Challenges & Solutions</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Data Silos</h4>
+                    <p>Implement a customer data platform (CDP) to unify information across departments</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Lack of Expertise</h4>
+                    <p>Partner with analytics vendors or hire specialists; use AutoML tools</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Resistance to Change</h4>
+                    <p>Start with small wins, demonstrate ROI, build organizational buy-in</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Model Accuracy</h4>
+                    <p>Validate predictions, use ensemble methods, maintain confidence thresholds</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Privacy Concerns</h4>
+                    <p>Implement robust data governance, ensure GDPR/CCPA compliance</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Integration Complexity</h4>
+                    <p>Use APIs and middleware; adopt phased implementation approach</p>
+                </div>
+            </div>
+            <div class="slide-number">13</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 14: Future Trends -->
+        <div class="slide content-slide">
+            <h2>Future Trends</h2>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon">⚡</div>
+                    <h4>Real-Time Predictions</h4>
+                    <p>Instant journey adjustments based on live behavior</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🤖</div>
+                    <h4>AI Orchestration</h4>
+                    <p>Automated, personalized path optimization</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">😊</div>
+                    <h4>Emotion AI</h4>
+                    <p>Sentiment analysis integrated into predictions</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">💊</div>
+                    <h4>Prescriptive Analytics</h4>
+                    <p>Moving beyond prediction to recommended actions</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🔮</div>
+                    <h4>Journey Digital Twins</h4>
+                    <p>Virtual simulations for testing improvements</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🌍</div>
+                    <h4>Hyper-Personalization</h4>
+                    <p>Individual journeys for every customer</p>
+                </div>
+            </div>
+            <div class="slide-number">14</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 15: Conclusion -->
+        <div class="slide conclusion-slide">
+            <h2>Key Takeaways</h2>
+            <div class="key-takeaway">
+                <p>Journey mapping combined with predictive analytics transforms customer experience from <strong>reactive to proactive</strong>.</p>
+            </div>
+            <div class="key-takeaway">
+                <p>Organizations that master this integration gain competitive advantages through deeper customer understanding, optimized resource allocation, and personalized experiences that drive <strong>loyalty and growth</strong>.</p>
+            </div>
+            <div class="key-takeaway">
+                <p>Start with clear objectives, build on quality data, and continuously learn from both successes and failures.</p>
+            </div>
+            <div class="slide-number">15</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                showSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                showSlide(totalSlides - 1);
+            }
+        });
+
+        // Touch support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+
+        // Click navigation (left/right halves)
+        document.addEventListener('click', (e) => {
+            const clickX = e.clientX;
+            const windowWidth = window.innerWidth;
+            
+            if (clickX > windowWidth / 2) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>

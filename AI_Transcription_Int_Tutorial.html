@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empathy Interviews + AI Transcription/Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            padding: 60px 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border-bottom: 3px solid rgba(255,255,255,0.5);
+            padding-bottom: 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h3 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #ffd700;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        p, li {
+            font-size: 1.4em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding-left: 40px;
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        ul li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-size: 1.5em;
+        }
+
+        .subtitle {
+            font-size: 1.8em;
+            opacity: 0.9;
+            margin-top: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            font-size: 1.2em;
+            opacity: 0.7;
+        }
+
+        .navigation-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            font-size: 1em;
+            opacity: 0.6;
+            animation: pulse 2s infinite;
+        }
+
+        /* Decorative elements */
+        .circle-decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            right: -100px;
+        }
+
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            left: -50px;
+            animation-delay: 2s;
+        }
+
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            right: 100px;
+            animation-delay: 4s;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .column {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #ffd700;
+            margin: 30px 0;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Icon styles */
+        .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: #ffd700;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div class="progress-bar" id="progressBar"></div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <div class="icon">🎯</div>
+                <h1>Empathy Interviews + AI Transcription/Analysis</h1>
+                <p class="subtitle">A Complete Tutorial on Modern User Research</p>
+                <p class="subtitle" style="margin-top: 60px; font-size: 1.4em;">Combining Human Insight with AI-Powered Efficiency</p>
+            </div>
+            <div class="navigation-hint">Use ← → arrow keys to navigate</div>
+            <div class="slide-number">1</div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="slide-content">
+                <h2>What Are Empathy Interviews?</h2>
+                <div class="highlight-box">
+                    <p>Empathy interviews are a foundational research method in human-centered design that aims to understand the emotional landscape, motivations, and unspoken needs of users.</p>
+                </div>
+                <ul>
+                    <li>Focus on understanding emotions and motivations, not just facts</li>
+                    <li>Step into the user's shoes to see their world</li>
+                    <li>Uncover pain points and hidden needs</li>
+                    <li>Build genuine understanding through storytelling</li>
+                </ul>
+            </div>
+            <div class="slide-number">2</div>
+        </div>
+
+        <!-- Slide 3: The AI Evolution -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>The Evolution: Adding AI to the Mix</h2>
+                <div class="two-column">
+                    <div class="column">
+                        <h3>Traditional Approach</h3>
+                        <ul>
+                            <li>Manual note-taking</li>
+                            <li>Hours of transcription</li>
+                            <li>Time-intensive analysis</li>
+                            <li>Risk of missing insights</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3>AI-Enhanced Approach</h3>
+                        <ul>
+                            <li>Automated transcription</li>
+                            <li>Instant text conversion</li>
+                            <li>Pattern recognition</li>
+                            <li>Deeper insight discovery</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">3</div>
+        </div>
+
+        <!-- Slide 4: Planning -->
+        <div class="slide">
+            <div class="circle-decoration circle-2"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Planning Your Empathy Interview</h2>
+                <h3>Three Key Steps</h3>
+                <ul>
+                    <li><strong>Define Objectives:</strong> What do you want to learn? Pain points? Workflows? Unmet needs?</li>
+                    <li><strong>Select Participants:</strong> Choose diverse representatives of your target users (5-8 per segment)</li>
+                    <li><strong>Craft Interview Guide:</strong> Create open-ended questions that encourage storytelling</li>
+                </ul>
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <p><strong>Pro Tip:</strong> Focus on "Tell me about..." and "Walk me through..." questions rather than yes/no questions</p>
+                </div>
+            </div>
+            <div class="slide-number">4</div>
+        </div>
+
+        <!-- Slide 5: Sample Questions -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="slide-content">
+                <h2>Crafting Powerful Questions</h2>
+                <h3>Examples of Open-Ended Questions</h3>
+                <ul>
+                    <li>"Tell me about the last time you..."</li>
+                    <li>"Walk me through your typical process for..."</li>
+                    <li>"How did that make you feel?"</li>
+                    <li>"What's the most frustrating part of..."</li>
+                    <li>"Can you describe a situation where..."</li>
+                </ul>
+                <p style="margin-top: 40px; font-size: 1.3em; opacity: 0.9;">These questions invite stories, emotions, and detailed experiences rather than simple answers.</p>
+            </div>
+            <div class="slide-number">5</div>
+        </div>
+
+        <!-- Slide 6: Conducting Interview -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Conducting the Interview</h2>
+                <h3>Setting the Stage</h3>
+                <ul>
+                    <li>Create a comfortable, safe environment</li>
+                    <li>Explain purpose and obtain recording consent</li>
+                    <li>Assure confidentiality and build rapport</li>
+                </ul>
+                <h3 style="margin-top: 40px;">Active Listening Techniques</h3>
+                <ul>
+                    <li>Use strategic silence to encourage elaboration</li>
+                    <li>Ask "why" to dig deeper into motivations</li>
+                    <li>Notice non-verbal cues and emotions</li>
+                    <li>Follow interesting threads organically</li>
+                </ul>
+            </div>
+            <div class="slide-number">6</div>
+        </div>
+
+        <!-- Slide 7: AI Transcription -->
+        <div class="slide">
+            <div class="circle-decoration circle-2"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>AI Transcription: Audio to Text</h2>
+                <h3>Popular AI Transcription Tools</h3>
+                <div class="two-column">
+                    <div class="column">
+                        <ul>
+                            <li><strong>Otter.ai</strong> - Real-time collaboration</li>
+                            <li><strong>Descript</strong> - Audio/video editing</li>
+                            <li><strong>Fireflies.ai</strong> - CRM integration</li>
+                            <li><strong>Rev</strong> - Hybrid AI-human accuracy</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="highlight-box">
+                            <p><strong>Accuracy: 90-95%+</strong></p>
+                            <p style="font-size: 0.9em; margin-top: 15px;">Modern AI transcription delivers professional-grade results in minutes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">7</div>
+        </div>
+
+        <!-- Slide 8: Transcription Features -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="slide-content">
+                <h2>What AI Transcription Delivers</h2>
+                <ul>
+                    <li><strong>Speaker Identification:</strong> Automatically distinguishes between different speakers</li>
+                    <li><strong>Timestamps:</strong> Precise timing throughout the conversation</li>
+                    <li><strong>Key Moments:</strong> Highlights important sections and action items</li>
+                    <li><strong>Searchable Text:</strong> Find any word or phrase instantly</li>
+                    <li><strong>Speed:</strong> Complete transcripts in minutes, not hours</li>
+                </ul>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p><strong>Remember:</strong> Always review for technical terms, names, and accents to ensure accuracy</p>
+                </div>
+            </div>
+            <div class="slide-number">8</div>
+        </div>
+
+        <!-- Slide 9: AI Analysis -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>AI-Powered Analysis</h2>
+                <h3>Uncovering Deep Insights</h3>
+                <ul>
+                    <li><strong>Sentiment Analysis:</strong> Identify emotional tone and intensity throughout interviews</li>
+                    <li><strong>Theme Identification:</strong> Automatically discover recurring patterns and topics</li>
+                    <li><strong>Keyword Extraction:</strong> Highlight frequently mentioned terms and concepts</li>
+                    <li><strong>Quote Mining:</strong> Extract powerful, representative quotes</li>
+                    <li><strong>Pattern Recognition:</strong> Find commonalities across multiple interviews</li>
+                </ul>
+            </div>
+            <div class="slide-number">9</div>
+        </div>
+
+        <!-- Slide 10: Sentiment Analysis -->
+        <div class="slide">
+            <div class="circle-decoration circle-2"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Sentiment Analysis in Action</h2>
+                <div class="highlight-box">
+                    <p style="font-size: 1.5em;">AI analyzes emotional tone to identify moments of:</p>
+                </div>
+                <div class="two-column" style="margin-top: 40px;">
+                    <div class="column">
+                        <ul>
+                            <li>😤 Frustration</li>
+                            <li>🎉 Excitement</li>
+                            <li>😕 Confusion</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <ul>
+                            <li>😊 Satisfaction</li>
+                            <li>😰 Anxiety</li>
+                            <li>💡 Discovery</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 50px; font-size: 1.3em;">This helps prioritize which pain points or opportunities matter most to users.</p>
+            </div>
+            <div class="slide-number">10</div>
+        </div>
+
+        <!-- Slide 11: Synthesizing Findings -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="slide-content">
+                <h2>Synthesizing Findings</h2>
+                <h3>From Data to Actionable Insights</h3>
+                <ul>
+                    <li><strong>Affinity Mapping:</strong> Group AI-identified themes into coherent clusters</li>
+                    <li><strong>Persona Development:</strong> Create data-driven personas based on actual patterns</li>
+                    <li><strong>Journey Mapping:</strong> Build detailed maps showing user experiences and emotions</li>
+                    <li><strong>Insight Prioritization:</strong> Focus on high-impact opportunities</li>
+                </ul>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p>Transform raw interview data into strategic recommendations that drive innovation</p>
+                </div>
+            </div>
+            <div class="slide-number">11</div>
+        </div>
+
+        <!-- Slide 12: Best Practices -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Best Practices & Ethics</h2>
+                <ul>
+                    <li><strong>Data Privacy:</strong> Ensure GDPR/CCPA compliance, anonymize transcripts, secure storage</li>
+                    <li><strong>Human-AI Collaboration:</strong> Use AI for efficiency, humans for interpretation and strategy</li>
+                    <li><strong>Bias Awareness:</strong> Critically review AI insights for potential biases</li>
+                    <li><strong>Transparency:</strong> Be clear with participants about AI processing</li>
+                    <li><strong>Continuous Improvement:</strong> Regularly evaluate tool performance and adjust</li>
+                </ul>
+            </div>
+            <div class="slide-number">12</div>
+        </div>
+
+        <!-- Slide 13: Tools Ecosystem -->
+        <div class="slide">
+            <div class="circle-decoration circle-2"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Recommended Tools Ecosystem</h2>
+                <div class="two-column">
+                    <div class="column">
+                        <h3>Transcription</h3>
+                        <ul>
+                            <li>Otter.ai</li>
+                            <li>Descript</li>
+                            <li>Fireflies.ai</li>
+                            <li>Rev</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3>Analysis</h3>
+                        <ul>
+                            <li>Dovetail</li>
+                            <li>Notably</li>
+                            <li>UserTesting</li>
+                            <li>MonkeyLearn</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 50px; font-size: 1.3em; opacity: 0.9;">Choose tools based on your specific needs: accuracy, integration, privacy, and budget.</p>
+            </div>
+            <div class="slide-number">13</div>
+        </div>
+
+        <!-- Slide 14: Measuring Success -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="slide-content">
+                <h2>Measuring Success</h2>
+                <h3>Key Metrics to Track</h3>
+                <ul>
+                    <li><strong>Time Efficiency:</strong> Hours saved in transcription and analysis</li>
+                    <li><strong>Insight Quality:</strong> Number and depth of actionable insights per interview</li>
+                    <li><strong>Validation Rate:</strong> Insights confirmed through subsequent research or product success</li>
+                    <li><strong>Stakeholder Engagement:</strong> How research findings influence decisions</li>
+                    <li><strong>Speed to Action:</strong> Time from research completion to implementation</li>
+                </ul>
+            </div>
+            <div class="slide-number">14</div>
+        </div>
+
+        <!-- Slide 15: Workflow Summary -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Complete Workflow Summary</h2>
+                <div class="highlight-box">
+                    <h3 style="color: #ffd700; margin-bottom: 20px;">The 5-Step Process</h3>
+                    <ul style="font-size: 1.2em;">
+                        <li><strong>1. Plan:</strong> Define objectives, select participants, craft questions</li>
+                        <li><strong>2. Conduct:</strong> Build rapport, actively listen, record interviews</li>
+                        <li><strong>3. Transcribe:</strong> Use AI tools to convert audio to searchable text</li>
+                        <li><strong>4. Analyze:</strong> Apply AI for sentiment, themes, and patterns</li>
+                        <li><strong>5. Synthesize:</strong> Create personas, journey maps, and actionable insights</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">15</div>
+        </div>
+
+        <!-- Slide 16: Benefits -->
+        <div class="slide">
+            <div class="circle-decoration circle-2"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Benefits of AI-Enhanced Empathy Interviews</h2>
+                <div class="two-column">
+                    <div class="column">
+                        <h3>Efficiency Gains</h3>
+                        <ul>
+                            <li>90% faster transcription</li>
+                            <li>50% reduction in analysis time</li>
+                            <li>Instant searchability</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3>Quality Improvements</h3>
+                        <ul>
+                            <li>Deeper pattern recognition</li>
+                            <li>Reduced human bias</li>
+                            <li>More comprehensive insights</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <p><strong>Result:</strong> Researchers spend less time on mechanical tasks and more time understanding users and driving innovation</p>
+                </div>
+            </div>
+            <div class="slide-number">16</div>
+        </div>
+
+        <!-- Slide 17: Common Pitfalls -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="slide-content">
+                <h2>Common Pitfalls to Avoid</h2>
+                <ul>
+                    <li><strong>Over-reliance on AI:</strong> Don't let automation replace human judgment and context</li>
+                    <li><strong>Poor Audio Quality:</strong> Bad recordings = bad transcriptions = bad insights</li>
+                    <li><strong>Skipping Review:</strong> Always verify AI-generated transcripts and themes</li>
+                    <li><strong>Ignoring Privacy:</strong> Ensure proper consent and data protection</li>
+                    <li><strong>Analysis Paralysis:</strong> Don't get lost in data—focus on actionable insights</li>
+                </ul>
+            </div>
+            <div class="slide-number">17</div>
+        </div>
+
+        <!-- Slide 18: Real-World Example -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Real-World Application Example</h2>
+                <div class="highlight-box">
+                    <h3 style="color: #ffd700;">Case Study: Healthcare App Redesign</h3>
+                    <p style="margin-top: 20px;"><strong>Challenge:</strong> Low user engagement with medication reminder app</p>
+                    <p style="margin-top: 15px;"><strong>Process:</strong> Conducted 8 empathy interviews with patients, used AI transcription and sentiment analysis</p>
+                    <p style="margin-top: 15px;"><strong>Key Insight:</strong> AI identified recurring frustration around "guilt" and "shame" when missing doses</p>
+                    <p style="margin-top: 15px;"><strong>Solution:</strong> Redesigned with positive reinforcement instead of reminders</p>
+                    <p style="margin-top: 15px;"><strong>Result:</strong> 300% increase in daily active users</p>
+                </div>
+            </div>
+            <div class="slide-number">18</div>
+        </div>
+
+        <!-- Slide 19: Future Trends -->
+        <div class="slide">
+            <div class="circle-decoration circle-2"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Future Trends</h2>
+                <h3>What's Next for AI-Enhanced Research?</h3>
+                <ul>
+                    <li><strong>Real-time Analysis:</strong> Instant insights during live interviews</li>
+                    <li><strong>Multimodal AI:</strong> Analyzing facial expressions, tone, and body language</li>
+                    <li><strong>Predictive Insights:</strong> AI suggesting follow-up questions in real-time</li>
+                    <li><strong>Automated Synthesis:</strong> AI generating complete research reports</li>
+                    <li><strong>Cross-study Learning:</strong> AI identifying patterns across multiple research projects</li>
+                </ul>
+            </div>
+            <div class="slide-number">19</div>
+        </div>
+
+        <!-- Slide 20: Getting Started -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="slide-content">
+                <h2>Getting Started Checklist</h2>
+                <div class="highlight-box">
+                    <ul style="font-size: 1.2em;">
+                        <li>☐ Choose and set up transcription tool (try free trials)</li>
+                        <li>☐ Conduct 2-3 pilot interviews to test your process</li>
+                        <li>☐ Experiment with AI analysis features</li>
+                        <li>☐ Refine workflow and scale to full research project</li>
+                    </ul>
+                </div>
+                <p style="margin-top: 40px; font-size: 1.3em;">Start small, learn fast, and iterate your approach!</p>
+            </div>
+            <div class="slide-number">20</div>
+        </div>
+
+        <!-- Slide 21: Conclusion -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content">
+                <h2>Conclusion</h2>
+                <div class="highlight-box">
+                    <p style="font-size: 1.5em; line-height: 1.8;">The combination of empathy interviews with AI transcription and analysis represents the <strong style="color: #ffd700;">future of user research</strong>.</p>
+                </div>
+                <p style="margin-top: 50px; font-size: 1.4em; line-height: 1.8;">
+                    It preserves the human-centered, qualitative depth of traditional empathy interviews while adding speed, scale, and analytical rigor through AI.
+                </p>
+                <p style="margin-top: 30px; font-size: 1.4em; line-height: 1.8;">
+                    This hybrid approach enables researchers to focus on what matters most: <strong style="color: #ffd700;">understanding users and driving meaningful innovation</strong>.
+                </p>
+            </div>
+            <div class="slide-number">21</div>
+        </div>
+
+        <!-- Slide 22: Thank You -->
+        <div class="slide">
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <div class="circle-decoration circle-3"></div>
+            <div class="slide-content" style="text-align: center;">
+                <div class="icon">🙏</div>
+                <h1>Thank You!</h1>
+                <p class="subtitle" style="margin-top: 50px;">Questions?</p>
+                <p style="margin-top: 80px; font-size: 1.3em; opacity: 0.8;">Start your AI-enhanced empathy interview journey today</p>
+            </div>
+            <div class="slide-number">22</div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.getElementById('progressBar');
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+
+        // Click navigation (left/right halves)
+        document.addEventListener('click', function(e) {
+            if (e.clientX > window.innerWidth / 2) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+
+        // Initialize progress bar
+        updateProgressBar();
+    </script>
+</body>
+</html>

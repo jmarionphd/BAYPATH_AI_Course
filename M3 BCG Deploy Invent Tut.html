@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCG's Deploy, Reshape, Invent Framework</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-green-700 via-emerald-600 to-teal-600 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Deploy, Reshape, Invent</h1>
+                <p class="text-xl md:text-2xl opacity-90">BCG's Framework for Strategic Portfolio Renewal</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: The Core Idea -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">What is This Framework?</h2>
+                    <p class="text-xl text-gray-600">It's a model developed by Boston Consulting Group (BCG) to help companies manage their portfolio of businesses. The goal is to ensure long-term health by simultaneously optimizing the present and building the future.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <div class="w-full max-w-sm flex justify-around">
+                        <div class="text-center"><div class="w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg">Deploy</div><p class="mt-2 font-semibold">Today's Winners</p></div>
+                        <div class="text-center"><div class="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-lg">Reshape</div><p class="mt-2 font-semibold">Tomorrow's Potential</p></div>
+                        <div class="text-center"><div class="w-24 h-24 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg">Invent</div><p class="mt-2 font-semibold">Future Growth</p></div>
+                     </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: The Three Strategies -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">The Three Core Strategies</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center border-t-4 border-blue-500">
+                        <h3 class="text-2xl font-bold text-blue-600 mb-3">Deploy</h3>
+                        <p class="text-gray-600">Maximize the value of your strong, established businesses. Focus on operational excellence, scaling, and defending your competitive advantage.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-lg text-center border-t-4 border-orange-500">
+                        <h3 class="text-2xl font-bold text-orange-600 mb-3">Reshape</h3>
+                        <p class="text-gray-600">Transform businesses that have potential but are currently underperforming or facing disruption. This involves turnarounds, pivots, or strategic changes.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-lg text-center border-t-4 border-purple-500">
+                        <h3 class="text-2xl font-bold text-purple-600 mb-3">Invent</h3>
+                        <p class="text-gray-600">Create entirely new growth engines. This means building or acquiring new businesses, exploring new technologies, and entering new markets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Deep Dive: DEPLOY -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 100 100" class="w-72 h-72">
+                        <circle cx="50" cy="50" r="25" fill="#3b82f6"/>
+                        <text x="50" y="52" text-anchor="middle" font-size="8" fill="white" font-weight="bold">CORE</text>
+                        <path d="M50 25 V10 M50 75 V90 M25 50 H10 M75 50 H90 M35 35 L20 20 M65 65 L80 80 M35 65 L20 80 M65 35 L80 20" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+                        <defs><marker id="arrow-blue" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#3b82f6"/></marker></defs>
+                     </svg>
+                </div>
+                <div class="w-full lg:w-1/2 p-4">
+                    <h3 class="text-3xl font-bold text-blue-600 mb-2">Strategy 1: Deploy</h3>
+                    <p class="text-lg text-gray-600">This is about your current cash cows and market leaders. The goal is not radical change, but disciplined execution and continuous improvement.</p>
+                     <ul class="text-lg text-gray-600 list-disc pl-5 space-y-2 mt-4">
+                        <li><b>Focus:</b> Efficiency, market share, and profitability.</li>
+                        <li><b>Actions:</b> Scale operations, optimize supply chains, refine marketing, and defend against competitors.</li>
+                        <li><b>Mantra:</b> "Run it better."</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Deep Dive: RESHAPE -->
+            <div class="slide w-full h-full flex-col-reverse lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4">
+                    <h3 class="text-3xl font-bold text-orange-600 mb-2">Strategy 2: Reshape</h3>
+                    <p class="text-lg text-gray-600">These are businesses at a crossroads. They may have a strong brand but outdated tech, or be in a market facing fundamental shifts. Bold action is required.</p>
+                     <ul class="text-lg text-gray-600 list-disc pl-5 space-y-2 mt-4">
+                        <li><b>Focus:</b> Transformation and strategic repositioning.</li>
+                        <li><b>Actions:</b> Turnaround plans, divest non-core parts, pivot business models, or forge new partnerships.</li>
+                        <li><b>Mantra:</b> "Change the game."</li>
+                    </ul>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 100 100" class="w-72 h-72">
+                        <path d="M25 25 H75 V75 H25 Z" fill="#fdba74" stroke="#f97316" stroke-width="2"/>
+                        <path d="M 65 40 C 85 50, 85 70, 65 80" fill="none" stroke="#f97316" stroke-width="2" marker-end="url(#arrow-orange)"/>
+                        <circle cx="50" cy="50" r="20" fill="#fb923c" stroke="#f97316" stroke-width="2"/>
+                        <defs><marker id="arrow-orange" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#f97316"/></marker></defs>
+                     </svg>
+                </div>
+            </div>
+
+             <!-- Slide 6: Deep Dive: INVENT -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 100 100" class="w-72 h-72">
+                         <path d="M50,30 A30,30 0 0,1 50,70 A15,15 0 0,1 50,30" fill="#c084fc"/>
+                         <circle cx="50" cy="50" r="5" fill="#a855f7"/>
+                         <text x="50" y="85" font-size="8" text-anchor="middle" font-weight="bold" fill="#581c87">New Growth</text>
+                     </svg>
+                </div>
+                 <div class="w-full lg:w-1/2 p-4">
+                    <h3 class="text-3xl font-bold text-purple-600 mb-2">Strategy 3: Invent</h3>
+                    <p class="text-lg text-gray-600">This is about creating the future. It requires a different mindset—one that embraces experimentation, accepts failure as part of learning, and is separate from the core business's constraints.</p>
+                     <ul class="text-lg text-gray-600 list-disc pl-5 space-y-2 mt-4">
+                        <li><b>Focus:</b> Discovery of new business models.</li>
+                        <li><b>Actions:</b> Corporate venturing, R&D labs, strategic acquisitions, and building new businesses from scratch.</li>
+                        <li><b>Mantra:</b> "Create the new."</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 7: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-emerald-400"><path d="M3 3v18h18"></path><path d="M18.7 8a6 6 0 0 0-8.4-8.4"></path><path d="M11.6 12.5a3 3 0 0 0-4.2-4.2"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Balancing the Portfolio</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">A healthy company doesn't just choose one strategy. It actively manages a portfolio across all three categories to ensure resilience and long-term, sustainable growth.</p>
+                 <ul class="text-lg opacity-80 max-w-2xl mx-auto list-none text-left mt-4 space-y-2 bg-black bg-opacity-20 p-4 rounded-lg">
+                    <li><b class="text-blue-300">Deploy:</b> Secure and optimize today's profits.</li>
+                    <li><b class="text-orange-300">Reshape:</b> Adapt and transform for tomorrow's challenges.</li>
+                    <li><b class="text-purple-300">Invent:</b> Build the businesses of the day after tomorrow.</li>
+                 </ul>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-emerald-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>

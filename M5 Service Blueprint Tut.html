@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Blueprinting Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Service Blueprinting</h1>
+                <p class="text-xl md:text-2xl opacity-90">Visualizing the Entire Service Experience</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: What is a Service Blueprint? -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">What is a Service Blueprint?</h2>
+                    <p class="text-xl text-gray-600">A service blueprint is a diagram that visualizes the hidden relationships between different service components. While a Customer Journey Map focuses only on what the customer sees and does, a blueprint reveals the entire underlying system of people, processes, and technology that make the journey possible.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 100 80" class="w-full max-w-md">
+                        <!-- Customer Journey -->
+                        <rect x="10" y="5" width="80" height="15" rx="3" fill="#e0f2fe"/>
+                        <text x="50" y="14" font-size="6" text-anchor="middle">Customer Journey</text>
+                        <!-- Iceberg -->
+                        <path d="M5,25 L95,25" stroke="#3b82f6" stroke-width="2" />
+                        <text x="50" y="23" font-size="5" text-anchor="middle" fill="#3b82f6">Line of Visibility</text>
+                        <!-- Frontstage -->
+                        <rect x="10" y="30" width="80" height="20" rx="3" fill="#dbeafe"/>
+                        <text x="50" y="40" font-size="6" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="50" dy="-3">Frontstage</tspan>
+                            <tspan x="50" dy="7" font-size="5">(What the customer sees)</tspan>
+                        </text>
+                        <!-- Backstage -->
+                         <rect x="10" y="55" width="80" height="20" rx="3" fill="#bfdbfe"/>
+                         <text x="50" y="65" font-size="6" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="50" dy="-3">Backstage</tspan>
+                            <tspan x="50" dy="7" font-size="5">(What they don't see)</tspan>
+                        </text>
+                     </svg>
+                </div>
+            </div>
+
+            <!-- Slide 3: The Five Core Components -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">The Five Core Components</h2>
+                <div class="w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg">
+                    <div class="space-y-2">
+                        <div class="p-3 bg-gray-100 rounded text-center border-b-4 border-gray-300"><h3 class="font-semibold">Physical Evidence</h3></div>
+                        <div class="p-3 bg-blue-100 rounded text-center"><h3 class="font-semibold">Customer Actions</h3></div>
+                        <hr class="border-dashed border-blue-400 my-1"><p class="text-xs text-center text-blue-600">Line of Interaction</p>
+                        <div class="p-3 bg-indigo-100 rounded text-center"><h3 class="font-semibold">Frontstage Actions</h3></div>
+                        <hr class="border-dashed border-indigo-400 my-1"><p class="text-xs text-center text-indigo-600">Line of Visibility</p>
+                        <div class="p-3 bg-purple-100 rounded text-center"><h3 class="font-semibold">Backstage Actions</h3></div>
+                        <hr class="border-dashed border-purple-400 my-1"><p class="text-xs text-center text-purple-600">Line of Internal Interaction</p>
+                        <div class="p-3 bg-slate-100 rounded text-center"><h3 class="font-semibold">Support Processes</h3></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: A Practical Example: Coffee Shop -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                 <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Example: Ordering a Coffee</h2>
+                 <div class="w-full max-w-6xl bg-white p-4 rounded-lg shadow-lg">
+                    <div class="grid grid-cols-5 gap-1 text-center text-xs">
+                        <!-- Headers -->
+                        <div class="font-bold">Enter & Browse</div><div class="font-bold">Order & Pay</div><div class="font-bold">Wait</div><div class="font-bold">Receive Drink</div><div class="font-bold">Leave</div>
+                        <!-- Customer Actions -->
+                        <div class="col-span-5 bg-blue-50 p-1 font-semibold text-blue-800 rounded my-1">Customer Actions</div>
+                        <div class="bg-blue-100 p-2 rounded">Walks in, looks at menu</div><div class="bg-blue-100 p-2 rounded">Tells barista order, pays with card</div><div class="bg-blue-100 p-2 rounded">Stands near pickup</div><div class="bg-blue-100 p-2 rounded">Takes drink</div><div class="bg-blue-100 p-2 rounded">Exits shop</div>
+                        <!-- Frontstage -->
+                        <div class="col-span-5 bg-indigo-50 p-1 font-semibold text-indigo-800 rounded my-1">Frontstage Actions</div>
+                        <div class="bg-indigo-100 p-2 rounded">Barista greets customer</div><div class="bg-indigo-100 p-2 rounded">Enters order, takes payment</div><div class="bg-indigo-100 p-2 rounded">Makes drink, steams milk</div><div class="bg-indigo-100 p-2 rounded">Calls out name and drink</div><div class="bg-indigo-100 p-2 rounded">"Have a great day!"</div>
+                        <!-- Backstage -->
+                        <div class="col-span-5 bg-purple-50 p-1 font-semibold text-purple-800 rounded my-1">Backstage Actions</div>
+                        <div></div><div class="bg-purple-100 p-2 rounded">POS system sends order to queue</div><div class="bg-purple-100 p-2 rounded">Grinds beans</div><div class="bg-purple-100 p-2 rounded">Order marked as complete</div><div></div>
+                    </div>
+                 </div>
+            </div>
+            
+            <!-- Slide 5: Why Blueprint? The Benefits -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">The Benefits of Blueprinting</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg text-blue-700 mb-1">Find the Root Cause of Pain Points</h3><p class="text-gray-600">Is a long wait time due to a slow barista, a broken machine, or an inefficient ordering system? Blueprints reveal the source.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg text-blue-700 mb-1">Break Down Silos</h3><p class="text-gray-600">It creates a single, shared source of truth that helps different departments (marketing, operations, IT) understand their impact on each other and the customer.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg text-blue-700 mb-1">Identify Opportunities for Improvement</h3><p class="text-gray-600">By visualizing the whole system, you can spot redundancies, inefficiencies, and moments to add value or automate tasks.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg text-blue-700 mb-1">Design More Robust Services</h3><p class="text-gray-600">Use it as a sandbox to test new service ideas, predict potential failure points, and design a more resilient customer experience from the start.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-indigo-300"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Connecting the Dots</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Service blueprinting is a powerful strategic tool. It moves teams beyond just looking at the customer's journey to truly understanding and designing the entire operational engine that delivers the experience, ensuring all the moving parts work in harmony.</p>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-indigo-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+

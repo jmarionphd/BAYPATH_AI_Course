@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perplexity for Market Research</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            padding: 60px 80px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            color: white;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide h1 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .slide h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border-bottom: 4px solid rgba(255,255,255,0.3);
+            padding-bottom: 20px;
+        }
+
+        .slide h3 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #60d5ff;
+        }
+
+        .slide p {
+            font-size: 1.5em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .slide ul {
+            font-size: 1.4em;
+            line-height: 2;
+            margin-left: 40px;
+            list-style: none;
+        }
+
+        .slide ul li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .slide ul li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #60d5ff;
+            font-size: 0.8em;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            font-size: 1.2em;
+            opacity: 0.7;
+        }
+
+        .navigation-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            font-size: 1em;
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .arrow-icon {
+            display: inline-block;
+            padding: 5px 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-slide h1 {
+            font-size: 5em;
+            margin-bottom: 40px;
+        }
+
+        .title-slide .subtitle {
+            font-size: 2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .title-slide .logo {
+            font-size: 6em;
+            margin-bottom: 30px;
+        }
+
+        .content-slide {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .column {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .highlight-box {
+            background: rgba(96,213,255,0.2);
+            border-left: 5px solid #60d5ff;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 10px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .icon-item {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .icon-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .icon-item .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .icon-item h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #60d5ff;
+        }
+
+        .icon-item p {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #60d5ff;
+        }
+
+        .feature-item h4 {
+            font-size: 1.4em;
+            color: #60d5ff;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .workflow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .workflow-step {
+            background: rgba(255,255,255,0.15);
+            padding: 25px 30px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .workflow-step .step-number {
+            min-width: 60px;
+            height: 60px;
+            background: #60d5ff;
+            color: #1e3c72;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .workflow-step .step-content h4 {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+            color: #60d5ff;
+        }
+
+        .workflow-step .step-content p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .comparison-card {
+            background: rgba(255,255,255,0.1);
+            padding: 35px;
+            border-radius: 15px;
+            border-top: 5px solid #60d5ff;
+        }
+
+        .comparison-card h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+        }
+
+        .comparison-card ul {
+            margin-left: 0;
+        }
+
+        .comparison-card ul li {
+            font-size: 1.2em;
+            padding-left: 35px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #60d5ff;
+        }
+
+        .benefit-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card h4 {
+            font-size: 1.5em;
+            color: #60d5ff;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .use-case-card {
+            background: rgba(255,255,255,0.12);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-left: 5px solid #60d5ff;
+        }
+
+        .use-case-card h4 {
+            font-size: 1.6em;
+            color: #60d5ff;
+            margin-bottom: 12px;
+        }
+
+        .use-case-card p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .conclusion-slide {
+            background: linear-gradient(135deg, #7e22ce 0%, #2a5298 50%, #1e3c72 100%);
+            text-align: center;
+            justify-content: center;
+        }
+
+        .conclusion-slide h2 {
+            border: none;
+        }
+
+        .key-takeaway {
+            background: rgba(255,255,255,0.2);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            font-size: 1.6em;
+            line-height: 1.8;
+        }
+
+        .pro-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .pro-feature {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .pro-feature .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .pro-feature h4 {
+            font-size: 1.3em;
+            color: #60d5ff;
+            margin-bottom: 10px;
+        }
+
+        .pro-feature p {
+            font-size: 1em;
+        }
+
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 40px;
+            }
+            .slide h1 {
+                font-size: 3em;
+            }
+            .slide h2 {
+                font-size: 2.5em;
+            }
+            .two-column, .comparison-grid, .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            .icon-grid, .pro-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <div class="logo">🔍</div>
+            <h1>Perplexity for Market Research</h1>
+            <p class="subtitle">AI-Powered Intelligence for Strategic Decision Making</p>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+                <span>Use arrow keys to navigate</span>
+            </div>
+        </div>
+
+        <!-- Slide 2: What is Perplexity? -->
+        <div class="slide content-slide">
+            <h2>What is Perplexity AI?</h2>
+            <p>An AI-powered research and conversational search engine that provides accurate, cited answers by searching and synthesizing information from across the web in real-time.</p>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>⚡ Real-time Information</h4>
+                    <p>Accesses current web data, not just training data</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📚 Source Citations</h4>
+                    <p>Every answer includes clickable sources for verification</p>
+                </div>
+                <div class="feature-item">
+                    <h4>💬 Conversational Interface</h4>
+                    <p>Follow-up questions maintain context</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🎯 Focus Modes</h4>
+                    <p>Specialized search for academic, video, Reddit, and more</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🖼️ Multi-modal Capabilities</h4>
+                    <p>Analyze images and generate visualizations</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📁 Thread Organization</h4>
+                    <p>Save and organize research sessions</p>
+                </div>
+            </div>
+            <div class="slide-number">2</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 3: Why Perplexity for Market Research? -->
+        <div class="slide content-slide">
+            <h2>Why Perplexity for Market Research?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon">⚡</div>
+                    <h4>Speed & Efficiency</h4>
+                    <p>What takes hours of manual research can be accomplished in minutes. Aggregates information from multiple sources simultaneously.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">💰</div>
+                    <h4>Cost-Effectiveness</h4>
+                    <p>Reduces reliance on expensive market research databases and consulting services at a fraction of traditional costs.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🔄</div>
+                    <h4>Real-Time Intelligence</h4>
+                    <p>Access current market data, news, trends, and competitor activities as they happen, not weeks later.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🌐</div>
+                    <h4>Comprehensive Coverage</h4>
+                    <p>Synthesizes information from news, industry publications, academic papers, and social media.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">✅</div>
+                    <h4>Verification & Transparency</h4>
+                    <p>Every claim is backed by sources, allowing verification and deeper investigation.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🎯</div>
+                    <h4>Contextual Understanding</h4>
+                    <p>AI understands nuanced queries and maintains conversation context for follow-ups.</p>
+                </div>
+            </div>
+            <div class="slide-number">3</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 4: Core Market Research Applications -->
+        <div class="slide content-slide">
+            <h2>Core Market Research Applications</h2>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon">🎯</div>
+                    <h4>Competitive Intelligence</h4>
+                    <p>Gather competitor products, strategies, pricing, and positioning</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">📊</div>
+                    <h4>Market Sizing & Trends</h4>
+                    <p>TAM estimates, growth rates, emerging trends, segmentation</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">👥</div>
+                    <h4>Customer Insights</h4>
+                    <p>Reviews, sentiment, pain points, preferences, behaviors</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🏭</div>
+                    <h4>Industry Analysis</h4>
+                    <p>Key players, value chains, regulations, technology trends</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">📦</div>
+                    <h4>Product Research</h4>
+                    <p>Specifications, comparisons, pricing, features, roadmaps</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🌍</div>
+                    <h4>Geographic Research</h4>
+                    <p>Market entry, cultural factors, regional competitors</p>
+                </div>
+            </div>
+            <div class="slide-number">4</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 5: Advanced Research Techniques -->
+        <div class="slide content-slide">
+            <h2>Advanced Research Techniques</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Focus Modes</h3>
+                    <ul>
+                        <li><strong>Academic:</strong> Peer-reviewed papers and scholarly sources</li>
+                        <li><strong>Writing:</strong> Draft reports and summaries</li>
+                        <li><strong>Video:</strong> Product demos and conference talks</li>
+                        <li><strong>Reddit:</strong> Community discussions and authentic opinions</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Iterative Deep Dives</h3>
+                    <ul>
+                        <li>Start with general market overview</li>
+                        <li>Follow up with specific segments</li>
+                        <li>Drill into particular features</li>
+                        <li>Request comparisons</li>
+                        <li>Ask for implications</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <h3>Multi-Source Validation</h3>
+                <p>Ask the same question in different ways • Request specific source types • Cross-reference data points • Verify numerical data with follow-ups</p>
+            </div>
+            <div class="slide-number">5</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 6: Research Workflow -->
+        <div class="slide content-slide">
+            <h2>Practical Research Workflow</h2>
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Research Planning (15 min)</h4>
+                        <p>Define objectives and key questions. Organize by category.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Initial Discovery (30-60 min)</h4>
+                        <p>Broad questions to understand landscape, key players, major trends.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Deep Dive Research (2-4 hours)</h4>
+                        <p>Focused research on competitors, segments, pricing, technology trends.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Validation & Synthesis (1-2 hours)</h4>
+                        <p>Cross-check data, review sources, identify gaps, synthesize insights.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Documentation & Reporting (1-2 hours)</h4>
+                        <p>Compile findings, include citations, create summaries and visualizations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">6</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 7: Best Practices -->
+        <div class="slide content-slide">
+            <h2>Best Practices for Effective Research</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Craft Effective Queries</h3>
+                    <ul>
+                        <li>Be specific with details</li>
+                        <li>Include context (time, region, segment)</li>
+                        <li>Use comparative language</li>
+                        <li>Request specific formats</li>
+                    </ul>
+                    <h3 style="margin-top: 30px;">Leverage Follow-Ups</h3>
+                    <ul>
+                        <li>Build on previous answers</li>
+                        <li>Maintain conversation context</li>
+                        <li>Explore implications</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Verify Critical Information</h3>
+                    <ul>
+                        <li>Click through to sources</li>
+                        <li>Cross-reference statistics</li>
+                        <li>Note source dates</li>
+                        <li>Be aware of biases</li>
+                    </ul>
+                    <h3 style="margin-top: 30px;">Organize Research</h3>
+                    <ul>
+                        <li>Use descriptive thread titles</li>
+                        <li>Separate research streams</li>
+                        <li>Export important findings</li>
+                        <li>Maintain research log</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">7</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 8: Example Queries -->
+        <div class="slide content-slide">
+            <h2>Example Research Queries</h2>
+            <div class="use-case-card">
+                <h4>🎯 Competitive Intelligence</h4>
+                <p>"What are the key features of Salesforce's latest product launch and how do they compare to HubSpot's offerings?"</p>
+            </div>
+            <div class="use-case-card">
+                <h4>📊 Market Sizing</h4>
+                <p>"What is the global market size for electric vehicles in 2025, broken down by region and segment?"</p>
+            </div>
+            <div class="use-case-card">
+                <h4>👥 Customer Insights</h4>
+                <p>"What are the most common complaints about project management software on Reddit and review sites?"</p>
+            </div>
+            <div class="use-case-card">
+                <h4>📈 Trend Analysis</h4>
+                <p>"What are the fastest-growing segments in the SaaS industry and what's driving their growth?"</p>
+            </div>
+            <div class="slide-number">8</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 9: Perplexity Pro Features -->
+        <div class="slide content-slide">
+            <h2>Perplexity Pro for Researchers</h2>
+            <p style="text-align: center; font-size: 1.3em; margin-bottom: 30px;">Enhanced capabilities at $20/month</p>
+            <div class="pro-features">
+                <div class="pro-feature">
+                    <div class="icon">♾️</div>
+                    <h4>Unlimited Searches</h4>
+                    <p>No daily limits on advanced AI models</p>
+                </div>
+                <div class="pro-feature">
+                    <div class="icon">📄</div>
+                    <h4>File Upload</h4>
+                    <p>Analyze PDFs, spreadsheets, documents</p>
+                </div>
+                <div class="pro-feature">
+                    <div class="icon">🎨</div>
+                    <h4>Image Generation</h4>
+                    <p>Create visualizations for presentations</p>
+                </div>
+                <div class="pro-feature">
+                    <div class="icon">🔌</div>
+                    <h4>API Access</h4>
+                    <p>Integrate into research workflows</p>
+                </div>
+                <div class="pro-feature">
+                    <div class="icon">🤖</div>
+                    <h4>Advanced AI Models</h4>
+                    <p>GPT-4, Claude, cutting-edge models</p>
+                </div>
+                <div class="pro-feature">
+                    <div class="icon">📏</div>
+                    <h4>Longer Context</h4>
+                    <p>Handle complex, multi-part questions</p>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>ROI Insight:</strong> Pro subscription costs less than 1 hour of traditional market research consulting fees.</p>
+            </div>
+            <div class="slide-number">9</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 10: Real-World Use Cases -->
+        <div class="slide content-slide">
+            <h2>Real-World Use Cases</h2>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon">🚀</div>
+                    <h4>Startup Validation</h4>
+                    <p>Market size, competitors, pricing models, customer pain points—in under a week</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">📦</div>
+                    <h4>Product Launch</h4>
+                    <p>Analyze competitors, track trends, understand preferences across markets</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">💼</div>
+                    <h4>Investment Due Diligence</h4>
+                    <p>Assess market dynamics, validate claims, identify threats, understand trends</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">📢</div>
+                    <h4>Marketing Strategy</h4>
+                    <p>Research audience behaviors, content trends, competitor messaging, partnerships</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🌍</div>
+                    <h4>Expansion Planning</h4>
+                    <p>Market entry requirements, local competition, cultural considerations, logistics</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">📊</div>
+                    <h4>Competitive Monitoring</h4>
+                    <p>Continuous tracking of competitor moves, pricing changes, product updates</p>
+                </div>
+            </div>
+            <div class="slide-number">10</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 11: Integration with Workflows -->
+        <div class="slide content-slide">
+            <h2>Integration with Research Workflows</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon">📊</div>
+                    <h4>With Spreadsheets</h4>
+                    <p>Export data for competitive matrices, market sizing calculations, pricing comparisons, trend tracking</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">📽️</div>
+                    <h4>With Presentations</h4>
+                    <p>Create market overview slides, competitive landscapes, strategic recommendations with cited evidence</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">💾</div>
+                    <h4>With CRM & BI Tools</h4>
+                    <p>Enrich existing data with competitive intelligence, market trends, customer insights, benchmarks</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🔄</div>
+                    <h4>With Traditional Methods</h4>
+                    <p>Combine with primary research, proprietary databases, expert consultations, direct analysis</p>
+                </div>
+            </div>
+            <div class="slide-number">11</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 12: Limitations & Considerations -->
+        <div class="slide content-slide">
+            <h2>Limitations & Considerations</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>⏰ Information Recency</h4>
+                    <p>Some data may lag for private companies or emerging markets. Always check source dates.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🎯 Data Accuracy</h4>
+                    <p>AI synthesis can occasionally misinterpret. Verify critical statistics by reviewing sources.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔒 Proprietary Data Gaps</h4>
+                    <p>Cannot access paywalled content or confidential information. Supplement with licensed tools.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📏 Depth vs. Breadth</h4>
+                    <p>Excels at breadth and synthesis but may lack depth of specialized reports.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🌐 Geographic Limitations</h4>
+                    <p>Coverage stronger for English-language markets. Emerging markets may have limited data.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🧠 Human Judgment Required</h4>
+                    <p>AI augments but doesn't replace strategic thinking and domain expertise.</p>
+                </div>
+            </div>
+            <div class="slide-number">12</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 13: Traditional vs. AI-Powered Research -->
+        <div class="slide content-slide">
+            <h2>Traditional vs. AI-Powered Research</h2>
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h3>Traditional Research</h3>
+                    <ul>
+                        <li>Days to weeks for results</li>
+                        <li>High costs ($5K-$50K+)</li>
+                        <li>Limited to purchased reports</li>
+                        <li>Point-in-time snapshots</li>
+                        <li>Requires specialized skills</li>
+                        <li>Fragmented sources</li>
+                        <li>Manual synthesis required</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h3>Perplexity Research</h3>
+                    <ul>
+                        <li>Minutes to hours for results</li>
+                        <li>Low costs ($0-$20/month)</li>
+                        <li>Access to broad web sources</li>
+                        <li>Real-time, continuous updates</li>
+                        <li>Accessible to all skill levels</li>
+                        <li>Unified search interface</li>
+                        <li>Automatic synthesis & citations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Best Approach:</strong> Use Perplexity for rapid intelligence and directional insights, supplement with traditional methods for deep specialized analysis.</p>
+            </div>
+            <div class="slide-number">13</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 14: Future of AI-Powered Research -->
+        <div class="slide content-slide">
+            <h2>Future of AI-Powered Market Research</h2>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon">🌟</div>
+                    <h4>Democratized Intelligence</h4>
+                    <p>High-quality research accessible to organizations of all sizes</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">⚡</div>
+                    <h4>Real-Time Insights</h4>
+                    <p>Continuous monitoring rather than periodic reports</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🤝</div>
+                    <h4>Augmented Researchers</h4>
+                    <p>AI handles gathering, humans focus on strategy and interpretation</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🔗</div>
+                    <h4>Integrated Workflows</h4>
+                    <p>Seamless connection between research, analysis, and decisions</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🔮</div>
+                    <h4>Predictive Capabilities</h4>
+                    <p>Moving from descriptive to predictive market intelligence</p>
+                </div>
+                <div class="icon-item">
+                    <div class="icon">🎯</div>
+                    <h4>Hyper-Personalization</h4>
+                    <p>Customized research tailored to specific business contexts</p>
+                </div>
+            </div>
+            <div class="slide-number">14</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 15: Key Takeaways -->
+        <div class="slide conclusion-slide">
+            <h2>Key Takeaways</h2>
+            <div class="key-takeaway">
+                <p>Perplexity AI has emerged as an <strong>essential tool for modern market researchers</strong>, offering unprecedented speed, breadth, and accessibility.</p>
+            </div>
+            <div class="key-takeaway">
+                <p>By combining Perplexity's capabilities with <strong>human expertise, critical thinking, and complementary research methods</strong>, organizations can make faster, better-informed strategic decisions.</p>
+            </div>
+            <div class="key-takeaway">
+                <p>Success requires understanding both the tool's <strong>strengths and limitations</strong>, crafting effective queries, verifying critical information, and integrating AI-powered research into broader strategic processes.</p>
+            </div>
+            <div class="slide-number">15</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+
+        <!-- Slide 16: Getting Started -->
+        <div class="slide conclusion-slide">
+            <h2>Getting Started Today</h2>
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Sign Up for Perplexity</h4>
+                        <p>Start with free tier to explore capabilities</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Define Your Research Questions</h4>
+                        <p>Identify 3-5 key questions about your market</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Run Your First Queries</h4>
+                        <p>Start broad, then drill down with follow-ups</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Verify and Document</h4>
+                        <p>Check sources, export findings, build your research library</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Integrate into Workflow</h4>
+                        <p>Make Perplexity part of your regular research routine</p>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-box" style="margin-top: 40px;">
+                <p style="font-size: 1.4em; text-align: center;"><strong>The future of market research is AI-augmented. Start your journey today.</strong></p>
+            </div>
+            <div class="slide-number">16</div>
+            <div class="navigation-hint">
+                <span class="arrow-icon">← →</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                showSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                showSlide(totalSlides - 1);
+            }
+        });
+
+        // Touch support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+
+        // Click navigation (left/right halves)
+        document.addEventListener('click', (e) => {
+            const clickX = e.clientX;
+            const windowWidth = window.innerWidth;
+            
+            if (clickX > windowWidth / 2) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>

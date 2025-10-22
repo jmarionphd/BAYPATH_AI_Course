@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mural/Miro with AI Features Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-blue-700 via-cyan-600 to-teal-500 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Mural & Miro with AI</h1>
+                <p class="text-xl md:text-2xl opacity-90">From Blank Canvas to Intelligent Workspace</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: The Whiteboard Challenge -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                    <div class="w-full max-w-lg relative">
+                        <!-- Sticky notes -->
+                        <div class="absolute top-0 left-10 w-24 h-24 bg-yellow-200 p-2 shadow-lg transform -rotate-6"><p class="text-sm">Idea A</p></div>
+                        <div class="absolute top-10 right-10 w-24 h-24 bg-pink-200 p-2 shadow-lg transform rotate-3"><p class="text-sm">Idea B</p></div>
+                        <div class="absolute bottom-20 left-20 w-24 h-24 bg-blue-200 p-2 shadow-lg transform rotate-2"><p class="text-sm">More thoughts on A...</p></div>
+                        <div class="absolute bottom-10 right-24 w-24 h-24 bg-green-200 p-2 shadow-lg transform -rotate-3"><p class="text-sm">What about C?</p></div>
+                        <div class="absolute top-28 left-40 w-24 h-24 bg-yellow-200 p-2 shadow-lg transform rotate-1"><p class="text-sm">Expand on Idea A</p></div>
+                         <div class="absolute bottom-0 left-0 w-24 h-24 bg-green-200 p-2 shadow-lg transform rotate-4"><p class="text-sm">Another C idea</p></div>
+                        <div class="text-center">
+                            <h3 class="text-5xl font-bold text-gray-300">Chaos!</h3>
+                            <p class="text-gray-500">How do we make sense of this?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">The Synthesis Problem</h2>
+                    <p class="text-xl text-gray-600">Digital whiteboards are fantastic for generating ideas. But this often leads to "sticky note chaos." Manually sorting, clustering, and summarizing hundreds of ideas is time-consuming and can cause valuable insights to be missed.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: How AI Transforms Whiteboarding -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">How AI Transforms Whiteboarding</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+                    <div class="bg-white p-6 rounded-lg shadow text-center"><svg class="w-12 h-12 text-blue-600 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-5 M3 4h5v5m10 10l-4-4m0 0l-4 4m4-4V4M7 4l4 4M7 20l4-4" /></svg><h3 class="font-semibold text-xl mb-1">Cluster & Theme</h3><p class="text-gray-600">Automatically group related sticky notes into themes, turning chaos into organized categories.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow text-center"><svg class="w-12 h-12 text-blue-600 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg><h3 class="font-semibold text-xl mb-1">Summarize</h3><p class="text-gray-600">Instantly generate concise summaries of entire boards, sections, or clusters of ideas.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow text-center"><svg class="w-12 h-12 text-blue-600 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg><h3 class="font-semibold text-xl mb-1">Generate Ideas</h3><p class="text-gray-600">Break through creative blocks by asking AI to generate new ideas based on existing content.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow text-center"><svg class="w-12 h-12 text-blue-600 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><h3 class="font-semibold text-xl mb-1">Create Content</h3><p class="text-gray-600">Turn brainstorming notes into structured content like user stories, mind maps, or full presentations.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 4: AI in Action: From Brainstorm to Action Plan -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                 <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">From Brainstorm to Action Plan</h2>
+                 <div class="w-full max-w-6xl">
+                    <svg viewBox="0 0 440 80" class="w-full">
+                        <!-- Group 1: Brainstorm -->
+                        <g transform="translate(0, 0)">
+                            <text x="40" y="10" font-size="8" text-anchor="middle" font-weight="bold">1. Brainstorm</text>
+                            <rect x="10" y="15" width="60" height="50" rx="5" fill="#fef3c7"/>
+                            <text x="40" y="40" font-size="7" text-anchor="middle">Lots of</text>
+                            <text x="40" y="50" font-size="7" text-anchor="middle">Ideas!</text>
+                        </g>
+
+                        <!-- Arrow 1 -->
+                        <g transform="translate(70, 0)">
+                             <path d="M5 42.5 H 35" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-ai-wb)"/>
+                             <text x="20" y="35" font-size="6" text-anchor="middle">AI Clusters</text>
+                        </g>
+
+                        <!-- Group 2: Cluster -->
+                        <g transform="translate(110, 0)">
+                            <text x="40" y="10" font-size="8" text-anchor="middle" font-weight="bold">2. Cluster</text>
+                            <rect x="10" y="15" width="60" height="50" rx="5" fill="#dbeafe"/>
+                            <text x="40" y="35" font-size="7" text-anchor="middle">Theme 1</text>
+                            <text x="40" y="45" font-size="7" text-anchor="middle">Theme 2</text>
+                            <text x="40" y="55" font-size="7" text-anchor="middle">Theme 3</text>
+                        </g>
+
+                        <!-- Arrow 2 -->
+                        <g transform="translate(180, 0)">
+                             <path d="M5 42.5 H 35" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-ai-wb)"/>
+                             <text x="22" y="35" font-size="6" text-anchor="middle">AI Summarizes</text>
+                        </g>
+
+                        <!-- Group 3: Summarize -->
+                        <g transform="translate(220, 0)">
+                            <text x="40" y="10" font-size="8" text-anchor="middle" font-weight="bold">3. Summarize</text>
+                            <rect x="10" y="15" width="60" height="50" rx="5" fill="#d1fae5"/>
+                            <text x="40" y="40" font-size="7" text-anchor="middle">Key</text>
+                            <text x="40" y="50" font-size="7" text-anchor="middle">Insights</text>
+                        </g>
+
+                        <!-- Arrow 3 -->
+                         <g transform="translate(290, 0)">
+                             <path d="M5 42.5 H 35" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-ai-wb)"/>
+                             <text x="20" y="35" font-size="6" text-anchor="middle">AI Creates</text>
+                        </g>
+
+                        <!-- Group 4: Action Plan -->
+                        <g transform="translate(330, 0)">
+                            <text x="45" y="10" font-size="8" text-anchor="middle" font-weight="bold">4. Action Plan</text>
+                            <rect x="15" y="15" width="60" height="50" rx="5" fill="#fee2e2"/>
+                            <text x="45" y="35" font-size="7" text-anchor="middle">User</text>
+                            <text x="45" y="45" font-size="7" text-anchor="middle">Stories /</text>
+                            <text x="45" y="55" font-size="7" text-anchor="middle">Tasks</text>
+                        </g>
+
+                        <defs><marker id="arrow-ai-wb" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#9ca3af"/></marker></defs>
+                    </svg>
+                 </div>
+            </div>
+
+            <!-- Slide 5: Real-World Use Cases -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Prompts for Your Next Session</h2>
+                <div class="w-full max-w-4xl space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500"><p class="font-mono text-sm text-gray-500">FOR SYNTHESIS:</p><p class="text-lg">"Cluster these sticky notes by common themes and give each cluster a title."</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow border-l-4 border-green-500"><p class="font-mono text-sm text-gray-500">FOR BRAINSTORMING:</p><p class="text-lg">"Generate 10 more ideas for a new mobile app feature, based on the notes in this section."</p></div>
+                    <div class="bg-white p-4 rounded-lg shadow border-l-4 border-yellow-500"><p class="font-mono text-sm text-gray-500">FOR ACTION:</p><p class="text-lg">"Turn these selected notes into user stories with acceptance criteria."</p></div>
+                     <div class="bg-white p-4 rounded-lg shadow border-l-4 border-purple-500"><p class="font-mono text-sm text-gray-500">FOR UNDERSTANDING:</p><p class="text-lg">"Summarize the key decisions and action items from this entire board."</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-cyan-300"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Your Intelligent Partner</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">AI features in Mural and Miro act as a facilitator's assistant. They handle the tedious work of organizing and synthesizing, freeing up human brainpower to focus on what matters most: creativity, critical thinking, and strategic decision-making.</p>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-blue-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+

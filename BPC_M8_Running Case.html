@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Scenario: The Transformation Summit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            overscroll-behavior: none;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+        .slide-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 3rem 4rem;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .day-badge {
+            background-color: #1e40af; /* New color for this module */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #1e3a8a;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1rem;
+            color: #64748b;
+        }
+        .arrow-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+        .arrow-nav button {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .arrow-nav button:hover {
+            background-color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        ul li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        ul li::before {
+            content: '★';
+            position: absolute;
+            left: 0;
+            color: #1e40af;
+            font-weight: bold;
+            font-size: 1.25rem;
+            top: -0.1rem;
+        }
+        .character-interaction {
+            background-color: #eef2ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Company Logo -->
+    <div class="logo">TransformCo</div>
+
+    <!-- Slide 1: Title -->
+    <div id="slide1" class="slide active" style="background-image: url('https://placehold.co/1920x1080/1e3a8a/FFFFFF?text=Summit');">
+        <div class="slide-content text-center">
+            <h1 class="text-5xl mb-4 text-gray-800">The Transformation Summit</h1>
+            <p class="text-2xl text-gray-600">Module 8 Running Case</p>
+            <p class="mt-8 text-lg">Use Left/Right Arrow Keys to Navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Monday - The Vision Crystallizes -->
+    <div id="slide2" class="slide" style="background-image: url('https://placehold.co/1920x1080/1e40af/FFFFFF?text=Vision');">
+        <div class="slide-content">
+            <span class="day-badge">MONDAY</span>
+            <h2 class="text-4xl mb-6">The Vision Crystallizes</h2>
+            <p class="text-xl mb-6">Delores stands before the board to present "Project Catalyst," the culmination of her work—an integrated, three-pillar plan to redefine TransformCo.</p>
+            <ul class="text-lg space-y-3">
+                <li><strong>Smart Products Platform:</strong> A $200M revenue opportunity through AI-powered consumer experiences.</li>
+                <li><strong>Intelligent Operations:</strong> A $50M annual savings engine by infusing AI across the entire supply chain.</li>
+                <li><strong>Customer Intelligence Hub:</strong> A plan to increase Customer Lifetime Value by 30% through hyper-personalization.</li>
+            </ul>
+            <div class="character-interaction">
+                "This isn't about adding AI to our business," Delores concluded, making eye contact with each board member. "This is about rebuilding our business on a foundation of AI." The room was silent, captivated.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Tuesday - The Technical Architecture -->
+    <div id="slide3" class="slide" style="background-image: url('https://placehold.co/1920x1080/1d4ed8/FFFFFF?text=Architecture');">
+        <div class="slide-content">
+            <span class="day-badge">TUESDAY</span>
+            <h2 class="text-4xl mb-6">The Technical Architecture</h2>
+            <p class="text-xl mb-6">Robert and Delores present the technical backbone for Project Catalyst, showing not just the 'what,' but the 'how'.</p>
+             <ul class="text-lg space-y-3">
+                <li>A hybrid cloud-native platform for maximum flexibility and power.</li>
+                <li>A microservices architecture to ensure agility and speed.</li>
+                <li>Robust MLOps practices for rapid and reliable model deployment.</li>
+                <li>Edge computing for instant, real-time decision-making in factories and stores.</li>
+             </ul>
+            <div class="character-interaction">
+                 Robert handled a technical question about data latency. "With our edge computing strategy, 90% of operational decisions will happen in under 50 milliseconds." Delores added, "Which, for us, means catching a quality defect before it ruins a batch, not after."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Wednesday - The Business Case -->
+    <div id="slide4" class="slide" style="background-image: url('https://placehold.co/1920x1080/2563eb/FFFFFF?text=Investment');">
+        <div class="slide-content">
+            <span class="day-badge">WEDNESDAY</span>
+            <h2 class="text-4xl mb-6">The Business Case</h2>
+            <p class="text-xl mb-6">John, the once-skeptical CFO, presents the financial analysis with the conviction of a true believer, making the investment case undeniable.</p>
+            <ul class="text-lg space-y-2">
+                <li><strong>Investment Required:</strong> $75M over three years.</li>
+                <li><strong>Expected Return:</strong> $350M in total value creation (revenue and savings).</li>
+                <li><strong>Payback Period:</strong> An aggressive 18 months.</li>
+                <li><strong>Net Present Value (NPV):</strong> A staggering $180M.</li>
+            </ul>
+            <div class="character-interaction">
+                 "I've scrutinized these numbers from every angle," John told the board. "The biggest financial risk we face is not making this investment. The cost of inaction is far greater than the cost of this plan. I recommend we approve it, fully and immediately."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Thursday - The Organization Design -->
+    <div id="slide5" class="slide" style="background-image: url('https://placehold.co/1920x1080/3b82f6/FFFFFF?text=Structure');">
+        <div class="slide-content">
+            <span class="day-badge">THURSDAY</span>
+            <h2 class="text-4xl mb-6">The Organization Design</h2>
+            <p class="text-xl mb-6">CEO Virginia announces a bold restructuring to align the company's talent and leadership with its new AI-centric strategy.</p>
+             <ul class="text-lg space-y-3">
+                <li>A new core function, "AI & Digital Innovation," is created.</li>
+                <li>Each business division will now have its own embedded AI team, supported by a central Center of Excellence.</li>
+                <li><strong>In a landmark move, Delores is promoted to the newly created role of President, Digital & AI.</strong></li>
+             </ul>
+            <div class="character-interaction">
+                 "To lead this new chapter, we need a leader who architected it," Virginia announced. "Delores has not only shown us the future, but has built the roadmap to get there. I can't think of anyone better to lead this charge."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Friday - The Transformation Celebration -->
+    <div id="slide6" class="slide" style="background-image: url('https://placehold.co/1920x1080/60a5fa/FFFFFF?text=Approval');">
+        <div class="slide-content">
+            <span class="day-badge">FRIDAY</span>
+            <h2 class="text-4xl mb-6">The Unanimous Approval</h2>
+            <p class="text-xl mb-6">The week culminates in the final board meeting. After a short deliberation, the vote for Project Catalyst is called.</p>
+             <ul class="text-lg space-y-2 mt-2">
+                <li>The board votes to approve the full $75M investment.</li>
+                <li>The vote is unanimous, a powerful signal of unified commitment.</li>
+                <li>The leadership team celebrates the beginning of a new era for TransformCo.</li>
+             </ul>
+             <div class="character-interaction">
+                The chairman polled the room. One by one, every hand went up. "It's unanimous. Motion carried. Congratulations to the team. You have our full support. Now, go build the future." A wave of applause and relief filled the boardroom.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Epilogue -->
+    <div id="slide7" class="slide" style="background-image: url('https://placehold.co/1920x1080/93c5fd/FFFFFF?text=Results');">
+        <div class="slide-content">
+            <span class="day-badge">SIX MONTHS LATER</span>
+            <h2 class="text-4xl mb-6">Epilogue: The New Reality</h2>
+            <p class="text-xl mb-6">The transformation is not just a plan, but a reality. The early results exceed all expectations.</p>
+             <ul class="text-lg space-y-2 mt-2">
+                <li>The company's stock price is up <strong>45%</strong>.</li>
+                <li>TransformCo is named <strong>"AI Innovator of the Year"</strong> by a leading industry publication.</li>
+                <li>Over <strong>2,000 employees</strong> are now certified in new AI tools.</li>
+                <li>A new venture fund is launched to invest in external AI startups.</li>
+             </ul>
+        </div>
+    </div>
+
+    <!-- Slide 8: Conclusion -->
+    <div id="slide8" class="slide" style="background-image: url('https://placehold.co/1920x1080/1e3a8a/FFFFFF?text=Future');">
+        <div class="slide-content text-center">
+            <h2 class="text-5xl mb-4">A New Identity</h2>
+            <div class="character-interaction mt-8 text-2xl">
+                "We didn't just adopt AI, we became an AI company. It's in our products, our processes, and most importantly, in our people. It's who we are now."
+                <br>- Delores, President of Digital & AI
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="slide-number" class="slide-number">1 / 8</div>
+    <div class="arrow-nav">
+        <button id="prevBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="nextBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" view`Box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberElement = document.getElementById('slide-number');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach((slide, index) => {
+                if (index === n) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            slideNumberElement.textContent = `${n + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Initialize first slide
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

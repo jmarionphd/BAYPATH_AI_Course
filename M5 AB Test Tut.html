@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/B Testing Platforms Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-blue-800 via-sky-700 to-cyan-600 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">A/B Testing Platforms</h1>
+                <p class="text-xl md:text-2xl opacity-90">From Hypothesis to High-Performing</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: What is A/B Testing? -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">What is A/B Testing?</h2>
+                    <p class="text-xl text-gray-600">Also known as split testing, it's a method of comparing two versions of a webpage, app screen, or other asset to determine which one performs better. It's one of the most reliable ways to make data-driven decisions about design and user experience.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 100 80" class="w-full max-w-md">
+                        <!-- Traffic -->
+                        <text x="50" y="10" font-size="6" text-anchor="middle">Website Traffic</text>
+                        <path d="M50 15 V 25" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-ab)"/>
+                        <!-- Split -->
+                        <path d="M50 25 L 25 40" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-ab)"/>
+                        <path d="M50 25 L 75 40" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-ab)"/>
+                        <!-- Version A -->
+                        <rect x="10" y="40" width="30" height="20" rx="3" fill="#dbeafe"/>
+                        <text x="25" y="48" font-size="5" text-anchor="middle">Version A</text>
+                        <text x="25" y="55" font-size="5" text-anchor="middle">(Control)</text>
+                        <!-- Version B -->
+                        <rect x="60" y="40" width="30" height="20" rx="3" fill="#dcfce7"/>
+                        <text x="75" y="48" font-size="5" text-anchor="middle">Version B</text>
+                        <text x="75" y="55" font-size="5" text-anchor="middle">(Variation)</text>
+                         <!-- Results -->
+                         <text x="50" y="72" font-size="6" text-anchor="middle">
+                            <tspan x="50" dy="0">Which version leads to</tspan>
+                            <tspan x="50" dy="7">more conversions?</tspan>
+                         </text>
+                        <defs><marker id="arrow-ab" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#9ca3af"/></marker></defs>
+                     </svg>
+                </div>
+            </div>
+
+            <!-- Slide 3: Why Use a Platform? -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Why Use a Platform?</h2>
+                <p class="text-lg text-gray-600 text-center mb-6 max-w-3xl">While simple tests can be run manually, dedicated platforms handle the complex and error-prone parts of experimentation at scale.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-blue-700 mb-2">Statistical Rigor</h3><p class="text-gray-600">Platforms have built-in statistical engines to ensure your results are significant and not just due to random chance, preventing costly false positives.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-blue-700 mb-2">Audience Targeting</h3><p class="text-gray-600">Easily segment and target specific user groups (e.g., new vs. returning, mobile vs. desktop) without complex custom code.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-xl text-blue-700 mb-2">Easy Implementation</h3><p class="text-gray-600">Visual editors and simple code snippets allow marketing and product teams to launch tests quickly without requiring developer time for every change.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Core Features -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Core Features of A/B Testing Platforms</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg">Visual Editor</h3><p>A user-friendly, "what you see is what you get" (WYSIWYG) interface for making simple changes like editing text, changing colors, or swapping images without code.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg">Code Editor</h3><p>For more complex changes, developers can directly inject custom JavaScript or CSS to implement significant feature variations.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg">Targeting & Segmentation</h3><p>The ability to define who sees your test based on attributes like device, location, traffic source, or custom user data.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg">Results Dashboard</h3><p>A clear, visual representation of your experiment's results, including conversion rates, confidence levels, and segmentation data.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Leading Platforms -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Leading Platforms in the Market</h2>
+                 <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50 border-b">
+                            <tr><th class="p-4 font-semibold">Platform</th><th class="p-4 font-semibold">Best For</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b"><td class="p-4 font-bold">Optimizely</td><td class="p-4">Enterprises needing a full suite of web and feature experimentation tools.</td></tr>
+                            <tr class="border-b"><td class="p-4 font-bold">VWO (Visual Website Optimizer)</td><td class="p-4">Mid-market companies looking for an all-in-one conversion optimization platform.</td></tr>
+                            <tr class="border-b"><td class="p-4 font-bold">GrowthBook</td><td class="p-4">Tech-forward companies wanting an open-source, developer-friendly feature flagging and A/B testing platform.</td></tr>
+                            <tr><td class="p-4 font-bold">Google Optimize</td><td class="p-4">Was a popular free tool for beginners, but has been sunset. Many users migrate to the options above.</td></tr>
+                        </tbody>
+                    </table>
+                 </div>
+            </div>
+            
+            <!-- Slide 6: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-sky-300"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="M12 12v-4"></path><path d="M12 16h.01"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Test, Learn, Win</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">A/B testing platforms take the guesswork out of optimization. By enabling rapid, reliable experimentation, they empower teams to make decisions based on real user behavior, leading to better user experiences and improved business outcomes.</p>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-blue-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+

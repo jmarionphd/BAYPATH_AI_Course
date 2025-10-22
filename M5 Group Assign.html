@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5 Group Assignment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-rose-800 via-red-700 to-red-900 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Module 5 Group Assignment</h1>
+                <p class="text-xl md:text-2xl opacity-90">The Go/No-Go Decision</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Assignment Goal -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Your Mission</h2>
+                    <p class="text-xl text-gray-600">This is the final presentation to the "board." Your group will select one innovation initiative for TransformCo, build an AI-accelerated Minimum Viable Product (MVP) to test its core hypothesis, and present a data-backed recommendation to either proceed with further investment (Go) or to pivot/cancel the project (No-Go).</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 200 80" class="w-full max-w-lg">
+                        <!-- Path -->
+                        <path d="M20 25 H 50 L 100 55 L 150 25 H 180" fill="none" stroke="#d1d5db" stroke-width="3"/>
+                        <!-- Nodes -->
+                        <g><circle cx="20" cy="25" r="8" fill="#fef9c3"/><text x="20" y="40" font-size="7" text-anchor="middle">Build MVP</text></g>
+                        <g><circle cx="50" cy="25" r="8" fill="#dbeafe"/><text x="50" y="15" font-size="7" text-anchor="middle">Validate</text></g>
+                        <g><circle cx="100" cy="55" r="8" fill="#d1fae5"/><text x="100" y="70" font-size="7" text-anchor="middle">Analyze Data</text></g>
+                        <g><circle cx="150" cy="25" r="8" fill="#fee2e2"/><text x="150" y="15" font-size="7" text-anchor="middle">Present</text></g>
+                        <g><circle cx="180" cy="25" r="8" fill="#fecaca"/><text x="180" y="40" font-size="7" text-anchor="middle">Recommend</text></g>
+                     </svg>
+                </div>
+            </div>
+
+            <!-- Slide 3: Core Tasks -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Your Five Core Tasks</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg mb-1">1. Develop MVP</h3><p class="text-gray-600">Define and build the smallest possible product that allows you to test your riskiest assumption for a TransformCo innovation.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg mb-1">2. Use AI to Accelerate</h3><p class="text-gray-600">Actively use AI tools (e.g., Copilot for code, Midjourney for visuals, ChatGPT for content) and document how they sped up your MVP development.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg mb-1">3. Conduct Validation</h3><p class="text-gray-600">Test your MVP with a target audience. Collect both quantitative (e.g., clicks, time on task) and qualitative (e.g., interview feedback) data.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow md:col-start-1"><h3 class="font-semibold text-lg mb-1">4. Present Findings</h3><p class="text-gray-600">Create a concise presentation that clearly shows your results using data visualizations (charts, graphs, key quotes).</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow md:col-start-2 md:col-span-2"><h3 class="font-semibold text-lg mb-1">5. Recommend Go/No-Go</h3><p class="text-gray-600">Based on your evidence, make a clear, decisive recommendation to the "board." Justify your decision with the data you collected.</p></div>
+                </div>
+            </div>
+
+             <!-- Slide 4: The Go/No-Go Framework -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Making the Final Recommendation</h2>
+                <p class="text-lg text-gray-600 text-center mb-6 max-w-3xl">Your final recommendation is a business decision based on evidence, not opinion. Use your findings to justify your choice.</p>
+                <div class="w-full max-w-4xl flex flex-col md:flex-row gap-8">
+                    <div class="w-full md:w-1/2 p-6 bg-green-50 rounded-lg shadow border-2 border-green-200">
+                        <h3 class="font-bold text-3xl mb-3 text-green-700">Go</h3>
+                        <p class="text-gray-600">Proceed with further investment. This is justified if:</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-600">
+                            <li>Your hypothesis was validated.</li>
+                            <li>Key metrics met or exceeded targets.</li>
+                            <li>Qualitative feedback was strongly positive.</li>
+                            <li>You have a clear next step for the product.</li>
+                        </ul>
+                    </div>
+                     <div class="w-full md:w-1/2 p-6 bg-red-50 rounded-lg shadow border-2 border-red-200">
+                        <h3 class="font-bold text-3xl mb-3 text-red-700">No-Go</h3>
+                        <p class="text-gray-600">Pivot or cancel the project. This is justified if:</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-600">
+                            <li>Your hypothesis was invalidated.</li>
+                            <li>Users were indifferent or confused.</li>
+                            <li>The results show no product-market fit.</li>
+                            <li>The problem is not worth solving.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Final Deliverable -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-red-300"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="m9 15 2 2 4-4"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Final Presentation to the Board</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Your group will deliver a concise, executive-level presentation that acts as your final deliverable. It must include:</p>
+                 <ul class="text-lg opacity-80 max-w-2xl mx-auto list-none text-left mt-4 space-y-2">
+                    <li><b>1. The MVP:</b> A clear description and demo/screenshot of the product you tested.</li>
+                    <li><b>2. The Findings:</b> Key data visualizations and qualitative insights from your validation.</li>
+                    <li><b>3. The Recommendation:</b> A final, unambiguous "Go" or "No-Go" decision.</li>
+                    <li><b>4. The Evidence:</b> A summary of the data that directly supports your recommendation.</li>
+                 </ul>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-red-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+
+
+

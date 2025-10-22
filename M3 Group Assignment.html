@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3 Group Assignment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity: 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-indigo-800 via-purple-700 to-blue-600 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Module 3 Group Assignment</h1>
+                <p class="text-xl md:text-2xl opacity-90">Building TransformCo's Innovation Portfolio</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Assignment Goal -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Your Mission</h2>
+                    <p class="text-xl text-gray-600">Your group will act as TransformCo's innovation leadership. Your mission is to develop a complete innovation portfolio, design AI-enhanced processes to manage it, create an integrated roadmap, and present your strategy for board approval.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 100 80" class="w-full max-w-md">
+                        <!-- Elements -->
+                        <rect x="5" y="5" width="30" height="20" rx="3" fill="#c4b5fd" />
+                        <text x="20" y="17" font-size="6" text-anchor="middle">Portfolio</text>
+                        <rect x="5" y="55" width="30" height="20" rx="3" fill="#a5b4fc" />
+                        <text x="20" y="67" font-size="6" text-anchor="middle">Processes</text>
+                        <rect x="65" y="5" width="30" height="20" rx="3" fill="#818cf8" />
+                        <text x="80" y="17" font-size="6" text-anchor="middle">Roadmap</text>
+                         <rect x="65" y="55" width="30" height="20" rx="3" fill="#6366f1" />
+                        <text x="80" y="64" font-size="5" text-anchor="middle" fill="white">Board</text>
+                        <text x="80" y="70" font-size="5" text-anchor="middle" fill="white">Approval</text>
+                        <!-- Arrows -->
+                        <path d="M35 15 H 65" fill="none" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-g)"/>
+                        <path d="M20 25 V 55" fill="none" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-g)"/>
+                        <path d="M35 65 H 65" fill="none" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-g)"/>
+                        <path d="M80 25 V 55" fill="none" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-g)"/>
+                        <defs><marker id="arrow-g" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#9ca3af"/></marker></defs>
+                     </svg>
+                </div>
+            </div>
+
+            <!-- Slide 3: Core Tasks -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Your Five Core Tasks</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg mb-1">1. Develop Portfolio</h3><p class="text-gray-600">Develop a complete, balanced innovation portfolio for TransformCo using a recognized framework (e.g., 70-20-10).</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg mb-1">2. Show Processes</h3><p class="text-gray-600">Detail the innovation process (e.g., Stage-Gate) for each type of initiative in your portfolio.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg mb-1">3. Identify AI Enhancements</h3><p class="text-gray-600">Pinpoint specific opportunities to integrate AI into your innovation processes to boost efficiency and insight.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow md:col-start-1"><h3 class="font-semibold text-lg mb-1">4. Create Roadmap</h3><p class="text-gray-600">Build an integrated, multi-year roadmap that visualizes the rollout of your portfolio initiatives.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow md:col-start-2 md:col-span-2"><h3 class="font-semibold text-lg mb-1">5. Present for Approval</h3><p class="text-gray-600">Synthesize all findings into a compelling presentation for the TransformCo "board" that clearly states your strategy, resource needs, and expected outcomes.</p></div>
+                </div>
+            </div>
+
+             <!-- Slide 4: Example - Portfolio Balance -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-2 text-center">Example: A Balanced Portfolio</h2>
+                <p class="text-lg text-gray-600 text-center mb-6">Structure your portfolio to manage risk and drive future growth.</p>
+                <div class="w-full max-w-5xl flex flex-col md:flex-row justify-center items-center gap-6">
+                    <!-- Core -->
+                    <div class="w-full md:w-1/3 p-4 border-t-8 border-blue-500 bg-white rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-blue-800">Core (70%)</h3>
+                        <p class="font-semibold text-gray-600 mb-2">Optimize Existing Business</p>
+                        <p class="text-gray-500 text-sm">Example: Use AI to improve supply chain logistics and reduce operational costs.</p>
+                    </div>
+                     <!-- Adjacent -->
+                    <div class="w-full md:w-1/3 p-4 border-t-8 border-purple-500 bg-white rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-purple-800">Adjacent (20%)</h3>
+                        <p class="font-semibold text-gray-600 mb-2">Expand into New Markets</p>
+                        <p class="text-gray-500 text-sm">Example: Launch a direct-to-consumer subscription service using existing products.</p>
+                    </div>
+                     <!-- Transformational -->
+                    <div class="w-full md:w-1/3 p-4 border-t-8 border-indigo-500 bg-white rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-indigo-800">Transformational (10%)</h3>
+                        <p class="font-semibold text-gray-600 mb-2">Create New Business Models</p>
+                        <p class="text-gray-500 text-sm">Example: Develop a new AI-driven B2B data analytics platform.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Submission Checklist -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-indigo-300"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M12 18v-6"></path><path d="m9 15 3-3 3 3"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Board Presentation Checklist</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Your final presentation should be a persuasive, data-driven strategic proposal covering:</p>
+                 <ul class="text-lg opacity-80 max-w-2xl mx-auto list-none text-left mt-4 space-y-2">
+                    <li><b class="text-indigo-300">1. Portfolio Overview:</b> A clear, balanced list of innovation initiatives.</li>
+                    <li><b class="text-indigo-300">2. AI-Enhanced Processes:</b> Visual maps of how each initiative type will be managed.</li>
+                    <li><b class="text-indigo-300">3. Strategic Roadmap:</b> A multi-year timeline with key milestones and dependencies.</li>
+                    <li><b class="text-indigo-300">4. The "Ask":</b> A clear request for resources (budget, headcount) required for success.</li>
+                 </ul>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-indigo-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>

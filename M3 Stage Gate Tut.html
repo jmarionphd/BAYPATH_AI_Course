@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage-Gate Methodology Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        .gate {
+            transform: rotate(45deg);
+        }
+        .gate-text {
+            transform: rotate(-45deg);
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-green-600 via-teal-500 to-cyan-500 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">The Stage-Gate Methodology</h1>
+                <p class="text-xl md:text-2xl opacity-90">A Disciplined Approach to Product Innovation</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: What is Stage-Gate? -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">What is Stage-Gate?</h2>
+                    <p class="text-xl text-gray-600">Stage-Gate is a project management framework that breaks down large, complex projects into smaller phases, or <b class="text-teal-600">Stages</b>. Each stage is followed by a decision point, or a <b class="text-green-600">Gate</b>, where key stakeholders decide if the project should continue.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <div class="w-full max-w-md h-40 flex justify-center items-center">
+                       <svg viewBox="0 0 200 50" class="w-full h-full">
+                           <text x="25" y="5" font-size="6">Stage</text>
+                           <rect x="5" y="10" width="40" height="30" rx="3" fill="#a7f3d0"/>
+                           <path d="M 45 25 L 55 25" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+                           <text x="70" y="5" font-size="6">Gate</text>
+                           <rect x="60" y="15" width="20" height="20" fill="#6ee7b7" transform="rotate(45 70 25)"/>
+                           <path d="M 85 25 L 95 25" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+                           <text x="110" y="5" font-size="6">Stage</text>
+                           <rect x="95" y="10" width="40" height="30" rx="3" fill="#a7f3d0"/>
+                           <path d="M 135 25 L 145 25" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrow)"/>
+                           <text x="160" y="5" font-size="6">Gate</text>
+                           <rect x="150" y="15" width="20" height="20" fill="#6ee7b7" transform="rotate(45 160 25)"/>
+                           <defs><marker id="arrow" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#6b7280"/></marker></defs>
+                       </svg>
+                     </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Core Components -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">The Two Core Components</h2>
+                <div class="flex flex-col md:flex-row justify-center items-stretch gap-8 w-full max-w-4xl">
+                    <div class="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-teal-600 mb-3">Stages</h3>
+                        <p class="text-lg">These are where the work happens. Cross-functional teams perform tasks, gather information, and develop the project deliverables for the next gate.</p>
+                    </div>
+                    <div class="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-green-600 mb-3">Gates</h3>
+                        <p class="text-lg">These are the decision points. At each gate, managers review the deliverables against set criteria and make one of four decisions: Go, Kill, Hold, or Recycle.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Anatomy of a Gate -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <div class="w-full max-w-sm">
+                        <div class="bg-white p-4 rounded-lg shadow text-center mb-2"><h4 class="font-semibold">INPUTS</h4><p class="text-sm">Deliverables from previous stage</p></div>
+                        <div class="flex justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m0-14l-4 4m4-4l4 4"/></svg></div>
+                        <div class="bg-green-500 text-white p-6 my-2 rounded-lg shadow-lg text-center font-bold">THE GATE MEETING</div>
+                        <div class="flex justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m0 0l-4-4m4 4l4-4"/></svg></div>
+                        <div class="bg-white p-4 rounded-lg shadow text-center mt-2"><h4 class="font-semibold">OUTPUTS</h4><p class="text-sm">Go / Kill / Hold / Recycle Decision</p></div>
+                     </div>
+                </div>
+                <div class="w-full lg:w-1/2 p-4">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Anatomy of a Gate</h3>
+                    <p class="text-lg text-gray-600">Gates are not just status reports; they are structured decision meetings. They ensure projects are still strategically aligned and commercially viable before more resources are invested.</p>
+                     <ul class="text-lg text-gray-600 list-disc pl-5 space-y-2 mt-4">
+                        <li><b>Criteria:</b> Are must-meet hurdles (e.g., legal, safety) and should-meet scoring criteria (e.g., market attractiveness) passed?</li>
+                        <li><b>Decision:</b> Is a clear Go/Kill decision made?</li>
+                    </ul>
+                </div>
+            </div>
+
+             <!-- Slide 5: A Typical 5-Stage Model -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">A Typical 5-Stage Model</h2>
+                <div class="w-full max-w-5xl flex items-center justify-between text-center text-xs md:text-sm">
+                    <!-- Idea -->
+                    <div class="flex flex-col items-center"><svg class="w-10 h-10 text-gray-400 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg><b>Idea</b></div>
+                    <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- Gate 1 -->
+                    <div class="gate w-12 h-12 md:w-16 md:h-16 bg-green-200 flex justify-center items-center mx-2"><div class="gate-text font-bold">G1</div></div>
+                     <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- Stage 1 -->
+                    <div class="bg-teal-100 p-2 md:p-3 rounded-lg mx-2"><h4 class="font-bold">S1</h4><p>Scoping</p></div>
+                     <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- Gate 2 -->
+                    <div class="gate w-12 h-12 md:w-16 md:h-16 bg-green-300 flex justify-center items-center mx-2"><div class="gate-text font-bold">G2</div></div>
+                     <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- Stage 2 -->
+                    <div class="bg-teal-200 p-2 md:p-3 rounded-lg mx-2"><h4 class="font-bold">S2</h4><p>Business Case</p></div>
+                     <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- Gate 3 -->
+                    <div class="gate w-12 h-12 md:w-16 md:h-16 bg-green-400 flex justify-center items-center mx-2"><div class="gate-text font-bold">G3</div></div>
+                     <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- And so on... -->
+                </div>
+                 <div class="w-full max-w-5xl flex items-center justify-between text-center text-xs md:text-sm mt-4">
+                    <div class="w-16"></div>
+                    <!-- Stage 3 -->
+                    <div class="bg-teal-300 p-2 md:p-3 rounded-lg mx-2"><h4 class="font-bold">S3</h4><p>Development</p></div>
+                     <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- Gate 4 -->
+                    <div class="gate w-12 h-12 md:w-16 md:h-16 bg-green-500 flex justify-center items-center mx-2"><div class="gate-text font-bold text-white">G4</div></div>
+                     <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- Stage 4 -->
+                    <div class="bg-teal-400 p-2 md:p-3 rounded-lg mx-2"><h4 class="font-bold">S4</h4><p>Testing</p></div>
+                     <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- Gate 5 -->
+                    <div class="gate w-12 h-12 md:w-16 md:h-16 bg-green-600 flex justify-center items-center mx-2"><div class="gate-text font-bold text-white">G5</div></div>
+                     <div class="flex-grow h-0.5 bg-gray-300"></div>
+                    <!-- Stage 5 -->
+                    <div class="bg-teal-500 p-2 md:p-3 rounded-lg mx-2 text-white"><h4 class="font-bold">S5</h4><p>Launch</p></div>
+                 </div>
+            </div>
+
+            <!-- Slide 6: Key Benefits -->
+             <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Key Benefits</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div><h3 class="font-semibold text-lg">Improved Success Rates</h3><p>Weeds out bad projects early, focusing resources on winners.</p></div></div>
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg><div><h3 class="font-semibold text-lg">Faster Time-to-Market</h3><p>Reduces rework and ensures clear direction at every phase.</p></div></div>
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2" /></svg><div><h3 class="font-semibold text-lg">Better Resource Allocation</h3><p>Ensures money and people are invested in strategically-aligned projects.</p></div></div>
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-green-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg><div><h3 class="font-semibold text-lg">Clear Communication</h3><p>Creates a shared understanding of project status and requirements.</p></div></div>
+                </div>
+            </div>
+            
+            <!-- Slide 7: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-green-400"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Key Takeaways</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Stage-Gate is a powerful roadmap for navigating the complexities of innovation.</p>
+                 <ul class="text-lg opacity-80 max-w-lg mx-auto list-none text-left mt-4 space-y-2">
+                    <li><b class="text-green-300">Divide & Conquer:</b> Break large projects into manageable stages.</li>
+                    <li><b class="text-green-300">Make Smart Decisions:</b> Use gates to evaluate and kill weak projects early.</li>
+                    <li><b class="text-green-300">Focus Resources:</b> Allocate your best people and funds to the best projects.</li>
+                 </ul>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-green-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>

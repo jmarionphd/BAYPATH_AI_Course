@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tool Certification Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">AI Tool Certification</h1>
+                <p class="text-xl md:text-2xl opacity-90">A Framework for Safe and Scalable Innovation</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: The "Wild West" of AI -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">The "Wild West" of Enterprise AI</h2>
+                <p class="text-lg text-gray-600 text-center mb-6 max-w-3xl">Uncontrolled adoption of AI tools creates a major conflict: employees want to innovate, but the organization must manage risk.</p>
+                <div class="w-full max-w-4xl flex flex-col md:flex-row gap-8">
+                    <div class="w-full md:w-1/2 p-6 bg-white rounded-lg shadow text-center">
+                        <h3 class="font-bold text-2xl mb-2 text-green-600">Employee Drive</h3>
+                        <p class="text-gray-600">"I need the best tools to do my job faster and better."</p>
+                    </div>
+                    <div class="w-full md:w-1/2 p-6 bg-white rounded-lg shadow text-center">
+                        <h3 class="font-bold text-2xl mb-2 text-red-600">Organizational Risk</h3>
+                        <p class="text-gray-600">"How do we protect company data, control costs, and ensure compliance?"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3: The Solution: A Certification Process -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">The Solution: A Certification Process</h2>
+                    <p class="text-xl text-gray-600">A certification program is a formal governance framework that vets AI tools before they are widely used. It acts as a gateway, blocking high-risk tools while approving safe and valuable ones, turning the "Wild West" into a managed innovation ecosystem.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 140 80" class="w-full max-w-md">
+                        <!-- Untrusted Tools -->
+                        <rect x="5" y="30" width="30" height="20" rx="3" fill="#fef2f2"/>
+                        <text x="20" y="42" font-size="5" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="20" dy="-3">New AI</tspan>
+                            <tspan x="20" dy="6">Tool</tspan>
+                        </text>
+                        <!-- Arrow -->
+                        <path d="M35 40 H 50" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-cert)"/>
+                        <!-- Gateway -->
+                        <rect x="50" y="20" width="40" height="40" rx="2" fill="#dbeafe"/>
+                        <text x="70" y="42" font-size="5" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="70" dy="-3">Certification</tspan>
+                            <tspan x="70" dy="6">Gateway</tspan>
+                        </text>
+                        <!-- Arrow -->
+                        <path d="M90 40 H 105" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-cert)"/>
+                         <!-- Approved -->
+                        <rect x="105" y="30" width="30" height="20" rx="3" fill="#dcfce7"/>
+                        <text x="120" y="42" font-size="5" text-anchor="middle">Approved</text>
+                        <defs><marker id="arrow-cert" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#9ca3af"/></marker></defs>
+                     </svg>
+                </div>
+            </div>
+
+            <!-- Slide 4: The Certification Workflow -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                 <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">The Certification Workflow</h2>
+                 <div class="w-full max-w-6xl">
+                    <svg viewBox="0 0 300 60" class="w-full">
+                        <!-- Step 1 -->
+                        <g>
+                            <rect x="5" y="20" width="50" height="20" rx="5" fill="#f0f9ff"/>
+                            <text x="30" y="32" font-size="7" text-anchor="middle">1. Request</text>
+                        </g>
+                        <path d="M55 30 H 65" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-cert2)"/>
+                        <!-- Step 2 -->
+                        <g>
+                            <rect x="65" y="20" width="60" height="20" rx="5" fill="#f0f9ff"/>
+                            <text x="95" y="32" font-size="6" text-anchor="middle">2. Committee Review</text>
+                        </g>
+                        <path d="M125 30 H 135" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-cert2)"/>
+                        <!-- Step 3 -->
+                        <g>
+                            <rect x="135" y="20" width="60" height="20" rx="5" fill="#f0f9ff"/>
+                            <text x="165" y="32" font-size="6" text-anchor="middle">3. Risk Assessment</text>
+                        </g>
+                        <path d="M195 30 H 205" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-cert2)"/>
+                        <!-- Step 4 -->
+                        <g>
+                            <rect x="205" y="20" width="60" height="20" rx="5" fill="#f0f9ff"/>
+                            <text x="235" y="32" font-size="5.5" text-anchor="middle" dominant-baseline="middle">
+                                <tspan x="235" dy="-2.5">4. Decision</tspan>
+                                <tspan x="235" dy="6">&amp; Catalog</tspan>
+                            </text>
+                        </g>
+                        <defs><marker id="arrow-cert2" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#9ca3af"/></marker></defs>
+                    </svg>
+                 </div>
+            </div>
+
+            <!-- Slide 5: Certification Tiers -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">A Tiered Approach to Risk</h2>
+                <p class="text-lg text-gray-600 text-center mb-6 max-w-3xl">Not all tools are equal. A tiered system provides clear guidance to employees on how and when approved tools can be used.</p>
+                <div class="w-full max-w-5xl flex flex-col md:flex-row justify-center items-stretch gap-6">
+                    <div class="w-full md:w-1/3 p-4 border-t-8 border-green-500 bg-white rounded-lg shadow-lg"><h3 class="text-2xl font-bold text-green-800">Green / Approved</h3><p class="font-semibold text-gray-600 mb-2">Safe for general use</p><p class="text-gray-500 text-sm">Tools with enterprise-grade security and a private tenancy. Safe for use with confidential company data.</p></div>
+                    <div class="w-full md:w-1/3 p-4 border-t-8 border-yellow-500 bg-white rounded-lg shadow-lg"><h3 class="text-2xl font-bold text-yellow-800">Yellow / Restricted</h3><p class="font-semibold text-gray-600 mb-2">Use with caution</p><p class="text-gray-500 text-sm">Public tools that have been vetted as useful. Approved ONLY for public or non-sensitive data.</p></div>
+                    <div class="w-full md:w-1/3 p-4 border-t-8 border-red-500 bg-white rounded-lg shadow-lg"><h3 class="text-2xl font-bold text-red-800">Red / Denied</h3><p class="font-semibold text-gray-600 mb-2">Do not use</p><p class="text-gray-500 text-sm">Tools with unacceptable security risks, unclear data policies, or prohibitive licensing terms.</p></div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-blue-300"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Innovation with Guardrails</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">An AI tool certification program is a foundational piece of a modern governance strategy. It replaces fear with a framework, enabling employees to experiment and innovate responsibly, while protecting the organization from undue risk. It's how you balance the need for speed with the need for safety.</p>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-blue-800 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+
+
+

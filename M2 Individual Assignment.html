@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 Assignment: Insight Synthesis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        .diagram-bg {
+            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+            background-size: 15px 15px;
+        }
+        .guide-line {
+            stroke-dasharray: 5, 5;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-blue-700 via-cyan-600 to-teal-500 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Week 2 Individual Assignment</h1>
+                <p class="text-xl md:text-2xl opacity-90">From Empathy to Insight</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Overview -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <div class="w-72 h-72 rounded-lg flex justify-center items-center">
+                       <svg viewBox="0 0 100 100" class="w-full h-full">
+                           <!-- Data Sources -->
+                           <circle cx="25" cy="25" r="8" fill="#60a5fa" />
+                           <text x="25" y="27" text-anchor="middle" font-size="5" fill="white">Human</text>
+                           <circle cx="75" cy="25" r="8" fill="#34d399" />
+                           <text x="75" y="27" text-anchor="middle" font-size="7" fill="white">AI</text>
+                           <!-- Arrow Down -->
+                           <path d="M 35 35 Q 50 45, 65 35" fill="none" stroke="#9ca3af" stroke-width="1.5" />
+                           <path d="M 50 45 L 50 60" fill="none" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrowhead-small)"/>
+                           <!-- Synthesis -->
+                           <rect x="35" y="60" width="30" height="20" rx="5" fill="#a78bfa" />
+                           <text x="50" y="72" text-anchor="middle" font-size="7" fill="white">Insights</text>
+                           <text x="50" y="90" text-anchor="middle" font-size="7" class="fill-gray-600">
+                               <tspan x="50" dy="0">Combining Human</tspan>
+                               <tspan x="50" dy="8">&amp; AI Analysis</tspan>
+                           </text>
+                           <defs><marker id="arrowhead-small" markerWidth="5" markerHeight="3.5" refX="2" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#9ca3af"/></marker></defs>
+                       </svg>
+                     </div>
+                </div>
+                <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Assignment Goal</h2>
+                    <p class="text-xl text-gray-600">This week, you will gather qualitative data from both human and digital sources. Your goal is to synthesize these findings to uncover deep insights and visualize them in a customer journey map.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: Four Core Tasks -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Your Four Core Tasks</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-4xl font-bold text-cyan-500 mb-2">1</div><h3 class="text-xl font-semibold mb-2">Empathy Interviews</h3><p>Conduct 3 one-on-one interviews to gather firsthand experiences.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-4xl font-bold text-cyan-500 mb-2">2</div><h3 class="text-xl font-semibold mb-2">AI Discussion Analysis</h3><p>Use AI to analyze relevant online conversations (forums, social media).</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-4xl font-bold text-cyan-500 mb-2">3</div><h3 class="text-xl font-semibold mb-2">Synthesize Findings</h3><p>Combine insights from both data sources into unified themes.</p></div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center"><div class="text-4xl font-bold text-cyan-500 mb-2">4</div><h3 class="text-xl font-semibold mb-2">Create Journey Map</h3><p>Visualize the customer experience, overlaying it with your data.</p></div>
+                </div>
+            </div>
+
+
+            <!-- Slide 4: Task 1 -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M17 18a5 5 0 0 0-10 0"></path><line x1="12" y1="2" x2="12" y2="7"></line><line x1="12" y1="13" x2="12" y2="22"></line><line x1="20" y1="9" x2="17" y2="11"></line><line x1="4" y1="9" x2="7" y2="11"></line></svg>
+                </div>
+                <div class="w-full lg:w-1/2 p-4">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Task 1: Empathy Interviews</h3>
+                    <ul class="text-lg text-gray-600 list-disc pl-5 space-y-2">
+                        <li><b>Who:</b> Interview 3 people (classmates, colleagues, friends, family).</li>
+                        <li><b>What:</b> Ask open-ended questions about their experiences related to your project topic.</li>
+                        <li><b>How:</b> Focus on listening, not talking. Dig deeper with "Why?" Record key quotes and observations.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 5: Task 2 -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4">
+                     <h3 class="text-3xl font-bold text-gray-800 mb-2">Task 2: AI Discussion Analysis</h3>
+                    <ul class="text-lg text-gray-600 list-disc pl-5 space-y-2">
+                        <li><b>Where:</b> Find online communities (Reddit, Twitter, forums) discussing your topic.</li>
+                        <li><b>What:</b> Gather a sample of relevant posts and comments.</li>
+                        <li><b>How:</b> Use an AI tool (like a large language model) to summarize themes, identify common pain points, and extract key sentiments from the text data.</li>
+                    </ul>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-500"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path><path d="m15 5 3 3"></path></svg>
+                </div>
+            </div>
+
+            <!-- Slide 6: Task 3 -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 100 100" class="w-3/4 h-3/4 max-w-sm">
+                        <circle cx="30" cy="30" r="10" fill="#60a5fa" opacity="0.7"/>
+                        <circle cx="70" cy="30" r="10" fill="#34d399" opacity="0.7"/>
+                        <circle cx="50" cy="70" r="15" fill="#a78bfa" />
+                        <path d="M35 38 Q 45 55, 45 65" stroke="#9ca3af" fill="none" stroke-width="2" class="guide-line"/>
+                        <path d="M65 38 Q 55 55, 55 65" stroke="#9ca3af" fill="none" stroke-width="2" class="guide-line"/>
+                        <text x="50" y="95" text-anchor="middle" font-size="6" class="fill-gray-600">Where do the stories overlap?</text>
+                    </svg>
+                </div>
+                <div class="w-full lg:w-1/2 p-4">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Task 3: Synthesize Findings</h3>
+                    <p class="text-lg text-gray-600">This is the most critical step. Compare your interview notes with the AI analysis. Look for:</p>
+                     <ul class="text-lg text-gray-600 list-disc pl-5 space-y-2 mt-4">
+                        <li><b>Patterns:</b> Themes that appear in both datasets.</li>
+                        <li><b>Contradictions:</b> Where do interviews and online discussions differ? Why?</li>
+                        <li><b>Unified Insights:</b> Formulate 3-5 core insights that capture the essence of your combined findings.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 7: Task 4 -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4">
+                     <h3 class="text-3xl font-bold text-gray-800 mb-2">Task 4: Create a Customer Journey Map</h3>
+                    <p class="text-lg text-gray-600">A customer journey map is a visual story of a person's experience. Your map should include:</p>
+                    <ul class="text-lg text-gray-600 list-disc pl-5 space-y-2 mt-4">
+                        <li><b>Stages:</b> Key phases of the experience (e.g., Awareness, Consideration, Action).</li>
+                        <li><b>Actions & Thoughts:</b> What is the user doing and thinking at each stage?</li>
+                        <li><b>Data Overlay:</b> Annotate the map with key quotes from interviews and themes from your AI analysis to support your insights.</li>
+                    </ul>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                    <svg viewBox="0 0 100 100" class="w-full h-auto max-w-md diagram-bg bg-white p-4 rounded-lg shadow-lg">
+                        <path d="M10 50 C 30 20, 70 20, 90 50" stroke="#06b6d4" fill="none" stroke-width="3" />
+                        <circle cx="10" cy="50" r="4" fill="white" stroke="#06b6d4" stroke-width="2"/>
+                        <circle cx="30" cy="30" r="4" fill="white" stroke="#06b6d4" stroke-width="2"/>
+                        <circle cx="50" cy="27" r="4" fill="white" stroke="#06b6d4" stroke-width="2"/>
+                        <circle cx="70" cy="35" r="4" fill="white" stroke="#06b6d4" stroke-width="2"/>
+                        <circle cx="90" cy="50" r="4" fill="white" stroke="#06b6d4" stroke-width="2"/>
+                        <text x="10" y="65" font-size="7" text-anchor="middle">Stage 1</text>
+                        <text x="50" y="15" font-size="7" text-anchor="middle">Stage 2</text>
+                        <text x="90" y="65" font-size="7" text-anchor="middle">Stage 3</text>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Slide 8: Deliverable -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-cyan-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Final Deliverable</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Submit a single document containing:</p>
+                 <ul class="text-lg opacity-80 max-w-md mx-auto list-disc text-left mt-4">
+                    <li>A brief summary of your interview and AI analysis process.</li>
+                    <li>Your 3-5 unified insights.</li>
+                    <li>Your visual Customer Journey Map with the data overlay.</li>
+                 </ul>
+            </div>
+
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-cyan-600 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+
+

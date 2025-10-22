@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Ethics Review Boards Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark blue-gray background */
+            color: #e2e8f0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .slide-content {
+            background-color: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 85, 104, 0.5);
+            border-radius: 1rem;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #9f7aea; /* Purple for ethics/governance */
+        }
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #d6bcfa; /* Lighter Purple */
+        }
+        p, li {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            color: #cbd5e0;
+        }
+        .diagram {
+            background-color: #2d3748;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #4a5568;
+        }
+        .diagram-arrow {
+            font-size: 2.5rem;
+            color: #9f7aea;
+            margin: 0 1rem;
+        }
+        .diagram-box {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #9f7aea;
+            width: 0%;
+            transition: width 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold leading-tight">A Guide to Human Ethics <br>Review Boards (IRB/ERB)</h1>
+            <p class="mt-6 text-2xl text-purple-200">Understanding the Guardians of Research Integrity and Participant Welfare.</p>
+             <p class="mt-12 text-lg text-gray-400">Use your arrow keys to navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Agenda -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="text-center">Agenda</h2>
+            <ul class="list-disc list-inside mt-8 space-y-4 text-xl">
+                <li>What is a Human Ethics Review Board?</li>
+                <li>Why Are They Essential? A Brief History</li>
+                <li>The Three Core Principles of Research Ethics</li>
+                <li>The ERB Review Process from Start to Finish</li>
+                <li>Key Responsibilities for Researchers</li>
+                <li>Levels of Review: Exempt, Expedited, and Full Board</li>
+                <li>Example Case: A Social Media Research Study</li>
+                <li>Key Takeaways & Best Practices</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: What is a Human Ethics Review Board? -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>What is a Human Ethics Review Board?</h2>
+            <p>A Human Ethics Review Board—often called an <strong class="text-purple-300">Institutional Review Board (IRB)</strong> in the US or <strong class="text-purple-300">Research Ethics Board (REB)</strong> in Canada—is a committee formally designated to approve, monitor, and review biomedical and behavioral research involving humans.</p>
+            <div class="diagram mt-8">
+                <div class="diagram-box text-lg">Research Idea Involving People</div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg !bg-purple-900/80">Ethics Review Board</div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg">Ethically Sound & Safe Research</div>
+            </div>
+            <p class="mt-6">Its primary mandate is to <strong class="text-purple-300">protect the rights and welfare</strong> of human research subjects, ensuring that research is conducted ethically and responsibly.</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: Why Are They Essential? -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Why Are They Essential?</h2>
+            <p>ERBs were established in response to past research abuses where participants were harmed. They serve several critical functions in the research ecosystem.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="diagram-box !bg-gray-700">
+                    <h3 class="font-bold text-xl text-purple-300">Protect Participants</h3>
+                    <p class="mt-2 text-base">Safeguards individuals from physical or psychological harm, upholding their dignity and autonomy.</p>
+                </div>
+                <div class="diagram-box !bg-gray-700">
+                    <h3 class="font-bold text-xl text-purple-300">Ensure Compliance</h3>
+                    <p class="mt-2 text-base">Guarantees that research adheres to federal regulations, state laws, and institutional policies.</p>
+                </div>
+                <div class="diagram-box !bg-gray-700">
+                    <h3 class="font-bold text-xl text-purple-300">Build Public Trust</h3>
+                    <p class="mt-2 text-base">Maintains public confidence in the integrity of the research enterprise, which is vital for participation and funding.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 5: The Three Core Ethical Principles -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The Three Core Ethical Principles</h2>
+            <p>The work of all ERBs is guided by the principles outlined in the <strong class="text-purple-300">Belmont Report (1979)</strong>, a foundational document in research ethics.</p>
+            <div class="diagram mt-6">
+                <div class="diagram-box !bg-blue-800/60 p-6 w-1/3">
+                    <h3 class="font-bold text-xl">1. Respect for Persons</h3>
+                    <p class="text-sm mt-2">Treat individuals as autonomous agents. Protect those with diminished autonomy. This is the basis for <strong class="text-white">Informed Consent</strong>.</p>
+                </div>
+                <div class="diagram-box !bg-green-800/60 p-6 w-1/3">
+                    <h3 class="font-bold text-xl">2. Beneficence</h3>
+                    <p class="text-sm mt-2">"Do no harm." Maximize possible benefits and minimize possible harms. This is the basis for the <strong class="text-white">Risk/Benefit Assessment</strong>.</p>
+                </div>
+                <div class="diagram-box !bg-yellow-800/60 p-6 w-1/3">
+                    <h3 class="font-bold text-xl">3. Justice</h3>
+                    <p class="text-sm mt-2">Ensure a fair distribution of the costs and benefits of research. Avoid exploiting vulnerable populations. This is the basis for <strong class="text-white">Fair Subject Selection</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 6: The ERB Review Process -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The ERB Review Process</h2>
+            <p>Researchers must submit their study protocols for review and approval <strong class="text-purple-300">before</strong> any interaction with human subjects begins.</p>
+            <div class="diagram mt-6 text-sm">
+                <div class="diagram-box">Submission</div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box">Pre-Review<br/><span class="text-xs font-light">(Is it complete?)</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box">Level Assigned<br/><span class="text-xs font-light">(Exempt, etc.)</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box">Review Conducted</div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box !bg-purple-900/80">Decision<br/><span class="text-xs font-light">(Approved, Modify, Disapproved)</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box">Research Begins<br/><span class="text-xs font-light">(If approved)</span></div>
+            </div>
+            <p class="mt-6 text-center">After approval, the ERB is responsible for ongoing monitoring of the research.</p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Key Responsibilities for Researchers -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Key Responsibilities for Researchers</h2>
+            <p>A successful and ethical study begins with a thorough and thoughtful submission to the ERB.</p>
+            <h3 class="text-xl font-bold text-purple-300 mt-6">Researchers must clearly articulate:</h3>
+            <ul class="list-disc list-inside mt-4 space-y-3">
+                <li><strong>Research Protocol:</strong> What are the research questions? What procedures will be used?</li>
+                <li><strong>Risk Assessment:</strong> What are the potential risks (physical, psychological, social) and how will they be minimized?</li>
+                <li><strong>Informed Consent Process:</strong> How will participants be informed about the study? The consent form must be clear, voluntary, and comprehensive.</li>
+                <li><strong>Data Protection:</strong> How will participant privacy and data confidentiality be maintained and secured?</li>
+                <li><strong>Subject Selection:</strong> Who will be recruited and is the selection equitable? Are there protections for vulnerable groups (e.g., children, prisoners)?</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 8: Levels of ERB Review -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Levels of ERB Review</h2>
+            <p>Not all research requires the same level of scrutiny. Studies are categorized based on their level of risk to participants.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="diagram-box !bg-green-800/60">
+                    <h3 class="font-bold text-xl">Exempt</h3>
+                    <p class="mt-2 text-base">Poses no more than minimal risk. Examples: anonymous surveys, analysis of existing anonymous data, observing public behavior.</p>
+                </div>
+                <div class="diagram-box !bg-yellow-800/60">
+                    <h3 class="font-bold text-xl">Expedited</h3>
+                    <p class="mt-2 text-base">Poses no more than minimal risk but involves activities that fall into specific regulated categories. Reviewed by one or two ERB members. Example: collection of blood samples by finger stick.</p>
+                </div>
+                <div class="diagram-box !bg-red-800/60">
+                    <h3 class="font-bold text-xl">Full Board</h3>
+                    <p class="mt-2 text-base">Poses more than minimal risk or involves vulnerable populations. Requires review by the entire convened ERB committee at a meeting.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Example Case: A Social Media Study -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Example Case: A Social Media Research Study</h2>
+            <p>Let's consider the ethics of a study analyzing public social media posts.</p>
+            <div class="p-6 rounded-lg bg-gray-700/50 mt-6">
+                <p><strong>The Proposal:</strong> A researcher wants to analyze 1 million public Twitter posts that mention a specific antidepressant to study self-reported side effects.</p>
+                <h3 class="text-xl font-bold text-purple-300 mt-4">Key Ethical Questions for the ERB:</h3>
+                <ul class="list-disc list-inside mt-2 space-y-2">
+                    <li><strong>Is "public" data truly public?</strong> Users may not reasonably expect their posts to be used in formal research.</li>
+                    <li><strong>What is the risk of re-identification?</strong> Could quoting a "anonymized" post lead back to the original user's profile?</li>
+                    <li><strong>Is there a risk of harm?</strong> The topic is sensitive. Could the study's findings stigmatize a group of individuals?</li>
+                </ul>
+                <p class="mt-4"><strong>Likely ERB Decision:</strong> May qualify for <strong class="text-purple-300">Expedited Review</strong>. The board would likely require the researcher to implement strict data security measures, aggregate all findings so no individual can be identified, and refrain from quoting any posts directly in publications.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Key Takeaways -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Key Takeaways</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-purple-400">&rarr;</div>
+                    <p><strong>Protection Over Progress.</strong> The primary goal of an ERB is to protect human participants; this objective always comes before the goals of the research itself.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-purple-400">&rarr;</div>
+                    <p><strong>ERBs are Partners, Not Obstacles.</strong> They are a crucial resource for helping researchers design better, safer, and more ethical studies.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-purple-400">&rarr;</div>
+                    <p><strong>Ethics is the Foundation of Good Science.</strong> Research that is not conducted ethically lacks scientific and social validity.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-purple-400">&rarr;</div>
+                    <p><strong>The Process Starts Before the Research.</strong> Engaging with the ERB is one of the first steps in the research process, not the last.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 11: Resources & Q&A -->
+    <div class="slide">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold">Thank You</h1>
+            <h2 class="mt-6 text-4xl">Questions?</h2>
+            
+            <div class="mt-12 text-left max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold text-purple-300">Resources</h3>
+                <ul class="list-disc list-inside mt-4 space-y-3 text-lg">
+                    <li><strong>The Belmont Report:</strong> <a href="https://www.hhs.gov/ohrp/regulations-and-policy/belmont-report/index.html" target="_blank" class="text-purple-400 hover:underline">U.S. Dept. of Health & Human Services (HHS)</a></li>
+                    <li><strong>Office for Human Research Protections (OHRP):</strong> <a href="https://www.hhs.gov/ohrp/" target="_blank" class="text-purple-400 hover:underline">hhs.gov/ohrp</a></li>
+                    <li><strong>"The Common Rule" (45 CFR 46):</strong> <a href="https://www.hhs.gov/ohrp/regulations-and-policy/regulations/45-cfr-46/index.html" target="_blank" class="text-purple-400 hover:underline">The primary U.S. federal policy for protecting human subjects.</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span id="slide-number-current">1</span>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <span id="slide-number-total"></span>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideEl = document.getElementById('slide-number-current');
+        const totalSlideEl = document.getElementById('slide-number-total');
+        const progressFill = document.getElementById('progress-fill');
+        let currentSlide = 0;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            currentSlideEl.textContent = currentSlide + 1;
+            totalSlideEl.textContent = totalSlides;
+            progressFill.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>

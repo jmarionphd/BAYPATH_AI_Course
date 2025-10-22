@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated AI Compliance Systems Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark blue-gray background */
+            color: #e2e8f0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .slide-content {
+            background-color: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 85, 104, 0.5);
+            border-radius: 1rem;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #10b981; /* Emerald Green for compliance/tech */
+        }
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #6ee7b7; /* Lighter Emerald */
+        }
+        p, li {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            color: #cbd5e0;
+        }
+        .diagram {
+            background-color: #2d3748;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #4a5568;
+        }
+        .diagram-arrow {
+            font-size: 2.5rem;
+            color: #10b981;
+            margin: 0 1rem;
+        }
+        .diagram-box {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #10b981;
+            width: 0%;
+            transition: width 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold leading-tight">Integrated Compliance Systems for AI</h1>
+            <p class="mt-6 text-2xl text-emerald-200">Building Trust and Managing Risk in the Age of Artificial Intelligence.</p>
+             <p class="mt-12 text-lg text-gray-400">Use your arrow keys to navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Agenda -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="text-center">Agenda</h2>
+            <ul class="list-disc list-inside mt-8 space-y-4 text-xl">
+                <li>The New Challenge: Why AI Compliance is Different</li>
+                <li>What is an Integrated AI Compliance System?</li>
+                <li>The Five Pillars of AI Compliance</li>
+                <li>Pillar 1: Governance & Policy Frameworks</li>
+                <li>Pillar 2: Technical Tooling & MLOps Integration</li>
+                <li>Pillar 3: Continuous Monitoring & Auditing</li>
+                <li>Putting It All Together: A Practical Example</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: The New AI Compliance Challenge -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The New Challenge: Why AI Compliance is Different</h2>
+            <p>Traditional software compliance focuses on predictable, rule-based systems. AI models are different: they learn, evolve, and can operate in ways their creators didn't explicitly program.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="diagram-box !bg-gray-700">
+                    <h3 class="font-bold text-xl text-emerald-300">Opacity ("Black Box")</h3>
+                    <p class="mt-2 text-base">The complex, internal logic of many models makes it difficult to explain specific decisions, challenging transparency requirements.</p>
+                </div>
+                <div class="diagram-box !bg-gray-700">
+                    <h3 class="font-bold text-xl text-emerald-300">Data Dependency & Bias</h3>
+                    <p class="mt-2 text-base">AI models inherit biases from their training data, which can lead to discriminatory or unfair outcomes that violate regulations.</p>
+                </div>
+                <div class="diagram-box !bg-gray-700">
+                    <h3 class="font-bold text-xl text-emerald-300">Model Drift & Scale</h3>
+                    <p class="mt-2 text-base">Models can degrade in performance over time as real-world data changes (drift). Compliance must be continuous, not a one-time check.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: What is an Integrated AI Compliance System? -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>What is an Integrated AI Compliance System?</h2>
+            <p>It's a holistic framework that embeds compliance, risk management, and ethical considerations directly into the entire AI lifecycle. It's not a single product, but a fusion of <strong class="text-emerald-300">People, Processes, and Technology</strong>.</p>
+            <div class="diagram mt-8">
+                <div class="diagram-box text-lg">People<br><span class="text-sm text-gray-400">(Legal, Ethics, Data Science)</span></div>
+                <div class="diagram-arrow text-4xl">+</div>
+                <div class="diagram-box text-lg">Process<br><span class="text-sm text-gray-400">(MLOps, Governance)</span></div>
+                <div class="diagram-arrow text-4xl">+</div>
+                <div class="diagram-box text-lg">Technology<br><span class="text-sm text-gray-400">(RAI Dashboards, Monitoring)</span></div>
+            </div>
+            <p class="mt-6">The goal is to make compliance a proactive, automated, and auditable part of AI development and deployment, rather than a reactive, manual checklist.</p>
+        </div>
+    </div>
+
+    <!-- Slide 5: The Five Pillars of AI Compliance -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The Five Pillars of AI Compliance</h2>
+            <p>A robust, integrated system is built on five interconnected pillars that span the entire AI lifecycle.</p>
+            <div class="diagram mt-6 !grid grid-cols-5 gap-4">
+                <div class="diagram-box !bg-blue-800/60 p-4">
+                    <h3 class="font-bold">1. Governance & Policy</h3>
+                </div>
+                <div class="diagram-box !bg-yellow-800/60 p-4">
+                    <h3 class="font-bold">2. Risk Management</h3>
+                </div>
+                <div class="diagram-box !bg-green-800/60 p-4">
+                    <h3 class="font-bold">3. Technical Tooling</h3>
+                </div>
+                <div class="diagram-box !bg-purple-800/60 p-4">
+                    <h3 class="font-bold">4. Monitoring & Audit</h3>
+                </div>
+                <div class="diagram-box !bg-red-800/60 p-4">
+                    <h3 class="font-bold">5. Documentation</h3>
+                </div>
+            </div>
+             <p class="mt-6 text-center">These pillars ensure that from ideation to retirement, an AI system is developed and operated responsibly.</p>
+        </div>
+    </div>
+    
+    <!-- Slide 6: Pillar 1: Governance & Policy -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Pillar 1: Governance & Policy Frameworks</h2>
+            <p>This is the foundation. It involves establishing the rules, roles, and responsibilities for AI within the organization.</p>
+            <h3 class="text-xl font-bold text-emerald-300 mt-6">Key Activities:</h3>
+            <ul class="list-disc list-inside mt-4 space-y-3">
+                <li><strong>Establish an AI Ethics Board:</strong> A cross-functional team (legal, tech, business, ethics) to review high-risk projects.</li>
+                <li><strong>Define AI Principles:</strong> Create clear, public statements on the organization's commitment to fairness, transparency, and accountability.</li>
+                <li><strong>Develop Use Case Policies:</strong> Define which applications of AI are acceptable and which are prohibited.</li>
+                <li><strong>Assign Accountability:</strong> Clearly designate who is responsible for the model's behavior, data, and compliance adherence.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 7: Pillar 2: Technical Tooling & MLOps -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Pillar 2: Technical Tooling & MLOps Integration</h2>
+            <p>This is where compliance becomes operational. Checks and balances are automated and embedded directly into the machine learning development lifecycle (MLOps).</p>
+            <p class="text-center font-bold mt-4">"Shifting Compliance Left"</p>
+            <div class="diagram mt-2 text-xs !p-4">
+                <div class="diagram-box">Data Ingestion<br/><span class="font-light text-emerald-300">Datasheets for Datasets</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box">Model Training<br/><span class="font-light text-emerald-300">Bias & Fairness Checks</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box">Validation<br/><span class="font-light text-emerald-300">Explainability Reports</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box">Deployment Gate<br/><span class="font-light text-emerald-300">Compliance Review</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box">In Production<br/><span class="font-light text-emerald-300">Live Monitoring</span></div>
+            </div>
+            <p class="mt-4">Tools like the <strong class="text-emerald-300">Microsoft RAI Dashboard</strong> or <strong class="text-emerald-300">IBM AI Fairness 360</strong> are integrated at these stages to automatically generate insights for review.</p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Pillar 3: Continuous Monitoring & Auditing -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Pillar 3: Continuous Monitoring & Auditing</h2>
+            <p>Compliance doesn't end at deployment. An integrated system continuously monitors models in production to ensure they remain safe, effective, and fair.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-2xl font-bold text-emerald-300">What to Monitor?</h3>
+                    <ul class="list-disc list-inside mt-2">
+                        <li><strong>Model Drift:</strong> Is the model's performance degrading?</li>
+                        <li><strong>Data Drift:</strong> Has the input data changed significantly from the training data?</li>
+                        <li><strong>Fairness Metrics:</strong> Are performance disparities emerging across different demographic groups?</li>
+                        <li><strong>Anomalies:</strong> Are there unexpected prediction patterns?</li>
+                    </ul>
+                </div>
+                <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-2xl font-bold text-emerald-300">The Role of Auditing</h3>
+                    <p class="mt-2">Regular internal and third-party audits are essential to validate that the compliance system is working as intended. They review documentation, test models, and verify that processes are being followed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Putting It All Together: Loan Application AI -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Example: A Bank's AI Loan Application System</h2>
+            <p>Let's see how an integrated system works for a high-risk AI model.</p>
+            <div class="p-6 rounded-lg bg-gray-700/50 mt-6">
+                <ol class="list-decimal list-inside space-y-3">
+                    <li><strong>Governance:</strong> The AI Ethics Board reviews the project. A policy is set: the AI can't be the sole decision-maker for rejections; a human must review.</li>
+                    <li><strong>MLOps Integration:</strong> During development, the model is automatically checked for biases related to race and gender using a fairness toolkit. An explainability report is generated for every validation run.</li>
+                    <li><strong>Documentation:</strong> A "Model Card" is automatically generated, detailing the model's intended use, performance metrics, and fairness evaluation results.</li>
+                    <li><strong>Monitoring:</strong> Post-deployment, the system is monitored for drift. An alert is triggered if the approval rate for a protected group drops below a predefined threshold.</li>
+                    <li><strong>Audit:</strong> Quarterly, an internal audit team reviews the system's logs, model cards, and monitoring alerts to ensure compliance with fair lending laws.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Key Takeaways -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Key Takeaways</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-emerald-400">&rarr;</div>
+                    <p><strong>Compliance must be Integrated, not Bolted-On.</strong> Effective AI compliance is built into the lifecycle from the start, not checked at the end.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-emerald-400">&rarr;</div>
+                    <p><strong>It's a Team Sport.</strong> AI compliance requires deep collaboration between technical, legal, and business teams.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-emerald-400">&rarr;</div>
+                    <p><strong>Automation is Key.</strong> Integrating technical tools into MLOps pipelines makes compliance scalable, repeatable, and auditable.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-emerald-400">&rarr;</div>
+                    <p><strong>Good Compliance is Good Business.</strong> An integrated system doesn't just reduce risk; it builds stakeholder trust and leads to better, more robust AI products.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 11: Resources & Q&A -->
+    <div class="slide">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold">Thank You</h1>
+            <h2 class="mt-6 text-4xl">Questions?</h2>
+            
+            <div class="mt-12 text-left max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold text-emerald-300">Further Reading & Frameworks</h3>
+                <ul class="list-disc list-inside mt-4 space-y-3 text-lg">
+                    <li><strong>NIST AI Risk Management Framework (AI RMF 1.0):</strong> A voluntary framework for managing risks from AI systems.</li>
+                    <li><strong>The EU AI Act:</strong> Landmark legislation creating a risk-based approach to AI regulation.</li>
+                    <li><strong>Model Cards for Model Reporting (Google):</strong> A framework for transparent model documentation.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span id="slide-number-current">1</span>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <span id="slide-number-total"></span>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideEl = document.getElementById('slide-number-current');
+        const totalSlideEl = document.getElementById('slide-number-total');
+        const progressFill = document.getElementById('progress-fill');
+        let currentSlide = 0;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            currentSlideEl.textContent = currentSlide + 1;
+            totalSlideEl.textContent = totalSlides;
+            progressFill.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>

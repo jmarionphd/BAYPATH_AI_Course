@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Scenario: The Transformation Accelerates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            overscroll-behavior: none;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+        .slide-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 3rem 4rem;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .day-badge {
+            background-color: #1d4ed8; /* New color for this module */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #1e3a8a;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1rem;
+            color: #64748b;
+        }
+        .arrow-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+        .arrow-nav button {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .arrow-nav button:hover {
+            background-color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        ul li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1d4ed8;
+            font-weight: bold;
+        }
+        .character-interaction {
+            background-color: #eef2ff;
+            border-left: 4px solid #4f46e5;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: #312e81;
+        }
+    </style>
+</head>
+<body>
+    <!-- Company Logo -->
+    <div class="logo">TransformCo</div>
+
+    <!-- Slide 1: Title -->
+    <div id="slide1" class="slide active" style="background-image: url('https://placehold.co/1920x1080/1e3a8a/FFFFFF?text=Acceleration');">
+        <div class="slide-content text-center">
+            <h1 class="text-5xl mb-4 text-gray-800">The Transformation Accelerates</h1>
+            <p class="text-2xl text-gray-600">Module 5 Running Case</p>
+            <p class="mt-8 text-lg">Use Left/Right Arrow Keys to Navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Monday - Marketing's Breakthrough -->
+    <div id="slide2" class="slide" style="background-image: url('https://placehold.co/1920x1080/1e40af/FFFFFF?text=Growth');">
+        <div class="slide-content">
+            <span class="day-badge">MONDAY</span>
+            <h2 class="text-4xl mb-6">Marketing's Breakthrough</h2>
+            <p class="text-xl mb-6">George's team, now fully empowered, launches three major AI initiatives in parallel, moving from theory to tangible market impact.</p>
+            <ul class="text-lg space-y-3">
+                <li><strong>Dynamic Pricing:</strong> An ML model now adjusts prices in real-time, boosting margins.</li>
+                <li><strong>Content Factory:</strong> Generative AI creates over 1,000 unique social posts and product descriptions daily.</li>
+                <li><strong>Customer 360:</strong> A unified view predicts churn risk and the next best action for every customer.</li>
+            </ul>
+            <div class="character-interaction">
+                George excitedly showed the results to Delores. "It's a virtuous cycle! The Customer 360 tells us who to talk to, the Content Factory creates the message, and Dynamic Pricing gives them the right offer. We're seeing an 18% revenue lift in our test markets... in the first week!"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Tuesday - The Supply Chain Revolution -->
+    <div id="slide3" class="slide" style="background-image: url('https://placehold.co/1920x1080/1d4ed8/FFFFFF?text=Efficiency');">
+        <div class="slide-content">
+            <span class="day-badge">TUESDAY</span>
+            <h2 class="text-4xl mb-6">The Supply Chain Revolution</h2>
+            <p class="text-xl mb-6">Baldemar's "Smart Factory" success spreads to the entire supply chain, turning it from a cost center into a predictive, strategic weapon.</p>
+             <ul class="text-lg space-y-3">
+                <li><strong>Demand Sensing:</strong> AI now processes point-of-sale, weather, and social trend data to predict demand with incredible accuracy.</li>
+                <li><strong>Route Optimization:</strong> AI modeling is on track to save 2.1 million miles of truck travel annually.</li>
+                <li><strong>Crisis Averted:</strong> The system successfully predicted and prevented a critical ingredient shortage by re-routing shipments two weeks in advance.</li>
+             </ul>
+            <div class="character-interaction">
+                 "Last year, that ingredient shortage would have cost us millions and shut down a production line," Baldemar told the leadership team. "This year, the AI flagged a supplier risk, suggested three alternatives, and we solved the problem before it was even a problem."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Wednesday - R&D's "Aha" Moment -->
+    <div id="slide4" class="slide" style="background-image: url('https://placehold.co/1920x1080/2563eb/FFFFFF?text=Innovation');">
+        <div class="slide-content">
+            <span class="day-badge">WEDNESDAY</span>
+            <h2 class="text-4xl mb-6">R&D's "Aha" Moment</h2>
+            <p class="text-xl mb-6">In Lab2025, Patricia's team achieves a stunning breakthrough, using AI to reinvent the R&D process itself.</p>
+            <ul class="text-lg space-y-3">
+                <li>AI analyzes 50,000 customer reviews to identify a subtle, unmet need for a gentler formula.</li>
+                <li>Generative AI creates 200 viable formula variations in two days—a task that normally takes two months.</li>
+                <li>AI simulations predict a 73% customer preference for the new formula before a single physical sample is made.</li>
+            </ul>
+             <div class="character-interaction">
+                Patricia held up a vial in a meeting. "This is our new AI-Optimized Enzyme Complex. But the real invention isn't what's in this bottle. It's that we went from insight to patent filing in under a month. We've changed the speed of science at this company."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Thursday - Finance Joins the Revolution -->
+    <div id="slide5" class="slide" style="background-image: url('https://placehold.co/1920x1080/3b82f6/FFFFFF?text=Value');">
+        <div class="slide-content">
+            <span class="day-badge">THURSDAY</span>
+            <h2 class="text-4xl mb-6">Finance Joins the Revolution</h2>
+            <p class="text-xl mb-6">John, the once-skeptical CFO, becomes AI's biggest financial advocate after seeing its power to protect and grow the bottom line.</p>
+             <ul class="text-lg space-y-3">
+                <li>AI-powered fraud detection is now saving thousands per day.</li>
+                <li>Automation of invoice processing has freed up 60% of the accounts payable team for higher-value work.</li>
+                <li>In its first pass, an AI audit tool uncovered <strong>$3.2 million in duplicate payments</strong> from the last two years.</li>
+             </ul>
+            <div class="character-interaction">
+                 "I was wrong," John admitted openly to the board. "I saw AI as a cost. It's not. It's a revenue driver, a risk mitigator, and an efficiency engine. That $3.2 million it found? That alone pays for half of our investment this year. I'm all in."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Friday - The Customer Experience Transformation -->
+    <div id="slide6" class="slide" style="background-image: url('https://placehold.co/1920x1080/60a5fa/FFFFFF?text=Satisfaction');">
+        <div class="slide-content">
+            <span class="day-badge">FRIDAY</span>
+            <h2 class="text-4xl mb-6">The Customer Experience Transformation</h2>
+            <p class="text-xl mb-6">The week culminates in seeing how the individual initiatives combine to create a seamless, intelligent, and proactive customer journey.</p>
+             <ul class="text-lg space-y-2 mt-2">
+                <li>A new chatbot handles 70% of all inquiries with an 85% satisfaction rating.</li>
+                <li>Personalized product recommendations are increasing average customer basket size by 23%.</li>
+                <li>Predictive service now identifies product issues and contacts customers before they even think to complain.</li>
+                <li>The result: <strong>Customer satisfaction scores hit a five-year high.</strong></li>
+             </ul>
+             <div class="character-interaction">
+                "Look at this," CEO Virginia said, pointing to the rising CSAT score. "This is the ultimate metric. Marketing, Supply Chain, R&D, Finance... it's all flowing to this. We're not just implementing AI; we're becoming an AI-native company."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Conclusion -->
+    <div id="slide7" class="slide" style="background-image: url('https://placehold.co/1920x1080/1e3a8a/FFFFFF?text=Momentum');">
+        <div class="slide-content text-center">
+            <h2 class="text-5xl mb-4">The Flywheel Effect</h2>
+            <p class="text-2xl text-gray-600">With silos broken and successes shared, TransformCo's AI transformation has hit an inflection point. The momentum is now self-sustaining, as each department's progress fuels new possibilities for the others, accelerating value creation across the entire enterprise.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="slide-number" class="slide-number">1 / 7</div>
+    <div class="arrow-nav">
+        <button id="prevBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="nextBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberElement = document.getElementById('slide-number');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach((slide, index) => {
+                if (index === n) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            slideNumberElement.textContent = `${n + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Initialize first slide
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

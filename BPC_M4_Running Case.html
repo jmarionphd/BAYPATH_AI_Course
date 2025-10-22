@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Scenario: The Strategic Pivot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            overscroll-behavior: none;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+        .slide-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 3rem 4rem;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .day-badge {
+            background-color: #c2410c; /* New color for this module */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #9a3412;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1rem;
+            color: #64748b;
+        }
+        .arrow-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+        .arrow-nav button {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .arrow-nav button:hover {
+            background-color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        ul li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        ul li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: #c2410c;
+            font-weight: bold;
+            font-size: 1.5rem;
+            top: -0.25rem;
+        }
+        .character-interaction {
+            background-color: #fff7ed;
+            border-left: 4px solid #fb923c;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: #9a3412;
+        }
+    </style>
+</head>
+<body>
+    <!-- Company Logo -->
+    <div class="logo">TransformCo</div>
+
+    <!-- Slide 1: Title -->
+    <div id="slide1" class="slide active" style="background-image: url('https://placehold.co/1920x1080/9a3412/FFFFFF?text=Strategy');">
+        <div class="slide-content text-center">
+            <h1 class="text-5xl mb-4 text-gray-800">The Strategic Pivot</h1>
+            <p class="text-2xl text-gray-600">Module 4 Running Case</p>
+            <p class="mt-8 text-lg">Use Left/Right Arrow Keys to Navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Monday - The Board Preview -->
+    <div id="slide2" class="slide" style="background-image: url('https://placehold.co/1920x1080/c2410c/FFFFFF?text=Feedback');">
+        <div class="slide-content">
+            <span class="day-badge">MONDAY</span>
+            <h2 class="text-4xl mb-6">The Board Preview</h2>
+            <p class="text-xl mb-6">Delores presents her draft AI strategy to CEO Virginia. The feedback is blunt and highlights a critical flaw: the strategy is a list of projects, not a coherent vision.</p>
+            <ul class="text-lg space-y-3">
+                <li>"This is a laundry list. There are too many initiatives with no clear prioritization."</li>
+                <li>"Where is the single, game-changing idea? The breakthrough innovation?"</li>
+                <li>"How does any of this build a competitive moat that our rivals can't cross in six months?"</li>
+            </ul>
+            <div class="character-interaction">
+                Virginia softened her tone. "Delores, you've identified all the right ingredients. Now you need to write the recipe. We need a story that explains not just what we're doing, but why it matters and how it all connects to win the market."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Tuesday - Strategic Framework Session -->
+    <div id="slide3" class="slide" style="background-image: url('https://placehold.co/1920x1080/ea580c/FFFFFF?text=Framework');">
+        <div class="slide-content">
+            <span class="day-badge">TUESDAY</span>
+            <h2 class="text-4xl mb-6">Strategic Framework Session</h2>
+            <p class="text-xl mb-6">Taking the feedback to heart, Delores facilitates a leadership workshop using a clear strategic framework to categorize and prioritize every initiative.</p>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-800">DEPLOY (Efficiency)</h3>
+                    <p class="text-sm">6-Month Horizon</p>
+                    <p class="mt-2 text-left text-sm">Predictive Maintenance<br>Customer Service Automation<br>Demand Forecasting</p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-green-800">RESHAPE (Enhancement)</h3>
+                    <p class="text-sm">12-Month Horizon</p>
+                    <p class="mt-2 text-left text-sm">AI-Powered R&D<br>Personalized Marketing<br>Smart Supply Chain</p>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-purple-800">INVENT (Transformation)</h3>
+                    <p class="text-sm">18+ Month Horizon</p>
+                    <p class="mt-2 text-left text-sm">AI Formulation App<br>Smart Dispenser Service<br>B2B Retailer Platform</p>
+                </div>
+            </div>
+            <div class="character-interaction">
+                "Now we can see the whole picture," Marcus said, looking at the board. "We're funding the present, improving the near-future, and inventing the long-term, all at once."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Wednesday - The Competitor Bombshell -->
+    <div id="slide4" class="slide" style="background-image: url('https://placehold.co/1920x1080/f97316/FFFFFF?text=Urgency');">
+        <div class="slide-content">
+            <span class="day-badge">WEDNESDAY</span>
+            <h2 class="text-4xl mb-6">The Competitor Bombshell</h2>
+            <p class="text-xl mb-6">The market forces their hand. A major competitor acquires an AI startup for $200M, announcing an "AI Cleaning Concierge." TransformCo's stock immediately drops 8%.</p>
+            <p class="text-lg font-bold mt-4">In an emergency strategy session, the debate is heated:</p>
+            <ul class="text-lg space-y-2 mt-2">
+                <li><strong>John (Sales):</strong> "We're getting calls from investors and customers. We need to respond TODAY! Announce our own AI assistant!"</li>
+                <li><strong>Patricia (R&D):</strong> "A knee-jerk reaction is suicide. We can't just copy them; we'll be playing catch-up forever."</li>
+                <li><strong>Delores (Strategy):</strong> "They've shown their hand. Let's not match them, let's leapfrog them. They're focused on consumers. We can win by enabling retailers with a B2B2C platform they can't replicate."</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 5: Thursday - The Innovation Lab -->
+    <div id="slide5" class="slide" style="background-image: url('https://placehold.co/1920x1080/fb923c/FFFFFF?text=Experiment');">
+        <div class="slide-content">
+            <span class="day-badge">THURSDAY</span>
+            <h2 class="text-4xl mb-6">Launching "Lab2025"</h2>
+            <p class="text-xl mb-6">To accelerate breakthrough ideas, Delores gets approval to establish Lab2025, a dedicated space for rapid AI experimentation, insulated from corporate bureaucracy.</p>
+             <ul class="text-lg space-y-3">
+                <li><strong>Protected Teams:</strong> Cross-functional teams are freed from their daily duties to focus solely on innovation.</li>
+                <li><strong>Direct Access:</strong> Provides sandboxed access to the new data platform, AI tools, and resources.</li>
+                <li><strong>Rapid Validation:</strong> Mandate to run 90-day sprints to validate or kill new concepts quickly and cheaply.</li>
+                <li><strong>First Project:</strong> The lab's first mission is to develop a prototype for an AI sustainability advisor for B2B customers.</li>
+             </ul>
+            <div class="character-interaction">
+                 "This is our early warning system," Delores explained to the leadership team. "It's where we'll place our riskier bets and find the next big thing before it finds us."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Friday - The Alliance Expands -->
+    <div id="slide6" class="slide" style="background-image: url('https://placehold.co/1920x1080/fdba74/FFFFFF?text=Synergy');">
+        <div class="slide-content">
+            <span class="day-badge">FRIDAY</span>
+            <h2 class="text-4xl mb-6">The Alliance Expands</h2>
+            <p class="text-xl mb-6">In an unexpected development, the new strategic clarity inspires collaboration. Baldemar (Operations) and Patricia (R&D) jointly propose a major initiative.</p>
+            <h3 class="text-2xl mt-4">The "Smart Factory Initiative":</h3>
+             <ul class="text-lg space-y-2 mt-2">
+                <li><strong>Computer Vision</strong> for 100% automated quality control on production lines.</li>
+                <li><strong>AI-Optimized Scheduling</strong> to reduce downtime and increase throughput.</li>
+                <li><strong>Predictive Maintenance</strong> rolled out across all global manufacturing plants.</li>
+                <li><strong>Estimated Value:</strong> A staggering $25M in annual savings and efficiencies by year two.</li>
+             </ul>
+             <div class="character-interaction">
+                "Patricia's team has the algorithms, and my team has the machines," Baldemar stated in the meeting. "For years we've worked in separate buildings. It's time we worked on the same bottom line. This initiative connects the lab to the factory floor."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Conclusion -->
+    <div id="slide7" class="slide" style="background-image: url('https://placehold.co/1920x1080/9a3412/FFFFFF?text=Clarity');">
+        <div class="slide-content text-center">
+            <h2 class="text-5xl mb-4">From Reaction to Revolution</h2>
+            <p class="text-2xl text-gray-600">Forced by internal pressure and external threats, TransformCo pivoted from a scattered collection of projects to a focused, prioritized portfolio—balancing short-term gains with long-term, game-changing innovation.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="slide-number" class="slide-number">1 / 7</div>
+    <div class="arrow-nav">
+        <button id="prevBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="nextBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberElement = document.getElementById('slide-number');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach((slide, index) => {
+                if (index === n) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            slideNumberElement.textContent = `${n + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Initialize first slide
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Scenario: Walking the Ethical Tightrope</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            overscroll-behavior: none;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+        .slide-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 3rem 4rem;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .day-badge {
+            background-color: #5b21b6; /* New color for this module */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #4c1d95;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1rem;
+            color: #64748b;
+        }
+        .arrow-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+        .arrow-nav button {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .arrow-nav button:hover {
+            background-color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        ul li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        ul li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: #5b21b6;
+            font-weight: bold;
+            font-size: 1.5rem;
+            top: -0.25rem;
+        }
+        .character-interaction {
+            background-color: #f5f3ff;
+            border-left: 4px solid #7c3aed;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: #5b21b6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Company Logo -->
+    <div class="logo">TransformCo</div>
+
+    <!-- Slide 1: Title -->
+    <div id="slide1" class="slide active" style="background-image: url('https://placehold.co/1920x1080/4c1d95/FFFFFF?text=Ethics');">
+        <div class="slide-content text-center">
+            <h1 class="text-5xl mb-4 text-gray-800">Walking the Ethical Tightrope</h1>
+            <p class="text-2xl text-gray-600">Module 7 Running Case</p>
+            <p class="mt-8 text-lg">Use Left/Right Arrow Keys to Navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Monday - The Ethics Committee Forms -->
+    <div id="slide2" class="slide" style="background-image: url('https://placehold.co/1920x1080/5b21b6/FFFFFF?text=Governance');">
+        <div class="slide-content">
+            <span class="day-badge">MONDAY</span>
+            <h2 class="text-4xl mb-6">The AI Ethics Board Forms</h2>
+            <p class="text-xl mb-6">Moving from reactive to proactive, George, in his legal counsel role, spearheads the creation of a formal AI Ethics Board to govern all deployments.</p>
+            <ul class="text-lg space-y-3">
+                <li>Chaired by an <strong>external, independent ethicist</strong> to ensure impartiality.</li>
+                <li>Includes an <strong>employee representative</strong> and a <strong>customer advocate</strong> to voice concerns from all sides.</li>
+                <li>Mandate: Review and approve any AI system that directly interacts with or makes decisions about customers.</li>
+            </ul>
+            <div class="character-interaction">
+                In their first meeting, George set the tone. "Our job isn't to slow down innovation. It's to build trust. If we get this right, our commitment to ethics becomes a competitive advantage."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Tuesday - The Bias Discovery -->
+    <div id="slide3" class="slide" style="background-image: url('https://placehold.co/1920x1080/6d28d9/FFFFFF?text=Bias');">
+        <div class="slide-content">
+            <span class="day-badge">TUESDAY</span>
+            <h2 class="text-4xl mb-6">The Bias Discovery</h2>
+            <p class="text-xl mb-6">A crisis erupts as a customer's social media post goes viral, accusing a marketing AI of bias. The data proves them right.</p>
+             <ul class="text-lg space-y-3">
+                <li><strong>The Problem:</strong> The algorithm was promoting luxury products disproportionately to higher-income zip codes.</li>
+                <li><strong>The Fallout:</strong> Accusations of digital redlining explode online, threatening the brand's reputation.</li>
+                <li><strong>The Response:</strong> Delores orders an immediate halt, a public apology, and a full audit, while implementing rigorous bias testing for all future models.</li>
+             </ul>
+            <div class="character-interaction">
+                 "This is a nightmare," a marketing manager said. Delores was firm. "It's a lesson. The AI didn't invent this bias, it learned it from the data we fed it. We are responsible for what our algorithms do. We fix the model, we fix the process, and we make it right."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Wednesday - The Privacy Challenge -->
+    <div id="slide4" class="slide" style="background-image: url('https://placehold.co/1920x1080/7c3aed/FFFFFF?text=Privacy');">
+        <div class="slide-content">
+            <span class="day-badge">WEDNESDAY</span>
+            <h2 class="text-4xl mb-6">The Privacy Challenge</h2>
+            <p class="text-xl mb-6">A routine GDPR audit uncovers significant issues in how customer data is being used to train AI models, putting the company at legal risk.</p>
+            <ul class="text-lg space-y-2">
+                <li><strong>The Findings:</strong> Customer data was used for model training without explicit consent, and some models were trained on data that should have been deleted.</li>
+                <li><strong>The Solution:</strong> George and Delores co-design a new privacy-preserving architecture.</li>
+                <li><strong>The Technology:</strong> They implement federated learning, a technique that allows models to be trained on local data without the data ever leaving the user's device.</li>
+            </ul>
+            <div class="character-interaction">
+                 George explained to the board, "The fines for this could be catastrophic. But more importantly, it's about trust. Federated learning is complex, but it lets us have the best of both worlds: smart models and protected customer data."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Thursday - The Security Scare -->
+    <div id="slide5" class="slide" style="background-image: url('https://placehold.co/1920x1080/8b5cf6/FFFFFF?text=Security');">
+        <div class="slide-content">
+            <span class="day-badge">THURSDAY</span>
+            <h2 class="text-4xl mb-6">The Security Scare</h2>
+            <p class="text-xl mb-6">The company's cybersecurity team detects a sophisticated attempt to hack into the AI systems, not to steal data, but to corrupt it.</p>
+             <ul class="text-lg space-y-3">
+                <li><strong>The Threat:</strong> An attacker was attempting to "poison" the training data for the product recommendation engine.</li>
+                <li><strong>The Risk:</strong> If successful, the attack could have caused the AI to recommend harmful or inappropriate products to customers.</li>
+                <li><strong>The Defense:</strong> Delores accelerates the implementation of new MLOps security protocols and establishes a dedicated AI Security Operations Center (SOC).</li>
+             </ul>
+            <div class="character-interaction">
+                 "They weren't trying to break down the door," the security lead told Delores. "They were trying to poison the well. It's a whole new kind of threat." Delores nodded grimly. "Which means we need a whole new kind of defense."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Friday - The Regulatory Navigation -->
+    <div id="slide6" class="slide" style="background-image: url('https://placehold.co/1920x1080/a78bfa/FFFFFF?text=Compliance');">
+        <div class="slide-content">
+            <span class="day-badge">FRIDAY</span>
+            <h2 class="text-4xl mb-6">The Regulatory Navigation</h2>
+            <p class="text-xl mb-6">News breaks of sweeping new AI regulations being proposed in the EU and California, sending competitors scrambling.</p>
+             <ul class="text-lg space-y-2 mt-2">
+                <li><strong>New Rules:</strong> The regulations demand model explainability, mandatory bias audits, and a "right to human review" for AI decisions.</li>
+                <li><strong>The Head Start:</strong> Thanks to the crises of the week, TransformCo has already implemented solutions for most of the new requirements.</li>
+                <li><strong>The Strategy:</strong> The company decides to publicly support the regulations and position itself as an industry leader in responsible, compliant AI.</li>
+             </ul>
+             <div class="character-interaction">
+                Virginia smiled in the strategy meeting. "While our competitors are panicked about these new laws, we're already living them. This isn't a burden for us. It's a validation of our entire strategy. Let's get ahead of this."
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Conclusion -->
+    <div id="slide7" class="slide" style="background-image: url('https://placehold.co/1920x1080/4c1d95/FFFFFF?text=Trust');">
+        <div class="slide-content text-center">
+            <h2 class="text-5xl mb-4">Building the Guardrails</h2>
+            <p class="text-2xl text-gray-600">Through a week of intense challenges, TransformCo learned that ethical AI is not a limitation, but a foundation. By proactively addressing bias, privacy, security, and compliance, they turned potential disasters into the bedrock of customer trust.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="slide-number" class="slide-number">1 / 7</div>
+    <div class="arrow-nav">
+        <button id="prevBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="nextBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberElement = document.getElementById('slide-number');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach((slide, index) => {
+                if (index === n) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            slideNumberElement.textContent = `${n + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Initialize first slide
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

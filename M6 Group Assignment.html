@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6 Group Assignment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gradient-to-br from-blue-900 via-slate-800 to-gray-900 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Module 6 Group Assignment</h1>
+                <p class="text-xl md:text-2xl opacity-90">Leading the Change at TransformCo</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-20 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Assignment Goal -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Your Mission</h2>
+                    <p class="text-xl text-gray-600">As TransformCo's Change Management team, your final mission is to create a comprehensive, actionable plan to build the organization's AI capabilities. This involves not just a training plan, but a holistic strategy for communication, managing resistance, and measuring success.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <svg viewBox="0 0 100 80" class="w-full max-w-lg">
+                        <!-- Inputs -->
+                        <rect x="5" y="5" width="40" height="20" rx="3" fill="#e0f2fe"/>
+                        <text x="25" y="15" font-size="5" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="25" dy="-3">Capability</tspan>
+                            <tspan x="25" dy="6">Strategy</tspan>
+                        </text>
+
+                        <rect x="55" y="5" width="40" height="20" rx="3" fill="#e0f2fe"/>
+                        <text x="75" y="15" font-size="5" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="75" dy="-3">Training</tspan>
+                            <tspan x="75" dy="6">Curriculum</tspan>
+                        </text>
+
+                        <rect x="5" y="30" width="40" height="15" rx="3" fill="#e0f2fe"/>
+                        <text x="25" y="37.5" font-size="5" text-anchor="middle">Resistance Plan</text>
+
+                        <rect x="55" y="30" width="40" height="15" rx="3" fill="#e0f2fe"/>
+                        <text x="75" y="37.5" font-size="5" text-anchor="middle">Comms Plan</text>
+
+                        <!-- Arrow -->
+                        <path d="M50 45 V 55" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow-m6g)"/>
+                        
+                        <!-- Output -->
+                        <rect x="20" y="55" width="60" height="25" rx="5" fill="#c7d2fe"/>
+                        <text x="50" y="67.5" font-size="5.5" text-anchor="middle" dominant-baseline="middle">
+                            <tspan x="50" dy="-3.5">Change Management</tspan>
+                            <tspan x="50" dy="7">Plan</tspan>
+                        </text>
+                        <defs><marker id="arrow-m6g" markerWidth="5" markerHeight="3.5" refX="2.5" refY="1.75" orient="auto"><polygon points="0 0, 2.5 1.75, 0 3.5" fill="#9ca3af"/></marker></defs>
+                     </svg>
+                </div>
+            </div>
+
+            <!-- Slide 3: Core Tasks -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Your Five Core Tasks</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg mb-1">1. Develop Capability Strategy</h3><p class="text-gray-600">Define the core AI-related skills TransformCo needs at different levels (e.g., leadership, managers, individual contributors).</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg mb-1">2. Design Training Curriculum</h3><p class="text-gray-600">Create a high-level, blended learning curriculum for one of the key capabilities you identified.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow"><h3 class="font-semibold text-lg mb-1">3. Address Resistance</h3><p class="text-gray-600">Anticipate 2-3 specific points of resistance to AI adoption and create a plan to address each scenario.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow md:col-start-1"><h3 class="font-semibold text-lg mb-1">4. Create Communication Plan</h3><p class="text-gray-600">Outline a plan to communicate the "why, what, and how" of this change to the entire organization.</p></div>
+                    <div class="bg-white p-5 rounded-lg shadow md:col-start-2 md:col-span-2"><h3 class="font-semibold text-lg mb-1">5. Build Measurement Framework</h3><p class="text-gray-600">Define the Key Performance Indicators (KPIs) you will use to measure the success of your change initiative.</p></div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Task Focus: Addressing Resistance -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Focus: Addressing Resistance</h2>
+                <p class="text-lg text-gray-600 text-center mb-6 max-w-3xl">Change is hard. A great strategy anticipates and proactively manages the human element of transformation.</p>
+                <div class="w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg">
+                    <h3 class="font-semibold text-xl mb-4">Example Scenario Planning</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-mono text-sm text-red-500">SCENARIO:</p>
+                            <p class="text-lg font-semibold">An employee fears, "AI is going to take my job."</p>
+                        </div>
+                        <div>
+                             <p class="font-mono text-sm text-green-500">YOUR RESPONSE PLAN:</p>
+                             <ul class="list-disc list-inside text-gray-700">
+                                <li><b>Communication:</b> Launch a campaign focused on "Augmentation, not Replacement."</li>
+                                <li><b>Training:</b> Offer learning paths on how AI can enhance their specific role.</li>
+                                <li><b>Incentives:</b> Publicly recognize and reward employees who find innovative ways to use AI in their work.</li>
+                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Final Deliverable -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-blue-300"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="m9 15 2 2 4-4"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Final Presentation to the Board</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Your group will deliver a final presentation that is your comprehensive Change Management Plan for TransformCo. It must include:</p>
+                 <ul class="text-lg opacity-80 max-w-2xl mx-auto list-none text-left mt-4 space-y-2">
+                    <li><b>1. The Capability Strategy:</b> Who needs to learn what?</li>
+                    <li><b>2. The Curriculum Design:</b> How will they learn it?</li>
+                    <li><b>3. The Resistance Plan:</b> How will you manage pushback?</li>
+                    <li><b>4. The Communication Plan:</b> How will you tell the story?</li>
+                    <li><b>5. The Measurement Framework:</b> How will you measure success?</li>
+                 </ul>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-blue-800 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
+
+
+

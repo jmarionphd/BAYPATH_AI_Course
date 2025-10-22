@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion AI for Documentation Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .active-slide {
+            display: flex;
+            opacity: 1;
+        }
+        /* Style for forcing landscape on mobile */
+        @media (orientation: portrait) and (max-width: 768px) {
+            #landscape-enforcer {
+                display: flex;
+            }
+            #presentation-container {
+                display: none;
+            }
+        }
+        @media (orientation: landscape) {
+            #landscape-enforcer {
+                display: none;
+            }
+            #presentation-container {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen w-screen">
+
+    <!-- Landscape mode enforcer for mobile -->
+    <div id="landscape-enforcer" class="h-full w-full flex-col justify-center items-center bg-gray-800 text-white p-4 text-center hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4"><path d="M13.6 2.6a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8l-5 5a2 2 0 0 1-2.8 0l-5-5a2 2 0 0 1 0-2.8l5-5z"></path><path d="m10.4 7.6 5 5"></path><path d="M2.6 13.6a2 2 0 0 0 0 2.8l5 5a2 2 0 0 0 2.8 0l5-5a2 2 0 0 0 0-2.8l-5-5a2 2 0 0 0-2.8 0l-5 5z"></path></svg>
+        <h2 class="text-2xl font-bold mb-2">Please Rotate Your Device</h2>
+        <p>This presentation is best viewed in landscape mode.</p>
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div id="presentation-container" class="w-full h-full flex flex-col">
+
+        <!-- Slides Wrapper -->
+        <main class="flex-grow w-full h-full relative">
+            
+            <!-- Slide 1: Title -->
+            <div class="slide active-slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-900 text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Notion AI for Documentation</h1>
+                <p class="text-xl md:text-2xl opacity-90">Streamline Your Knowledge Base</p>
+                 <div class="mt-12 text-lg bg-black bg-opacity-40 px-4 py-2 rounded-lg">
+                    <p>Use <kbd>←</kbd> and <kbd>→</kbd> arrow keys or the on-screen buttons to navigate.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: What is Notion AI? -->
+            <div class="slide w-full h-full flex-col lg:flex-row justify-center items-center p-8">
+                 <div class="w-full lg:w-1/2 p-4 text-center lg:text-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">What is Notion AI?</h2>
+                    <p class="text-xl text-gray-600">Notion AI is a suite of features integrated directly into the Notion workspace. It acts as a thought partner, helping you write faster, think bigger, and augment your creativity right where your work happens.</p>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center items-center p-4">
+                     <div class="relative w-full max-w-md bg-white p-6 rounded-lg shadow-lg border">
+                        <h3 class="font-semibold text-lg mb-2">Project Plan</h3>
+                        <p class="text-gray-500">Here's the Q4 roadmap...</p>
+                        <div class="absolute bottom-4 right-4 flex items-center space-x-2 p-2 bg-purple-100 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
+                            <span class="font-semibold text-purple-800">Ask AI...</span>
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Key Documentation Features -->
+             <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Key Features for Documentation</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-gray-700 mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div><h3 class="font-semibold text-lg">Q&A on Your Docs</h3><p>Instantly get answers from across your entire workspace. Ask "What is our policy on X?" and get a synthesized answer with sources.</p></div></div>
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-gray-700 mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><div><h3 class="font-semibold text-lg">Summarize Anything</h3><p>Instantly generate concise summaries of long documents, meeting notes, or research pages.</p></div></div>
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-gray-700 mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" /></svg><div><h3 class="font-semibold text-lg">Improve Writing</h3><p>Fix spelling and grammar, simplify language for clarity, change tone, and translate content into other languages.</p></div></div>
+                    <div class="bg-white p-5 rounded-lg shadow flex items-center"><svg class="w-8 h-8 text-gray-700 mr-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18" /></svg><div><h3 class="font-semibold text-lg">Generate First Drafts</h3><p>Create outlines, tables, how-to guides, or explain complex topics from a simple prompt to overcome writer's block.</p></div></div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Cost & Pricing -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Cost and Setup</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="font-semibold text-2xl mb-4">Setup: It's an Add-On</h3>
+                        <p class="text-gray-600 mb-4">Notion AI is not a separate product. It's an optional add-on that you can enable for your existing Notion workspace. Any workspace admin can add it from the "Settings & Members" menu.</p>
+                        <div class="p-4 bg-gray-50 rounded-md">
+                            <p class="font-semibold">Requirement:</p>
+                            <p class="text-gray-600">You must have a paid Notion plan (Plus, Business, or Enterprise) to purchase the Notion AI add-on.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="font-semibold text-2xl mb-4">Pricing Model</h3>
+                        <p class="text-gray-600 mb-4">The cost is calculated on a per-member, per-month basis.</p>
+                        <div class="p-4 bg-green-50 rounded-md text-center">
+                            <p class="text-4xl font-bold text-green-800">$10</p>
+                            <p class="text-green-700">per member / month</p>
+                            <p class="text-sm text-gray-500 mt-2">(A 20% discount is available with annual billing, making it $8 per member/month)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Real-World Use Cases -->
+            <div class="slide w-full h-full flex-col justify-center items-center p-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Documentation Use Cases</h2>
+                <div class="w-full max-w-3xl space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
+                        <p class="font-mono text-sm text-gray-500">PROMPT:</p>
+                        <p class="text-lg">"Summarize these meeting notes into action items with owners."</p>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow border-l-4 border-green-500">
+                        <p class="font-mono text-sm text-gray-500">PROMPT:</p>
+                        <p class="text-lg">"Create a how-to guide for setting up a new developer environment based on this technical brief."</p>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow border-l-4 border-yellow-500">
+                        <p class="font-mono text-sm text-gray-500">PROMPT:</p>
+                        <p class="text-lg">"Explain the concept of 'technical debt' like I'm a non-technical project manager."</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Summary -->
+            <div class="slide w-full h-full flex-col justify-center items-center text-center p-8 bg-gray-800 text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-6 text-purple-400"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Is Notion AI Worth It?</h1>
+                <p class="text-xl md:text-2xl opacity-80 max-w-3xl">Notion AI supercharges your documentation process by making it faster to create, easier to maintain, and simpler to find information. It's a powerful investment for teams that live in their knowledge base.</p>
+                 <ul class="text-lg opacity-80 max-w-lg mx-auto list-none text-left mt-4 space-y-2">
+                    <li><b class="text-purple-300">Boosts Productivity:</b> Reduces time spent writing, summarizing, and searching.</li>
+                    <li><b class="text-purple-300">Improves Quality:</b> Helps create clearer, more consistent documentation.</li>
+                    <li><b class="text-purple-300">Unlocks Knowledge:</b> Makes information accessible through natural language questions.</li>
+                 </ul>
+            </div>
+
+        </main>
+        
+        <!-- Footer and Navigation -->
+        <footer class="w-full bg-white shadow-t-lg p-2">
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                <div id="progress-bar" class="bg-gray-800 h-1.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center px-4">
+                <span id="slide-counter" class="text-sm text-gray-600"></span>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const slideCounter = document.getElementById('slide-counter');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.remove('active-slide');
+                }
+                currentSlide = index;
+                if (slides[currentSlide]) {
+                    slides[currentSlide].classList.add('active-slide');
+                }
+                updateControls();
+            }
+
+            function updateControls() {
+                const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
