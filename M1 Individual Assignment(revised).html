@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 Individual Assignment - Innovation & AI Maturity Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            /* height: 85vh; */ /* <-- Removed this line */
+            aspect-ratio: 16 / 9; /* <-- Added this for landscape ratio */
+            max-height: 85vh; /* <-- Added this to prevent overflow on tall screens */
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px 60px 80px 60px;
+            position: relative;
+            animation: slideIn 0.5s ease-out;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        /* Custom scrollbar */
+        .slide::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .slide::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .slide::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 12px;
+        }
+
+        h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            color: #764ba2;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            margin-left: 35px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 5px solid #667eea;
+            padding: 18px;
+            margin: 18px 0;
+            border-radius: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .grid-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #667eea;
+            transition: transform 0.3s;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .diagram {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .maturity-levels {
+            display: flex;
+            justify-content: space-between;
+            margin: 25px 0;
+            gap: 12px;
+        }
+
+        .level {
+            flex: 1;
+            padding: 15px 10px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .level1 { background: #e74c3c; }
+        .level2 { background: #e67e22; }
+        .level3 { background: #f39c12; }
+        .level4 { background: #27ae60; }
+        .level5 { background: #2ecc71; }
+
+        .arrow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .arrow {
+            font-size: 2.5em;
+            margin: 0 15px;
+            color: #667eea;
+        }
+
+        .process-tech-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .process-circle {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .tech-circle {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .vs {
+            font-size: 2.5em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9em;
+            color: #999;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 1.1em;
+            color: white;
+            font-weight: bold;
+            background: #667eea;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .framework-box {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 18px;
+            margin: 15px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .pdma-stages {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .stage {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px 12px 55px;
+            border-radius: 10px;
+            font-size: 1.05em;
+            position: relative;
+        }
+
+        .stage-number {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            color: #667eea;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .emphasis {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #667eea;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.05em;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .reflection-box {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 1.3em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 25px 0;
+        }
+
+        .scenario-card {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 10px;
+            border-top: 5px solid #667eea;
+            text-align: center;
+        }
+        
+        /* --- New Arrow Navigation Styles --- */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 60px; 
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            color: white; 
+        }
+
+        .nav-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .nav-arrow:active {
+            transform: translateY(-50%) scale(1.0);
+        }
+
+        .nav-arrow#prev-slide {
+            left: 20px;
+        }
+
+        .nav-arrow#next-slide {
+            right: 20px;
+        }
+
+        .nav-arrow svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .grid, .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.7em; }
+            h3 { font-size: 1.3em; }
+            p, li { font-size: 1em; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-arrow {
+                width: 44px;
+                height: 44px;
+                left: 10px;
+            }
+            .nav-arrow#next-slide {
+                right: 10px;
+                left: auto; /* Override the 'left: 10px' */
+            }
+            .nav-arrow svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>Week 1 Individual Assignment</h1>
+            <h2 style="text-align: center; border: none; margin-top: 50px;">Innovation & AI Maturity Assessment</h2>
+            <div style="text-align: center; margin-top: 80px;">
+                <p style="font-size: 1.6em; color: #667eea;"><strong>Frameworks, Reflection, and Scenario Analysis</strong></p>
+                <p style="margin-top: 40px; font-size: 1.3em; color: #666;">A comprehensive approach to understanding organizational innovation and AI capabilities</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Assignment Overview -->
+        <div class="slide">
+            <h2>Assignment Overview</h2>
+            <div class="box">
+                <h3>Three Core Components</h3>
+            </div>
+            
+            <div class="grid">
+                <div class="grid-item">
+                    <h3 style="color: #667eea; margin-top: 0;">1️⃣ Dual Assessment</h3>
+                    <p>Evaluate your organization using:</p>
+                    <ul>
+                        <li><strong>PDMA Best Practices</strong></li>
+                        <li><strong>AI Maturity Framework</strong> (your choice)</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h3 style="color: #764ba2; margin-top: 0;">2️⃣ Critical Reflection</h3>
+                    <p>Write a thoughtful analysis:</p>
+                    <p style="font-style: italic; color: #667eea;">"When do innovation frameworks vs. AI tools solve problems?"</p>
+                </div>
+            </div>
+
+            <div class="grid-item" style="margin-top: 20px;">
+                <h3 style="color: #e74c3c; margin-top: 0;">3️⃣ Scenario Identification</h3>
+                <p>Identify <strong>six scenarios</strong> (3 + 3):</p>
+                <ul>
+                    <li>Three where <span class="highlight">process</span> is the answer</li>
+                    <li>Three where <span class="highlight">technology</span> is the answer</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Organization Selection -->
+        <div class="slide">
+            <h2>Step 1: Choose Your Organization</h2>
+            
+            <div class="box">
+                <h3>Selection Criteria</h3>
+                <p><span class="emphasis">Preferably:</span> Your own organization OR one with which you are familiar</p>
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h3>✅ Good Choices</h3>
+                    <ul>
+                        <li>Your current employer</li>
+                        <li>Previous employer (recent experience)</li>
+                        <li>Organization where you interned</li>
+                        <li>Client organization you've worked with</li>
+                        <li>Well-documented public company</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>❌ Avoid</h3>
+                    <ul>
+                        <li>Organizations with no innovation activity</li>
+                        <li>Companies you know nothing about</li>
+                        <li>Organizations with no public information</li>
+                        <li>Purely hypothetical companies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box" style="margin-top: 25px;">
+                <h3>What You Need to Know</h3>
+                <ul>
+                    <li>Industry and sector</li>
+                    <li>Size and scope of operations</li>
+                    <li>Current innovation practices (formal or informal)</li>
+                    <li>Technology adoption patterns</li>
+                    <li>AI/digital transformation initiatives (if any)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: PDMA Best Practices Overview -->
+        <div class="slide">
+            <h2>PDMA Best Practices Framework</h2>
+            
+            <div class="box">
+                <p><strong>PDMA</strong> = Product Development and Management Association</p>
+                <p>A comprehensive framework for assessing innovation and product development maturity</p>
+            </div>
+
+            <h3>Five Key Dimensions</h3>
+            
+            <div class="pdma-stages">
+                <div class="stage">
+                    <div class="stage-number">1</div>
+                    <strong>Strategy:</strong> Innovation strategy alignment with business goals
+                </div>
+                <div class="stage">
+                    <div class="stage-number">2</div>
+                    <strong>Portfolio Management:</strong> Project selection and resource allocation
+                </div>
+                <div class="stage">
+                    <div class="stage-number">3</div>
+                    <strong>Process:</strong> Stage-gate or agile development processes
+                </div>
+                <div class="stage">
+                    <div class="stage-number">4</div>
+                    <strong>Organization & Culture:</strong> Structure, roles, and innovation culture
+                </div>
+                <div class="stage">
+                    <div class="stage-number">5</div>
+                    <strong>Market Research:</strong> Voice of customer and market insights
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: PDMA Assessment Approach -->
+        <div class="slide">
+            <h2>How to Assess Using PDMA</h2>
+            
+            <div class="maturity-levels">
+                <div class="level level1">Level 1<br>Ad Hoc</div>
+                <div class="level level2">Level 2<br>Defined</div>
+                <div class="level level3">Level 3<br>Managed</div>
+                <div class="level level4">Level 4<br>Integrated</div>
+                <div class="level level5">Level 5<br>Optimized</div>
+            </div>
+
+            <h3>Assessment Questions for Each Dimension</h3>
+            
+            <table>
+                <tr>
+                    <th>Dimension</th>
+                    <th>Key Assessment Questions</th>
+                </tr>
+                <tr>
+                    <td><strong>Strategy</strong></td>
+                    <td>Is there a formal innovation strategy? How aligned with business goals?</td>
+                </tr>
+                <tr>
+                    <td><strong>Portfolio</strong></td>
+                    <td>How are projects selected? Is there active portfolio management?</td>
+                </tr>
+                <tr>
+                    <td><strong>Process</strong></td>
+                    <td>What development process is used? How standardized and followed?</td>
+                </tr>
+                <tr>
+                    <td><strong>Organization</strong></td>
+                    <td>Are roles clear? Does culture support innovation?</td>
+                </tr>
+                <tr>
+                    <td><strong>Market Research</strong></td>
+                    <td>How is customer insight gathered and used?</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 6: AI Maturity Framework Options -->
+        <div class="slide">
+            <h2>AI Maturity Framework Selection</h2>
+            
+            <div class="box">
+                <p><span class="emphasis">You must choose ONE</span> AI maturity framework for your assessment</p>
+            </div>
+
+            <div class="framework-box">
+                <h4>🔷 Microsoft AI Maturity Model</h4>
+                <p><strong>5 Stages:</strong> Foundational → Approaching → Aspirational → Mature → Advanced</p>
+                <p>Focus: Infrastructure, data, governance, and AI deployment capabilities</p>
+            </div>
+
+            <div class="framework-box">
+                <h4>🔷 Google Cloud AI Adoption Framework</h4>
+                <p><strong>4 Phases:</strong> Tactical → Strategic → Transformational → Differentiating</p>
+                <p>Focus: Business value, scale, and competitive advantage from AI</p>
+            </div>
+
+            <div class="framework-box">
+                <h4>🔷 Gartner AI Maturity Model</h4>
+                <p><strong>5 Levels:</strong> Awareness → Active → Operational → Systemic → Transformational</p>
+                <p>Focus: Organizational readiness and AI integration across enterprise</p>
+            </div>
+
+            <div class="framework-box">
+                <h4>🔷 MIT CISR AI Maturity Framework</h4>
+                <p>Focus: Data quality, algorithmic sophistication, and infrastructure capabilities</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Framework Comparison -->
+        <div class="slide">
+            <h2>Choosing Your AI Framework</h2>
+            
+            <h3>Selection Guidance</h3>
+            
+            <div class="grid">
+                <div class="grid-item">
+                    <h4 style="color: #667eea;">Choose Microsoft if...</h4>
+                    <ul>
+                        <li>Your org uses Azure/Microsoft stack</li>
+                        <li>Focus on technical infrastructure</li>
+                        <li>Emphasis on governance & ethics</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4 style="color: #764ba2;">Choose Google if...</h4>
+                    <ul>
+                        <li>Focus on business transformation</li>
+                        <li>Emphasis on competitive advantage</li>
+                        <li>Cloud-native organization</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4 style="color: #e74c3c;">Choose Gartner if...</h4>
+                    <ul>
+                        <li>Enterprise-wide perspective needed</li>
+                        <li>Focus on organizational change</li>
+                        <li>Comprehensive assessment desired</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4 style="color: #27ae60;">Choose MIT CISR if...</h4>
+                    <ul>
+                        <li>Academic/research orientation</li>
+                        <li>Deep technical assessment</li>
+                        <li>Data-centric organization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box" style="margin-top: 25px;">
+                <p><strong>Tip:</strong> Choose the framework that best aligns with your organization's industry, size, and strategic priorities</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Conducting the Assessment -->
+        <div class="slide">
+            <h2>Conducting Your Dual Assessment</h2>
+            
+            <div class="arrow-container">
+                <div style="text-align: center;">
+                    <div style="background: #667eea; color: white; padding: 25px; border-radius: 15px; font-size: 1.3em;">
+                        <strong>PDMA<br>Assessment</strong>
+                    </div>
+                </div>
+                <span class="arrow">+</span>
+                <div style="text-align: center;">
+                    <div style="background: #764ba2; color: white; padding: 25px; border-radius: 15px; font-size: 1.3em;">
+                        <strong>AI Maturity<br>Assessment</strong>
+                    </div>
+                </div>
+                <span class="arrow">=</span>
+                <div style="text-align: center;">
+                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 25px; border-radius: 15px; font-size: 1.3em;">
+                        <strong>Comprehensive<br>View</strong>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Assessment Deliverable Should Include:</h3>
+            <ul>
+                <li><strong>Current State Analysis:</strong> Where does your organization stand on each framework?</li>
+                <li><strong>Evidence & Examples:</strong> Specific practices, tools, or initiatives that support your assessment</li>
+                <li><strong>Maturity Level Justification:</strong> Why did you assign each rating?</li>
+                <li><strong>Gaps & Opportunities:</strong> What's missing? Where could the organization improve?</li>
+                <li><strong>Comparative Insights:</strong> How do innovation maturity and AI maturity relate?</li>
+            </ul>
+        </div>
+
+        <!-- Slide 9: The Reflection Question -->
+        <div class="slide">
+            <h2>Critical Reflection Component</h2>
+            
+            <div class="reflection-box">
+                "When do innovation frameworks vs. AI tools solve problems?"
+            </div>
+
+            <h3>What This Question Is Asking</h3>
+            
+            <div class="two-column">
+                <div>
+                    <div class="box">
+                        <h4 style="color: #667eea;">Innovation Frameworks</h4>
+                        <ul>
+                            <li>Structured processes (Stage-Gate, Agile)</li>
+                            <li>Portfolio management methods</li>
+                            <li>Innovation strategy approaches</li>
+                            <li>Organizational design principles</li>
+                            <li>Cultural change initiatives</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="box">
+                        <h4 style="color: #764ba2;">AI Tools</h4>
+                        <ul>
+                            <li>Machine learning algorithms</li>
+                            <li>Predictive analytics platforms</li>
+                            <li>Natural language processing</li>
+                            <li>Computer vision systems</li>
+                            <li>Automation technologies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box" style="margin-top: 20px;">
+                <h4>Key Considerations for Your Reflection:</h4>
+                <ul>
+                    <li>What types of problems are best solved by process/structure vs. technology?</li>
+                    <li>When is human judgment and framework discipline more valuable than AI?</li>
+                    <li>When does AI provide capabilities that frameworks cannot?</li>
+                    <li>How do they complement each other?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: Reflection Writing Guidance -->
+        <div class="slide">
+            <h2>Writing Your Reflection</h2>
+            
+            <h3>Academic Approach</h3>
+            
+            <div class="grid">
+                <div class="grid-item">
+                    <h4 style="color: #667eea; margin-top: 0;">Structure</h4>
+                    <ul>
+                        <li>Introduction: Frame the question</li>
+                        <li>Analysis: Compare and contrast</li>
+                        <li>Examples: Use your organization</li>
+                        <li>Conclusion: Synthesize insights</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h4 style="color: #764ba2; margin-top: 0;">Depth</h4>
+                    <ul>
+                        <li>Go beyond surface observations</li>
+                        <li>Consider context and nuance</li>
+                        <li>Acknowledge complexity</li>
+                        <li>Draw on theory and practice</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Potential Themes to Explore</h3>
+            <ul>
+                <li><strong>Problem Complexity:</strong> Structured vs. unstructured problems</li>
+                <li><strong>Human vs. Machine:</strong> Judgment, creativity, and pattern recognition</li>
+                <li><strong>Organizational Readiness:</strong> Culture, skills, and infrastructure</li>
+                <li><strong>Scale & Speed:</strong> When does volume or velocity matter?</li>
+                <li><strong>Complementarity:</strong> How frameworks enable AI, and vice versa</li>
+                <li><strong>Risk & Ethics:</strong> Governance considerations for each approach</li>
+            </ul>
+
+            <div class="box" style="margin-top: 20px;">
+                <p><strong>Remember:</strong> There's no single "right" answer. Demonstrate critical thinking and support your arguments with evidence.</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Scenario Identification -->
+        <div class="slide">
+            <h2>Scenario Identification Task</h2>
+            
+            <div class="process-tech-diagram">
+                <div class="circle process-circle">
+                    PROCESS<br>Solutions<br>(3 scenarios)
+                </div>
+                <div class="vs">VS</div>
+                <div class="circle tech-circle">
+                    TECHNOLOGY<br>Solutions<br>(3 scenarios)
+                </div>
+            </div>
+
+            <h3>What You Need to Identify</h3>
+            
+            <div class="box">
+                <h4>Three Scenarios Where PROCESS Is the Answer</h4>
+                <p>Problems best solved through frameworks, methods, organizational design, or cultural change</p>
+            </div>
+
+            <div class="box">
+                <h4>Three Scenarios Where TECHNOLOGY Is the Answer</h4>
+                <p>Problems best solved through AI tools, automation, data analytics, or digital platforms</p>
+            </div>
+
+            <div class="box" style="background: #fff3cd; border-left-color: #f39c12;">
+                <p><strong>Important:</strong> These should be <span class="emphasis">real or realistic scenarios</span> from your chosen organization, not generic examples</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Process Scenarios -->
+        <div class="slide">
+            <h2>Process-Focused Scenarios</h2>
+            
+            <h3>When Process/Framework Is the Answer</h3>
+            
+            <div class="scenario-grid">
+                <div class="scenario-card">
+                    <h4>Example Type 1</h4>
+                    <p><strong>Alignment Problems</strong></p>
+                    <p style="font-size: 0.9em;">Innovation projects not aligned with strategy</p>
+                </div>
+                <div class="scenario-card">
+                    <h4>Example Type 2</h4>
+                    <p><strong>Coordination Issues</strong></p>
+                    <p style="font-size: 0.9em;">Cross-functional teams not collaborating effectively</p>
+                </div>
+                <div class="scenario-card">
+                    <h4>Example Type 3</h4>
+                    <p><strong>Cultural Barriers</strong></p>
+                    <p style="font-size: 0.9em;">Risk-averse culture stifling innovation</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <h4>Characteristics of Process Solutions:</h4>
+                <ul>
+                    <li>Problem involves <strong>human behavior, decisions, or collaboration</strong></li>
+                    <li>Solution requires <strong>organizational change or new ways of working</strong></li>
+                    <li>Success depends on <strong>clarity, structure, or governance</strong></li>
+                    <li>Technology alone cannot solve the underlying issue</li>
+                    <li>Requires <strong>leadership, culture, or capability development</strong></li>
+                </ul>
+            </div>
+
+            <div class="box" style="margin-top: 20px;">
+                <h4>For Each Scenario, Describe:</h4>
+                <ul>
+                    <li>The specific problem or challenge</li>
+                    <li>Why process/framework is the appropriate solution</li>
+                    <li>What process or framework would address it</li>
+                    <li>Expected outcomes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 13: Technology Scenarios -->
+        <div class="slide">
+            <h2>Technology-Focused Scenarios</h2>
+            
+            <h3>When Technology/AI Is the Answer</h3>
+            
+            <div class="scenario-grid">
+                <div class="scenario-card">
+                    <h4>Example Type 1</h4>
+                    <p><strong>Scale Problems</strong></p>
+                    <p style="font-size: 0.9em;">Processing thousands of customer feedback responses</p>
+                </div>
+                <div class="scenario-card">
+                    <h4>Example Type 2</h4>
+                    <p><strong>Pattern Recognition</strong></p>
+                    <p style="font-size: 0.9em;">Identifying market trends from big data</p>
+                </div>
+                <div class="scenario-card">
+                    <h4>Example Type 3</h4>
+                    <p><strong>Automation Needs</strong></p>
+                    <p style="font-size: 0.9em;">Repetitive tasks consuming valuable time</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <h4>Characteristics of Technology Solutions:</h4>
+                <ul>
+                    <li>Problem involves <strong>large-scale data processing or analysis</strong></li>
+                    <li>Solution requires <strong>speed, accuracy, or computational power</strong></li>
+                    <li>Success depends on <strong>pattern recognition or prediction</strong></li>
+                    <li>Human capacity is insufficient or inefficient</li>
+                    <li>Requires <strong>automation, optimization, or augmentation</strong></li>
+                </ul>
+            </div>
+
+            <div class="box" style="margin-top: 20px;">
+                <h4>For Each Scenario, Describe:</h4>
+                <ul>
+                    <li>The specific problem or challenge</li>
+                    <li>Why technology/AI is the appropriate solution</li>
+                    <li>What technology or AI tool would address it</li>
+                    <li>Expected outcomes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 14: Integration Insight -->
+        <div class="slide">
+            <h2>The Integration Perspective</h2>
+            
+            <div class="box" style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-left: 5px solid #e74c3c;">
+                <h3 style="color: #e74c3c;">Critical Insight</h3>
+                <p style="font-size: 1.3em;">Most real-world problems require BOTH process and technology solutions working together</p>
+            </div>
+
+            <div class="two-column" style="margin-top: 30px;">
+                <div>
+                    <h3>Process Enables Technology</h3>
+                    <ul>
+                        <li>Governance frameworks for AI ethics</li>
+                        <li>Data quality processes for ML</li>
+                        <li>Change management for adoption</li>
+                        <li>Portfolio management for AI investments</li>
+                        <li>Cross-functional collaboration for implementation</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Technology Enables Process</h3>
+                    <ul>
+                        <li>AI tools for portfolio optimization</li>
+                        <li>Analytics for process improvement</li>
+                        <li>Automation of stage-gate reviews</li>
+                        <li>Digital platforms for collaboration</li>
+                        <li>Predictive models for decision support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box" style="margin-top: 30px;">
+                <h4>Advanced Thinking:</h4>
+                <p>While you must identify scenarios where one is "the answer," also consider in your reflection how process and technology interact and reinforce each other in practice.</p>
+            </div>
+        </div>
+
+        <!-- Slide 15: Assignment Checklist -->
+        <div class="slide">
+            <h2>Assignment Completion Checklist</h2>
+            
+            <div class="grid">
+                <div class="grid-item">
+                    <h3 style="margin-top: 0; color: #667eea;">✓ Assessment Component</h3>
+                    <ul>
+                        <li>Organization selected and described</li>
+                        <li>PDMA Best Practices assessment completed</li>
+                        <li>AI maturity framework selected and applied</li>
+                        <li>Current state documented with evidence</li>
+                        <li>Maturity levels justified</li>
+                        <li>Gaps and opportunities identified</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item">
+                    <h3 style="margin-top: 0; color: #764ba2;">✓ Reflection Component</h3>
+                    <ul>
+                        <li>Question addressed directly</li>
+                        <li>Academic tone and structure</li>
+                        <li>Critical analysis demonstrated</li>
+                        <li>Examples from your organization</li>
+                        <li>Theoretical grounding</li>
+                        <li>Thoughtful conclusions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-item" style="margin-top: 20px;">
+                <h3 style="margin-top: 0; color: #e74c3c;">✓ Scenario Component</h3>
+                <ul>
+                    <li>Three process-focused scenarios identified</li>
+                    <li>Three technology-focused scenarios identified</li>
+                    <li>Each scenario clearly described</li>
+                    <li>Rationale provided for each classification</li>
+                    <li>Specific solutions proposed</li>
+                    <li>Expected outcomes articulated</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 16: Success Criteria -->
+        <div class="slide">
+            <h2>Success Criteria</h2>
+            
+            <h3>What Makes an Excellent Submission?</h3>
+            
+            <div class="box">
+                <h4 style="color: #667eea;">🎯 Depth of Analysis</h4>
+                <p>Goes beyond surface-level observations to demonstrate genuine understanding of both frameworks and organizational realities</p>
+            </div>
+
+            <div class="box">
+                <h4 style="color: #764ba2;">🎯 Evidence-Based Reasoning</h4>
+                <p>Assessments and scenarios supported by specific examples, data, or observable practices from the organization</p>
+            </div>
+
+            <div class="box">
+                <h4 style="color: #e74c3c;">🎯 Critical Thinking</h4>
+                <p>Reflection demonstrates nuanced understanding of when and why different approaches are appropriate</p>
+            </div>
+
+            <div class="box">
+                <h4 style="color: #27ae60;">🎯 Integration & Synthesis</h4>
+                <p>Connects insights across the three components; shows how innovation maturity and AI maturity relate</p>
+            </div>
+
+            <div class="box">
+                <h4 style="color: #f39c12;">🎯 Academic Rigor</h4>
+                <p>Appropriate tone, structure, and depth for graduate-level work; proper use of frameworks and terminology</p>
+            </div>
+        </div>
+
+        <!-- Slide 17: Common Pitfalls -->
+        <div class="slide">
+            <h2>Common Pitfalls to Avoid</h2>
+            
+            <div class="two-column">
+                <div>
+                    <div class="box" style="background: #ffe6e6; border-left-color: #e74c3c;">
+                        <h4 style="color: #e74c3c;">❌ Superficial Assessment</h4>
+                        <p>Simply stating maturity levels without justification or evidence</p>
+                    </div>
+                    
+                    <div class="box" style="background: #ffe6e6; border-left-color: #e74c3c;">
+                        <h4 style="color: #e74c3c;">❌ Generic Scenarios</h4>
+                        <p>Using textbook examples instead of organization-specific situations</p>
+                    </div>
+                    
+                    <div class="box" style="background: #ffe6e6; border-left-color: #e74c3c;">
+                        <h4 style="color: #e74c3c;">❌ Binary Thinking</h4>
+                        <p>Treating process and technology as completely separate rather than complementary</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="box" style="background: #ffe6e6; border-left-color: #e74c3c;">
+                        <h4 style="color: #e74c3c;">❌ Lack of Reflection Depth</h4>
+                        <p>Answering the reflection question with a simple list instead of thoughtful analysis</p>
+                    </div>
+                    
+                    <div class="box" style="background: #ffe6e6; border-left-color: #e74c3c;">
+                        <h4 style="color: #e74c3c;">❌ Misunderstanding Frameworks</h4>
+                        <p>Applying frameworks incorrectly or conflating different concepts</p>
+                    </div>
+                    
+                    <div class="box" style="background: #ffe6e6; border-left-color: #e74c3c;">
+                        <h4 style="color: #e74c3c;">❌ No Integration</h4>
+                        <p>Treating the three components as completely separate tasks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Resources & Next Steps -->
+        <div class="slide">
+            <h2>Resources & Next Steps</h2>
+            
+            <h3>Recommended Resources</h3>
+            
+            <div class="box">
+                <h4>PDMA Resources</h4>
+                <ul>
+                    <li>PDMA Handbook of New Product Development (3rd Edition)</li>
+                    <li>PDMA Body of Knowledge</li>
+                    <li>PDMA.org - Best Practices research</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h4>AI Maturity Framework Resources</h4>
+                <ul>
+                    <li>Microsoft: "AI Maturity Model" whitepaper</li>
+                    <li>Google Cloud: "AI Adoption Framework" documentation</li>
+                    <li>Gartner: "AI Maturity Model" research notes</li>
+                    <li>MIT CISR: AI research publications</li>
+                </ul>
+            </div>
+
+            <h3>Getting Started</h3>
+            <ol style="font-size: 1.15em; line-height: 1.8;">
+                <li>Select your organization today</li>
+                <li>Choose your AI maturity framework</li>
+                <li>Gather information about current practices</li>
+                <li>Begin your assessments</li>
+                <li>Draft your reflection</li>
+                <li>Identify and document scenarios</li>
+            </ol>
+        </div>
+
+        <!-- Slide 19: Summary -->
+        <div class="slide">
+            <h2>Assignment Summary</h2>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 35px; border-radius: 20px; display: inline-block;">
+                    <h3 style="color: white; margin-bottom: 25px; font-size: 1.8em;">Three Deliverables</h3>
+                    <div style="font-size: 1.3em; line-height: 2.2;">
+                        <p><strong>1.</strong> Dual Assessment (PDMA + AI Maturity)</p>
+                        <p><strong>2.</strong> Critical Reflection Essay</p>
+                        <p><strong>3.</strong> Six Scenarios (3 Process + 3 Technology)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box" style="margin-top: 40px;">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li>Choose an organization you know well</li>
+                    <li>Apply frameworks rigorously with evidence</li>
+                    <li>Think critically about when process vs. technology solves problems</li>
+                    <li>Use specific, realistic scenarios from your organization</li>
+                    <li>Demonstrate academic depth and integration across components</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 20: Questions -->
+        <div class="slide">
+            <h1 style="text-align: center; margin-top: 150px;">Questions?</h1>
+            <div style="text-align: center; margin-top: 80px;">
+                <p style="font-size: 1.6em; color: #667eea;">Good luck with your assessment!</p>
+                <p style="margin-top: 40px; font-size: 1.3em; color: #666;">Remember: Depth, evidence, and critical thinking are key to success</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Updated navigation hint -->
+    <div class="navigation">Use ← → keys, swipe, or click arrows to navigate</div>
+    <div class="slide-number">1 / 20</div>
+
+    <!-- On-screen Navigation Arrows -->
+    <button class="nav-arrow" id="prev-slide" aria-label="Previous Slide">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+    </button>
+    <button class="nav-arrow" id="next-slide" aria-label="Next Slide">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+    </button>
+
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const slideNumber = document.querySelector('.slide-number');
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            slideNumber.textContent = `${currentSlide + 1} / ${totalSlides}`;
+            
+            // Scroll to top of new slide
+            slides[currentSlide].scrollTop = 0;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                prevSlide();
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
+
+        // --- New Clickable Arrow Navigation ---
+        document.getElementById('prev-slide').addEventListener('click', prevSlide);
+        document.getElementById('next-slide').addEventListener('click', nextSlide);
+    </script>
+</body>
+</html>
