@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 7 Group Assignment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark blue-gray background */
+            color: #e2e8f0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .slide-content {
+            background-color: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 85, 104, 0.5);
+            border-radius: 1rem;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #3b82f6; /* Blue for corporate/governance theme */
+        }
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #93c5fd; /* Lighter Blue */
+        }
+        p, li {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            color: #cbd5e0;
+        }
+        .diagram {
+            background-color: #2d3748;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #4a5568;
+        }
+        .diagram-arrow {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            margin: 0 1rem;
+        }
+        .diagram-box {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .deliverable {
+            background-color: #374151;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+        }
+        .footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #3b82f6;
+            width: 0%;
+            transition: width 0.3s ease-out;
+        }
+        /* Styles for navigation buttons */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            color: #93c5fd; /* Light blue to match theme */
+            font-size: 3rem;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+            opacity: 0.5;
+            padding: 1rem;
+            user-select: none;
+            outline: none;
+        }
+        .nav-arrow:hover {
+            color: #3b82f6; /* Blue to match theme */
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+        #prev-slide-btn {
+            left: 1rem;
+        }
+        #next-slide-btn {
+            right: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Arrows -->
+    <div id="prev-slide-btn" class="nav-arrow" onclick="prevSlide()">
+        <!-- SVG for Left Arrow (Chevron Left) -->
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    </div>
+    <div id="next-slide-btn" class="nav-arrow" onclick="nextSlide()">
+        <!-- SVG for Right Arrow (Chevron Right) -->
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold leading-tight">Module 7 Group Assignment:<br>TransformCo AI Governance Framework</h1>
+            <p class="mt-6 text-2xl text-blue-200">A Guide to Structuring Your Group Project Deliverables.</p>
+             <p class="mt-12 text-lg text-gray-400">Use your arrow keys or the side arrows to navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Assignment Overview -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="text-center">Group Assignment Goal & Deliverables</h2>
+            <p>Your group's objective is to act as a consulting team tasked with building a comprehensive AI governance and ethics framework for a fictional company, "TransformCo."</p>
+            <ul class="list-decimal list-inside mt-8 space-y-3 text-xl">
+                <li><strong>Create TransformCo Governance Structure:</strong> Define who oversees AI ethics.</li>
+                <li><strong>Develop Ethics Review Process:</strong> Design the project review workflow.</li>
+                <li><strong>Address Specific Ethical Dilemmas:</strong> Apply your framework to hard cases.</li>
+                <li><strong>Build a Regulatory Roadmap:</strong> Plan for future legal compliance.</li>
+                <li><strong>Present to the Ethics Committee:</strong> Synthesize and defend your proposal.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: Deliverable 1 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>1. Create TransformCo Governance Structure</h2>
+            <p>This is the "who" of your framework. You need to design the central oversight body responsible for guiding and governing AI ethics at TransformCo.</p>
+            <h3 class="text-xl font-bold text-blue-300 mt-6">Elaboration:</h3>
+            <p>Define the committee's official name (e.g., "AI Governance Council"). Detail its charter, its authority within the company, and the roles of its members. Specify who should be on the committee (e.g., Chief Ethics Officer, VP of Engineering, General Counsel, a senior data scientist, an external advisor).</p>
+            <div class="deliverable">
+                <p><strong class="text-blue-300">Deliverable:</strong> A formal charter document for the AI Governance Council. This should include its mission statement, member roles and responsibilities, and operational procedures (e.g., "The council will meet quarterly to review high-risk projects and annually to update AI ethics guidelines.").</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Deliverable 2 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>2. Develop Ethics Review Process</h2>
+            <p>This is the "how" of your framework. You will design the end-to-end process that project teams must follow to get their AI initiatives reviewed and approved.</p>
+            <h3 class="text-xl font-bold text-blue-300 mt-6">Elaboration:</h3>
+            <p>Create a clear, step-by-step workflow. This should start with a project intake or risk assessment form. Based on the risk level, the project would follow a specific review path (e.g., low-risk projects get automated checks, high-risk projects go to the full Governance Council). Define the possible outcomes (Approved, Approved with Conditions, Reject).</p>
+            <div class="deliverable">
+                 <p><strong class="text-blue-300">Deliverable:</strong> A process flowchart or a detailed step-by-step document illustrating the ethics review process. It should clearly show the decision points, stakeholders involved at each stage, and required documentation (like the checklist from the individual assignment).</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 5: Deliverable 3 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>3. Address Specific Ethical Dilemmas</h2>
+            <p>This task tests the robustness of your framework. You will apply your newly designed governance structure and review process to analyze complex, real-world ethical scenarios.</p>
+            <h3 class="text-xl font-bold text-blue-300 mt-6">Elaboration:</h3>
+            <p>For each provided dilemma, your group will act as the AI Governance Council. You must walk through your own review process to assess the case. Your analysis should weigh the potential benefits against the ethical risks, referencing your AI ethics principles.</p>
+            <div class="deliverable">
+                 <p><strong class="text-blue-300">Deliverable:</strong> A written memorandum for each dilemma. Each memo should:
+                    <ol class="list-decimal list-inside ml-4">
+                        <li>Briefly summarize the ethical problem.</li>
+                        <li>Analyze the pros and cons through the lens of your framework.</li>
+                        <li>State your council's final decision (e.g., "Proceed with mandatory safeguards X and Y," or "Halt the project as it violates our core principle of fairness.").</li>
+                    </ol>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Deliverable 4 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>4. Build a Regulatory Roadmap</h2>
+            <p>This is the forward-looking part of your strategy. You need to help TransformCo prepare for the evolving landscape of AI laws and regulations.</p>
+            <h3 class="text-xl font-bold text-blue-300 mt-6">Elaboration:</h3>
+            <p>Identify 2-3 significant, near-future AI regulations or standards that are not yet law but are likely to impact TransformCo (e.g., a proposed national AI Act, new industry standards for transparency). Create a high-level plan for how the company can prepare to comply.</p>
+            <div class="deliverable">
+                 <p><strong class="text-blue-300">Deliverable:</strong> A 12-to-18-month roadmap (can be a visual timeline or a table). For each upcoming regulation, list key preparatory actions and assign them to quarters.
+                 <br><strong>Example Item:</strong> <em>"Q2 2026: Task legal and engineering teams with conducting a gap analysis of our current practices against the draft 'Safe AI Act'."</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Deliverable 5 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>5. Present to the Ethics Committee</h2>
+            <p>This is the final deliverable where you synthesize all your work into a persuasive executive presentation for the leadership of TransformCo.</p>
+            <h3 class="text-xl font-bold text-blue-300 mt-6">Elaboration:</h3>
+            <p>Your presentation should tell a coherent story. Start with the "why" (the need for governance), introduce your solution (the structure and process), show it in action (the dilemma analysis), and outline the path forward (the roadmap). Be prepared to justify your decisions.</p>
+            <div class="deliverable">
+                <p><strong class="text-blue-300">Deliverable:</strong> A professional presentation deck (e.g., 10-12 slides). The presentation should be clear, concise, and aimed at a senior leadership audience. It serves as the executive summary of your entire project.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: How It All Fits Together -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>A Cohesive Governance System</h2>
+            <p>Your five deliverables are designed to function as a single, integrated system for governing AI responsibly at TransformCo.</p>
+            
+            <div class="diagram mt-6 text-sm">
+                <div class="text-center">
+                    <div class="diagram-box !bg-gray-700/80 p-4"><strong>Governance Structure</strong><br/>(The People)</div>
+                    <div class="diagram-arrow">&darr;</div>
+                    <div class="diagram-box !bg-gray-700/80 p-4"><strong>Review Process</strong><br/>(The Workflow)</div>
+                </div>
+                <div class="diagram-arrow text-5xl">&rArr;</div>
+                <div class="diagram-box !bg-blue-800/80 p-6 text-base">
+                    <strong>Analyzes Dilemmas &<br/>Prepares for Future Regulations</strong><br/>(The Actions)
+                </div>
+                <div class="diagram-arrow text-5xl">&rArr;</div>
+                <div class="diagram-box !bg-green-700/80 p-6 text-base">
+                    <strong>Final<br/>Presentation</strong><br/>(The Proposal)
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 9: Final Questions -->
+    <div class="slide">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold">Assignment Complete</h1>
+            <h2 class="mt-6 text-4xl">Questions?</h2>
+            
+            <p class="mt-12 text-lg">Focus on making your deliverables consistent and interconnected. Your review process should be something your governance body can realistically execute, and your dilemma analysis should strictly follow that process.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span id="slide-number-current">1</span>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <span id="slide-number-total"></span>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideEl = document.getElementById('slide-number-current');
+        const totalSlideEl = document.getElementById('slide-number-total');
+        const progressFill = document.getElementById('progress-fill');
+        const prevBtn = document.getElementById('prev-slide-btn');
+        const nextBtn = document.getElementById('next-slide-btn');
+        let currentSlide = 0;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            currentSlideEl.textContent = currentSlide + 1;
+            totalSlideEl.textContent = totalSlides;
+            progressFill.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+
+            // Hide/Show navigation buttons based on slide index
+            prevBtn.style.visibility = currentSlide === 0 ? 'hidden' : 'visible';
+            nextBtn.style.visibility = currentSlide === totalSlides - 1 ? 'hidden' : 'visible';
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide += 1;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide -= 1;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>

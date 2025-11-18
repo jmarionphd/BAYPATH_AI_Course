@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBM AI Fairness 360 Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark blue-gray background */
+            color: #e2e8f0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .slide-content {
+            background-color: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 85, 104, 0.5);
+            border-radius: 1rem;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #63b3ed; /* IBM Blue */
+        }
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #90cdf4; /* Lighter Blue */
+        }
+        p, li {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            color: #cbd5e0;
+        }
+        .code-block {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            white-space: pre-wrap;
+            border: 1px solid #334155;
+        }
+        .diagram {
+            background-color: #2d3748;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #4a5568;
+        }
+        .diagram-arrow {
+            font-size: 2.5rem;
+            color: #63b3ed;
+            margin: 0 1rem;
+        }
+        .diagram-box {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #63b3ed;
+            width: 0%;
+            transition: width 0.3s ease-out;
+        }
+        /* Styles for navigation buttons */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            color: #90cdf4; /* Lighter Blue to match theme */
+            font-size: 3rem;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+            opacity: 0.5;
+            padding: 1rem;
+            user-select: none;
+            outline: none;
+        }
+        .nav-arrow:hover {
+            color: #63b3ed; /* IBM Blue to match theme */
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+        #prev-slide-btn {
+            left: 1rem;
+        }
+        #next-slide-btn {
+            right: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Arrows -->
+    <div id="prev-slide-btn" class="nav-arrow" onclick="prevSlide()">
+        <!-- SVG for Left Arrow (Chevron Left) -->
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    </div>
+    <div id="next-slide-btn" class="nav-arrow" onclick="nextSlide()">
+        <!-- SVG for Right Arrow (Chevron Right) -->
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold leading-tight">A Deep Dive into <br>IBM AI Fairness 360</h1>
+            <p class="mt-6 text-2xl text-blue-200">A complete tutorial on detecting, understanding, and mitigating bias in machine learning.</p>
+             <p class="mt-12 text-lg text-gray-400">Use your arrow keys or the side arrows to navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Agenda -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="text-center">Agenda</h2>
+            <ul class="list-disc list-inside mt-8 space-y-4 text-xl">
+                <li>What is AI Fairness and why is it critical?</li>
+                <li>Introduction to the AI Fairness 360 (AIF360) Toolkit</li>
+                <li>Core Components: Datasets, Metrics, and Algorithms</li>
+                <li>Detecting Bias: A Look at Key Fairness Metrics</li>
+                <li>Mitigating Bias: Pre-, In-, and Post-processing Algorithms</li>
+                <li>AIF360 in Practice: A Code Workflow Example</li>
+                <li>Conclusion & Key Resources</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: What is AI Fairness? -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>What is AI Fairness?</h2>
+            <p>AI Fairness refers to the effort of ensuring that machine learning algorithms do not perpetuate or amplify existing societal biases. An algorithm is considered "biased" if its outcomes are systematically prejudiced against certain individuals or groups.</p>
+            <div class="diagram mt-8">
+                <div class="text-center">
+                    <div class="diagram-box text-lg">Biased Historical Data</div>
+                    <p class="text-sm mt-2 text-gray-400">(e.g., loan approvals) </p>
+                </div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg">ML Model Training</div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="text-center">
+                    <div class="diagram-box text-lg bg-red-800 border border-red-500">Biased Predictions</div>
+                    <p class="text-sm mt-2 text-gray-400">(Model learns and replicates historical bias)</p>
+                </div>
+            </div>
+            <p class="mt-6">Bias can originate from unrepresentative data, flawed data collection, or algorithms that inadvertently disadvantage certain groups.</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: Why is Fairness Critical? -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Why is Fairness Critical?</h2>
+            <p>Biased AI systems can have profound, real-world consequences, leading to discriminatory outcomes and eroding trust.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="diagram-box !bg-blue-900/50">
+                    <h3 class="font-bold text-xl text-blue-300">Ethical Impact</h3>
+                    <p class="mt-2 text-base">Reinforces stereotypes and creates unfair disadvantages in areas like hiring, lending, and criminal justice.</p>
+                </div>
+                <div class="diagram-box !bg-blue-900/50">
+                    <h3 class="font-bold text-xl text-blue-300">Legal & Regulatory Risk</h3>
+                    <p class="mt-2 text-base">Violates anti-discrimination laws (e.g., GDPR, Equal Credit Opportunity Act), leading to fines and lawsuits.</p>
+                </div>
+                <div class="diagram-box !bg-blue-900/50">
+                    <h3 class="font-bold text-xl text-blue-300">Business & Reputational Harm</h3>
+                    <p class="mt-2 text-base">Damages brand reputation, alienates customer segments, and leads to flawed business decisions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Introducing IBM AIF360 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="flex items-center"><svg class="w-12 h-12 mr-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2m-6 14v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3M5.636 5.636l1.414 1.414m10.909 10.909l-1.414-1.414M18.364 5.636l-1.414 1.414M5.636 18.364l1.414-1.414M9 12a3 3 0 116 0 3 3 0 01-6 0z"></path></svg> Introducing AI Fairness 360</h2>
+            <p>AI Fairness 360 (AIF360) is an extensible open-source toolkit developed by IBM to help data scientists and developers detect and mitigate unwanted bias in machine learning models and datasets.</p>
+            <ul class="list-disc list-inside mt-6 space-y-3 text-lg">
+                <li>Provides a comprehensive set of over <strong class="text-blue-300">70 fairness metrics</strong> and <strong class="text-blue-300">10+ bias mitigation algorithms</strong>.</li>
+                <li>Supports the entire lifecycle of a machine learning system, from data pre-processing to model post-processing.</li>
+                <li>Offers an extensible framework, allowing researchers to add their own metrics and algorithms.</li>
+                <li>Aims to translate academic research into practical, real-world applications for developers.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 6: The AIF360 Framework -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The AIF360 Framework</h2>
+            <p>AIF360 organizes the fairness workflow around three key components: specialized Datasets, Metrics to measure bias, and Algorithms to mitigate it.</p>
+            <div class="diagram mt-6">
+                <div class="diagram-box text-lg">1. Load Data<br/><span class="text-sm text-gray-300">(into AIF360 Dataset object)</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg">2. Measure Bias<br/><span class="text-sm text-gray-300">(using Fairness Metrics)</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg">3. Mitigate Bias<br/><span class="text-sm text-gray-300">(apply an Algorithm)</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg">4. Re-Measure<br/><span class="text-sm text-gray-300">(to verify improvement)</span></div>
+            </div>
+            <p class="mt-6 text-center text-lg">This iterative process helps ensure fairness is actively managed, not just checked once.</p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Key Concepts in AIF360 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Key Concepts in AIF360</h2>
+            <p>To use AIF360, you must define the context of fairness for your specific problem.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-2xl font-bold text-blue-300">Protected Attributes</h3>
+                    <p class="mt-2">Sensitive features that should not be a basis for decisions (e.g., race, gender, age). The groups within these attributes are key to fairness analysis.</p>
+                    <ul class="list-disc list-inside mt-2">
+                        <li><strong>Privileged Group:</strong> The group historically at an advantage (e.g., male for a hiring model).</li>
+                        <li><strong>Unprivileged Group:</strong> The group historically at a disadvantage (e.g., female).</li>
+                    </ul>
+                </div>
+                <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-2xl font-bold text-blue-300">Favorable Outcomes</h3>
+                    <p class="mt-2">The desired or positive outcome of a prediction. This is essential for many fairness metrics.</p>
+                     <ul class="list-disc list-inside mt-2">
+                        <li><strong>Favorable Outcome:</strong> Loan Approved, Hired, No Recidivism.</li>
+                        <li><strong>Unfavorable Outcome:</strong> Loan Denied, Not Hired, Recidivism.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Detecting Bias: Metrics -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Detecting Bias: Fairness Metrics</h2>
+            <p>AIF360 provides dozens of metrics to quantify different types of bias. A value of 0 often indicates fairness, while non-zero values indicate disparity.</p>
+            <div class="mt-6">
+                <h3 class="text-xl font-bold text-blue-300">Statistical Parity Difference (SPD)</h3>
+                <p class="mt-1">Measures the difference in the rate of favorable outcomes received by the unprivileged group compared to the privileged group.</p>
+                <div class="code-block mt-2 text-base">SPD = P(Outcome=Favorable | Group=Unprivileged) - P(Outcome=Favorable | Group=Privileged)</div>
+                <p class="mt-2"><strong>Goal:</strong> This value should be close to 0. A negative value means the unprivileged group gets favorable outcomes less often.</p>
+            </div>
+             <div class="mt-6">
+                <h3 class="text-xl font-bold text-blue-300">Equal Opportunity Difference (EOD)</h3>
+                <p class="mt-1">Measures the difference in true positive rates between unprivileged and privileged groups. It checks if people who qualify for a favorable outcome are equally likely to receive it, regardless of group.</p>
+                <div class="code-block mt-2 text-base">EOD = TPR(Unprivileged) - TPR(Privileged)</div>
+                <p class="mt-2"><strong>Goal:</strong> Also should be close to 0. Important for scenarios where avoiding false negatives is key (e.g., identifying qualified candidates).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Mitigating Bias: Algorithms -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Mitigating Bias: Algorithm Types</h2>
+            <p>AIF360's algorithms are categorized by where they intervene in the ML pipeline.</p>
+            <div class="diagram mt-6 !block text-center">
+                <div class="flex justify-around items-center">
+                     <div class="diagram-box !bg-green-800">Pre-processing<br/><span class="text-sm font-normal">Modify Data</span></div>
+                     <div class="diagram-arrow">&rarr;</div>
+                     <div class="diagram-box !bg-yellow-800">In-processing<br/><span class="text-sm font-normal">Modify Model</span></div>
+                     <div class="diagram-arrow">&rarr;</div>
+                     <div class="diagram-box !bg-purple-800">Post-processing<br/><span class="text-sm font-normal">Modify Predictions</span></div>
+                </div>
+                 <div class="flex justify-around items-center mt-4">
+                     <div class="w-1/3 p-2 text-sm text-gray-300">Applied to the training data *before* a model is trained. Examples: Reweighing, Disparate Impact Remover.</div>
+                     <div class="w-1/3 p-2 text-sm text-gray-300">Modifies the learning algorithm itself to incorporate fairness constraints. Examples: Adversarial Debiasing, Prejudice Remover.</div>
+                     <div class="w-1/3 p-2 text-sm text-gray-300">Applied to the model's predictions *after* it has been trained. Examples: Calibrated Equalized Odds, Reject Option Classification.</div>
+                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 10: Pre-processing Example: Reweighing -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Algorithm Example: Reweighing (Pre-processing)</h2>
+            <p>Reweighing is a technique that assigns different weights to data points in the training set to ensure fairness across groups and outcomes.</p>
+            <div class="diagram mt-6">
+                <div class="w-2/5">
+                    <h3 class="text-xl text-center mb-2">Before Reweighing</h3>
+                    <div class="p-4 bg-gray-800 rounded-lg">
+                        <p>Unprivileged + Favorable: <strong>Low count</strong></p>
+                        <p>Privileged + Favorable: <strong>High count</strong></p>
+                    </div>
+                    <p class="text-sm mt-2 text-center text-red-400">Data is biased against unprivileged group</p>
+                </div>
+                <div class="diagram-arrow text-4xl">&rArr;</div>
+                <div class="w-2/5">
+                     <h3 class="text-xl text-center mb-2">After Reweighing</h3>
+                    <div class="p-4 bg-gray-800 rounded-lg">
+                        <p>Unprivileged + Favorable: <strong class="text-green-300">Weight &uarr;</strong></p>
+                        <p>Privileged + Favorable: <strong class="text-red-300">Weight &darr;</strong></p>
+                    </div>
+                    <p class="text-sm mt-2 text-center text-green-400">Model training will now treat these instances more equally</p>
+                </div>
+            </div>
+            <p class="mt-6"><strong>How it works:</strong> The algorithm calculates weights for each data sample based on their group membership and outcome label. During training, the model pays more attention to the up-weighted samples, helping to correct for the historical bias in the data.</p>
+        </div>
+    </div>
+
+    <!-- Slide 11: In- & Post-processing Examples -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Algorithm Examples: In- & Post-processing</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                 <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-xl font-bold text-yellow-300">Adversarial Debiasing (In-processing)</h3>
+                    <p class="mt-2">This technique trains two models simultaneously:</p>
+                    <ul class="list-disc list-inside mt-2">
+                        <li>A <strong>Predictor</strong> model tries to predict the outcome from the data.</li>
+                        <li>An <strong>Adversary</strong> model tries to predict the protected attribute (e.g., race) from the Predictor's output.</li>
+                    </ul>
+                    <p class="mt-2">The Predictor is trained to "fool" the Adversary, learning to make predictions that contain no information about the protected attribute, thus promoting fairness.</p>
+                </div>
+                <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-xl font-bold text-purple-300">Calibrated Equalized Odds (Post-processing)</h3>
+                    <p class="mt-2">This algorithm adjusts a pre-trained model's predictions to improve fairness without needing to retrain the model itself.</p>
+                    <p class="mt-2">It works by finding a new decision threshold for each group (privileged and unprivileged) to equalize the true positive and false positive rates across groups. It's useful when you cannot modify the training process.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: AIF360 in Practice -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>AIF360 in Practice: Code Workflow</h2>
+            <p>Here’s a simplified Python code example showing the typical AIF360 workflow.</p>
+            <div class="code-block mt-4 text-sm">
+<pre><code class="language-python">
+# 1. Prepare the data
+from aif360.datasets import BinaryLabelDataset
+# ... (load your data into a pandas DataFrame)
+# Define privileged/unprivileged groups and favorable/unfavorable outcomes
+dataset = BinaryLabelDataset(df=your_df, label_names=['outcome'],
+                               protected_attribute_names=['race'], ...)
+
+# 2. Measure bias on the original dataset
+from aif360.metrics import ClassificationMetric
+metric_orig = ClassificationMetric(dataset, unprivileged_groups, privileged_groups)
+print(f"Statistical Parity Difference: {metric_orig.statistical_parity_difference():.4f}")
+
+# 3. Apply a mitigation algorithm (e.g., Reweighing)
+from aif360.algorithms.preprocessing import Reweighing
+RW = Reweighing(unprivileged_groups, privileged_groups)
+dataset_transf = RW.fit_transform(dataset)
+
+# 4. Train a model on the transformed data and re-measure
+# ... (train your model on dataset_transf)
+# ... (get predictions)
+dataset_pred = dataset.copy()
+dataset_pred.labels = predictions
+
+metric_new = ClassificationMetric(dataset_pred, unprivileged_groups, privileged_groups)
+print(f"New Statistical Parity Difference: {metric_new.statistical_parity_difference():.4f}")
+</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13: Key Takeaways -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Key Takeaways</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-blue-400">&rarr;</div>
+                    <p><strong>Fairness is a necessity, not a feature.</strong> Ignoring bias can lead to significant harm and risk. Proactive management is essential for responsible AI.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-blue-400">&rarr;</div>
+                    <p><strong>Bias can be quantified.</strong> Fairness is not just an abstract concept. Tools like AIF360 provide concrete metrics to measure and track bias in your systems.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-blue-400">&rarr;</div>
+                    <p><strong>AIF360 provides a comprehensive toolkit.</strong> It offers a wide range of metrics and algorithms to support detection and mitigation across the entire ML lifecycle.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-blue-400">&rarr;</div>
+                    <p><strong>Technology is only part of the solution.</strong> Fairness is a socio-technical challenge. It requires collaboration between developers, domain experts, and affected communities to define and achieve fair outcomes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 14: Resources & Q&A -->
+    <div class="slide">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold">Thank You</h1>
+            <h2 class="mt-6 text-4xl">Questions?</h2>
+            
+            <div class="mt-12 text-left max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold text-blue-300">Resources</h3>
+                <ul class="list-disc list-inside mt-4 space-y-3 text-lg">
+                    <li><strong>AIF360 on GitHub:</strong> <a href="https://github.com/Trusted-AI/AIF360" target="_blank" class="text-blue-400 hover:underline">github.com/Trusted-AI/AIF360</a></li>
+                    <li><strong>Official Documentation:</strong> <a href="https://aif360.readthedocs.io/" target="_blank" class="text-blue-400 hover:underline">aif360.readthedocs.io</a></li>
+                    <li><strong>IBM's Trusted AI Resources:</strong> <a href="https://www.research.ibm.com/trusted-ai/" target="_blank" class="text-blue-400 hover:underline">research.ibm.com/trusted-ai/</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span id="slide-number-current">1</span>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <span id="slide-number-total"></span>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideEl = document.getElementById('slide-number-current');
+        const totalSlideEl = document.getElementById('slide-number-total');
+        const progressFill = document.getElementById('progress-fill');
+        const prevBtn = document.getElementById('prev-slide-btn');
+        const nextBtn = document.getElementById('next-slide-btn');
+
+        let currentSlide = 0;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            currentSlideEl.textContent = currentSlide + 1;
+            totalSlideEl.textContent = totalSlides;
+            progressFill.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+            
+            // Hide/Show navigation buttons based on slide index
+            prevBtn.style.visibility = currentSlide === 0 ? 'hidden' : 'visible';
+            nextBtn.style.visibility = currentSlide === totalSlides - 1 ? 'hidden' : 'visible';
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide += 1;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide -= 1;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>

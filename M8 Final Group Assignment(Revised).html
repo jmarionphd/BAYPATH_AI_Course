@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 8 Final Group Assignment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark blue-gray background */
+            color: #e2e8f0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .slide-content {
+            background-color: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 85, 104, 0.5);
+            border-radius: 1rem;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #8b5cf6; /* Purple for strategy/boardroom theme */
+        }
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #c4b5fd; /* Lighter Purple */
+        }
+        p, li {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            color: #cbd5e0;
+        }
+        .diagram {
+            background-color: #2d3748;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #4a5568;
+        }
+        .diagram-arrow {
+            font-size: 2.5rem;
+            color: #8b5cf6;
+            margin: 0 1rem;
+        }
+        .diagram-box {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .deliverable {
+            background-color: #374151;
+            border-left: 4px solid #8b5cf6;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 0.25rem;
+        }
+        .footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #8b5cf6;
+            width: 0%;
+            transition: width 0.3s ease-out;
+        }
+        /* Styles for navigation buttons */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            color: #c4b5fd; /* Light purple to match theme */
+            font-size: 3rem;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+            opacity: 0.5;
+            padding: 1rem;
+            user-select: none;
+            outline: none;
+        }
+        .nav-arrow:hover {
+            color: #8b5cf6; /* Purple to match theme */
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+        #prev-slide-btn {
+            left: 1rem;
+        }
+        #next-slide-btn {
+            right: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Arrows -->
+    <div id="prev-slide-btn" class="nav-arrow" onclick="prevSlide()">
+        <!-- SVG for Left Arrow (Chevron Left) -->
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    </div>
+    <div id="next-slide-btn" class="nav-arrow" onclick="nextSlide()">
+        <!-- SVG for Right Arrow (Chevron Right) -->
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold leading-tight">Module 8 Final Group Assignment:<br>TransformCo Year 2 Board Presentation</h1>
+            <p class="mt-6 text-2xl text-purple-200">From Strategy to Execution: Securing the Mandate for Year 2.</p>
+             <p class="mt-12 text-lg text-gray-400">Use your arrow keys or the side arrows to navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Assignment Overview -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="text-center">The Scenario & The Goal</h2>
+            <p>It is one year after your initial proposal. Your group, acting as the transformation leadership team, is now presenting to the TransformCo Board of Directors. Your goal is to showcase Year 1 progress and present a compelling case for the Year 2 strategic plan and budget.</p>
+            <h3 class="text-xl font-bold text-purple-300 mt-6">Key Presentation Pillars:</h3>
+            <ul class="list-decimal list-inside mt-4 space-y-2 text-xl">
+                <li>Demonstrate a successfully integrated portfolio.</li>
+                <li>Show evidence of a maturing innovation process.</li>
+                <li>Quantify the value created by AI initiatives.</li>
+                <li>Outline a clear plan for scaling and sustainability.</li>
+                <li>Report on key metrics and governance effectiveness.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: Task 1: The Integrated Portfolio -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>1. Demonstrate an Integrated Portfolio</h2>
+            <p>Your presentation must move beyond the theoretical "dual transformation." Show the board a tangible, integrated portfolio of initiatives across the core and new businesses.</p>
+            <h3 class="text-xl font-bold text-purple-300 mt-6">Elaboration:</h3>
+            <p>Visually represent how the core business (Transformation A) and the new venture (Transformation B) are now operating. Highlight the synergies you predicted last year and show evidence of them working. For example, show how data from the core business is fueling the new AI venture's success.</p>
+            <div class="deliverable">
+                <p><strong class="text-purple-300">Deliverable Component:</strong> A portfolio slide in your presentation that maps key Year 1 projects. Use a framework like the Three Horizons of Growth to position initiatives and show a balanced approach to managing the present and inventing the future.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Task 2: Innovation Process Maturity -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>2. Show Innovation Process Maturity</h2>
+            <p>Prove to the board that your innovation frameworks are not just buzzwords; they are a functioning, value-producing system.</p>
+            <h3 class="text-xl font-bold text-purple-300 mt-6">Elaboration:</h3>
+            <p>Present evidence that your innovation process is working. This includes both successes and "intelligent failures." Showcase the innovation pipeline: how many ideas were explored? How many prototypes were built? How many were killed after failing validation tests (which saves money)? This demonstrates disciplined innovation.</p>
+             <div class="deliverable">
+                <p><strong class="text-purple-300">Deliverable Component:</strong> A section in your presentation on "The Innovation Engine." Include key metrics for your innovation pipeline (e.g., idea-to-pilot conversion rate) and briefly feature a case study of a project that went through the full process.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 5: Task 3: Highlight AI Value Creation -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>3. Highlight AI Value Creation</h2>
+            <p>This is where you connect your AI strategy to the bottom line. The board wants to see a return on the company's significant investment in AI.</p>
+             <h3 class="text-xl font-bold text-purple-300 mt-6">Elaboration:</h3>
+            <p>Present concrete, quantifiable results from Year 1 AI initiatives. Divide this into two parts:</p>
+            <ul class="list-disc list-inside mt-4 space-y-2">
+                <li><strong>AI in the Core:</strong> Show metrics like cost savings from automation, revenue lift from personalization engines, or improved efficiency in operations.</li>
+                <li><strong>AI in the New Venture:</strong> Show progress metrics like user adoption for an AI-powered product, accuracy of a new predictive model, or the creation of a valuable, proprietary dataset.</li>
+            </ul>
+            <div class="deliverable">
+                 <p><strong class="text-purple-300">Deliverable Component:</strong> A dedicated "AI ROI" section in your presentation. Use clear charts and hard numbers to make your case. For every AI initiative mentioned, be prepared to answer "What value did this create?"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Task 4: Address Scaling and Sustainability -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>4. Address Scaling and Sustainability</h2>
+            <p>Year 1 was about pilots and validation. Your Year 2 plan must focus on scaling up what works and ensuring long-term viability.</p>
+            <h3 class="text-xl font-bold text-purple-300 mt-6">Your plan must address:</h3>
+            <ul class="list-disc list-inside mt-4 space-y-2">
+                <li><strong>Scaling Plan:</strong> Which successful Year 1 pilots will be scaled in Year 2? What resources (budget, talent, technology) are required?</li>
+                <li><strong>Financial Sustainability:</strong> Present a path to profitability for the new venture. When is it expected to become self-funding?</li>
+                <li><strong>Talent & Capability:</strong> How will you continue to build the necessary AI and innovation skills within the organization?</li>
+            </ul>
+            <div class="deliverable">
+                 <p><strong class="text-purple-300">Deliverable Component:</strong> The core of your "Year 2 Strategic Plan" section. This part of the presentation should clearly articulate your strategic priorities and include a specific "ask" for the resources needed to achieve them.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Task 5: Metrics and Governance -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>5. Include Metrics and Governance Updates</h2>
+            <p>This is the accountability portion of your presentation. You must report on your Year 1 performance and show that your governance framework is effective.</p>
+            <h3 class="text-xl font-bold text-purple-300 mt-6">Key elements to report:</h3>
+            <ul class="list-disc list-inside mt-4 space-y-2">
+                <li><strong>Year 1 Scorecard:</strong> Present a dashboard showing Year 1 performance against the KPIs you established in your original plan. Be transparent about both hits and misses.</li>
+                <li><strong>Governance in Action:</strong> Provide a brief update from the AI Governance Council. How many projects were reviewed? What were the key decisions or policy updates made in Year 1?</li>
+                <li><strong>Year 2 KPIs:</strong> Propose the key metrics that the board should use to measure the success of your Year 2 plan.</li>
+            </ul>
+            <div class="deliverable">
+                 <p><strong class="text-purple-300">Deliverable Component:</strong> A concise "Performance & Oversight" section. This builds credibility and shows the board that your team is managing the transformation in a disciplined, transparent manner.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Final Deliverable: The Board Presentation -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The Final Deliverable: 45-Minute Board Presentation</h2>
+            <p>Your task is to synthesize all of these components into a single, compelling, and professional 45-minute narrative.</p>
+            <h3 class="text-xl font-bold text-purple-300 mt-6">Presentation Flow:</h3>
+            <div class="diagram mt-4 text-sm">
+                 <div class="diagram-box"><strong>Intro:</strong><br/>Recap the Vision</div>
+                 <div class="diagram-arrow">&rArr;</div>
+                 <div class="diagram-box"><strong>Part 1:</strong><br/>Y1 Results & Learnings (Portfolio, AI ROI, Metrics)</div>
+                 <div class="diagram-arrow">&rArr;</div>
+                 <div class="diagram-box"><strong>Part 2:</strong><br/>The Y2 Strategic Plan (Scaling, Sustainability)</div>
+                 <div class="diagram-arrow">&rArr;</div>
+                 <div class="diagram-box"><strong>The Ask:</strong><br/>Y2 Budget & Resources</div>
+                 <div class="diagram-arrow">&rArr;</div>
+                 <div class="diagram-box"><strong>Conclusion:</strong><br/>Future Outlook</div>
+            </div>
+             <p class="mt-4">Remember, you are not just reporting information; you are persuading the board to continue investing in your strategic direction. Your story must be clear, data-driven, and forward-looking.</p>
+        </div>
+    </div>
+    
+    <!-- Slide 9: Final Questions -->
+    <div class="slide">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold">Final Group Project</h1>
+            <h2 class="mt-6 text-4xl">Questions?</h2>
+            
+            <p class="mt-12 text-lg">Your group's success depends on telling a cohesive story of progress and potential. Connect your Year 1 results directly to your Year 2 plans to build a powerful case for continued investment and support.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span id="slide-number-current">1</span>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <span id="slide-number-total"></span>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideEl = document.getElementById('slide-number-current');
+        const totalSlideEl = document.getElementById('slide-number-total');
+        const progressFill = document.getElementById('progress-fill');
+        const prevBtn = document.getElementById('prev-slide-btn');
+        const nextBtn = document.getElementById('next-slide-btn');
+        let currentSlide = 0;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            currentSlideEl.textContent = currentSlide + 1;
+            totalSlideEl.textContent = totalSlides;
+            progressFill.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+            
+            // Hide/Show navigation buttons based on slide index
+            prevBtn.style.visibility = currentSlide === 0 ? 'hidden' : 'visible';
+            nextBtn.style.visibility = currentSlide === totalSlides - 1 ? 'hidden' : 'visible';
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide += 1;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide -= 1;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>

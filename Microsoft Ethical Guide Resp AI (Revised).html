@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Responsible AI Dashboard Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark blue-gray background */
+            color: #e2e8f0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .slide-content {
+            background-color: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 85, 104, 0.5);
+            border-radius: 1rem;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0078d4; /* Microsoft Blue */
+        }
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #50e6ff; /* Lighter Blue/Cyan */
+        }
+        p, li {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            color: #cbd5e0;
+        }
+        .diagram {
+            background-color: #2d3748;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #4a5568;
+        }
+        .diagram-arrow {
+            font-size: 2.5rem;
+            color: #0078d4;
+            margin: 0 1rem;
+        }
+        .diagram-box {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #0078d4;
+            width: 0%;
+            transition: width 0.3s ease-out;
+        }
+        /* Styles for navigation buttons */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            color: #50e6ff; /* Lighter Blue/Cyan to match theme */
+            font-size: 3rem;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+            opacity: 0.5;
+            padding: 1rem;
+            user-select: none;
+            outline: none;
+        }
+        .nav-arrow:hover {
+            color: #0078d4; /* Microsoft Blue to match theme */
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+        #prev-slide-btn {
+            left: 1rem;
+        }
+        #next-slide-btn {
+            right: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Arrows -->
+    <div id="prev-slide-btn" class="nav-arrow" onclick="prevSlide()">
+        <!-- SVG for Left Arrow (Chevron Left) -->
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    </div>
+    <div id="next-slide-btn" class="nav-arrow" onclick="nextSlide()">
+        <!-- SVG for Right Arrow (Chevron Right) -->
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold leading-tight">A Practical Guide to the <br>Microsoft Responsible AI Dashboard</h1>
+            <p class="mt-6 text-2xl text-cyan-200">Debugging Models and Building Trust with Azure Machine Learning.</p>
+             <p class="mt-12 text-lg text-gray-400">Use your arrow keys or the side arrows to navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Agenda -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="text-center">Agenda</h2>
+            <ul class="list-disc list-inside mt-8 space-y-4 text-xl">
+                <li>What is Responsible AI (RAI) and Why Does It Matter?</li>
+                <li>Introducing the Microsoft Responsible AI Dashboard</li>
+                <li>Core Components: A Unified Toolkit for Model Assessment</li>
+                <li>Deep Dive: Error Analysis, Interpretability, and Fairness</li>
+                <li>Exploring Causal Analysis and Data Explorer</li>
+                <li>The Responsible AI Scorecard for Governance</li>
+                <li>A Practical Workflow in Azure ML</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: What is Responsible AI? -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>What is Responsible AI?</h2>
+            <p>Responsible AI is an approach to developing, assessing, and deploying AI systems in a safe, trustworthy, and ethical manner. It is a core pillar for building AI that benefits individuals and society.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="diagram-box !bg-gray-700">
+                    <h3 class="font-bold text-xl text-cyan-300">Fairness</h3>
+                    <p class="mt-2 text-base">AI systems should treat all people fairly and avoid affecting similarly situated groups of people in different ways.</p>
+                </div>
+                <div class="diagram-box !bg-gray-700">
+                    <h3 class="font-bold text-xl text-cyan-300">Transparency</h3>
+                    <p class="mt-2 text-base">People should understand how AI systems work and why they make the decisions they do.</p>
+                </div>
+                <div class="diagram-box !bg-gray-700">
+                    <h3 class="font-bold text-xl text-cyan-300">Accountability</h3>
+                    <p class="mt-2 text-base">People should be accountable for AI systems. Designers and developers are responsible for their systems' operations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Introducing the RAI Dashboard -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The Microsoft Responsible AI Dashboard</h2>
+            <p>The Responsible AI Dashboard is a single, integrated interface within <strong class="text-cyan-300">Azure Machine Learning</strong> that brings together several tools to help you assess and debug your models and make more informed, data-driven decisions.</p>
+            <div class="diagram mt-8">
+                <div class="diagram-box text-lg">Your Trained ML Model</div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg !bg-blue-900/80">Responsible AI Dashboard<br><span class="text-sm text-gray-300">(in Azure ML Studio)</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg">Holistic Insights<br><span class="text-sm text-gray-300">(Performance, Fairness, Explainability)</span></div>
+            </div>
+            <p class="mt-6">It aims to streamline the practice of Responsible AI, moving it from a theoretical concept to a practical part of the MLOps lifecycle.</p>
+        </div>
+    </div>
+
+    <!-- Slide 5: The Core Components -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Core Components of the Dashboard</h2>
+            <p>The dashboard provides a unified view through a set of powerful, interconnected tools.</p>
+            <div class="diagram mt-6 !grid grid-cols-3 gap-6">
+                <div class="diagram-box !bg-green-800/60 p-4">
+                    <h3 class="font-bold text-lg">Error Analysis</h3>
+                    <p class="text-sm mt-1">Identify data cohorts with higher error rates.</p>
+                </div>
+                <div class="diagram-box !bg-blue-800/60 p-4">
+                    <h3 class="font-bold text-lg">Model Interpretability</h3>
+                    <p class="text-sm mt-1">Explain "why" your model made its predictions.</p>
+                </div>
+                <div class="diagram-box !bg-yellow-800/60 p-4">
+                    <h3 class="font-bold text-lg">Fairness Assessment</h3>
+                    <p class="text-sm mt-1">Evaluate how model predictions impact different groups.</p>
+                </div>
+                <div class="diagram-box !bg-purple-800/60 p-4">
+                    <h3 class="font-bold text-lg">Causal Analysis</h3>
+                    <p class="text-sm mt-1">Simulate "what-if" scenarios and treatment effects.</p>
+                </div>
+                <div class="diagram-box !bg-red-800/60 p-4">
+                    <h3 class="font-bold text-lg">Data Explorer</h3>
+                    <p class="text-sm mt-1">Understand your dataset's distribution and statistics.</p>
+                </div>
+                 <div class="diagram-box !bg-teal-800/60 p-4">
+                    <h3 class="font-bold text-lg">Model Performance</h3>
+                    <p class="text-sm mt-1">Assess overall model quality with standard metrics.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 6: Component 1: Error Analysis -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Component Deep Dive: Error Analysis</h2>
+            <p>Error Analysis helps you move beyond overall accuracy metrics to understand <strong class="text-cyan-300">where your model is failing</strong>. It automatically discovers segments of your data where the model has a disproportionately high error rate.</p>
+            <div class="diagram mt-8">
+                <div class="diagram-box text-lg">Model predicts loan defaults with 95% accuracy.</div>
+                <div class="diagram-arrow text-4xl">&rArr;</div>
+                <div class="diagram-box text-lg !bg-red-900/80">
+                    <h3 class="font-bold">Error Analysis reveals:</h3>
+                    <p class="mt-2 text-base">Accuracy drops to 70% for applicants who are self-employed and under 30.</p>
+                </div>
+            </div>
+            <p class="mt-6">This allows you to identify blind spots in your model and diagnose whether the root cause is a data representation issue or a model behavior problem.</p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Component 2: Model Interpretability -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Component Deep Dive: Model Interpretability</h2>
+            <p>Interpretability (also known as Explainable AI or XAI) answers the question: <strong class="text-cyan-300">"Why did my model make this prediction?"</strong></p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-2xl font-bold text-cyan-300">Global Explanations</h3>
+                    <p class="mt-2">Shows which features are most important for the model's overall behavior. (e.g., "Income and credit score are the top two factors driving loan approvals.")</p>
+                </div>
+                <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-2xl font-bold text-cyan-300">Local Explanations</h3>
+                    <p class="mt-2">Shows which features influenced an individual prediction. (e.g., "This specific loan was denied primarily because of a high debt-to-income ratio.")</p>
+                </div>
+            </div>
+            <p class="mt-4">The dashboard uses techniques like SHAP to generate these explanations, which are crucial for debugging, regulatory compliance, and building user trust.</p>
+        </div>
+    </div>
+    
+    <!-- Slide 8: Component 3: Fairness Assessment -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Component Deep Dive: Fairness Assessment</h2>
+            <p>This component evaluates how your model's performance and harms impact various demographic or sensitive groups defined by you.</p>
+            <h3 class="text-xl font-bold text-cyan-300 mt-6">The Process:</h3>
+            <ol class="list-decimal list-inside mt-4 space-y-3">
+                <li><strong>Identify Sensitive Features:</strong> You specify attributes like gender, race, or age.</li>
+                <li><strong>Select Fairness Metrics:</strong> Choose from metrics like demographic parity (similar selection rates) or equalized odds (similar error rates).</li>
+                <li><strong>Assess Disparities:</strong> The tool visualizes the performance disparities between the groups you defined. For example, it might show that the model's false negative rate is significantly higher for women than for men.</li>
+                <li><strong>Mitigate (Optional):</strong> The toolkit is integrated with Fairlearn algorithms to help mitigate the unfairness discovered.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Slide 9: Causal Analysis & Data Explorer -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Other Key Components</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                 <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-xl font-bold text-purple-300">Causal Analysis</h3>
+                    <p class="mt-2">Causal Analysis helps you understand cause-and-effect relationships in your data by simulating "what-if" scenarios. It answers questions like:</p>
+                    <ul class="list-disc list-inside mt-2">
+                        <li>"How would offering a 10% discount on a product affect overall sales for a specific customer segment?"</li>
+                        <li>"What is the true effect of a specific medication on patient recovery, controlling for other factors?"</li>
+                    </ul>
+                </div>
+                <div class="p-6 rounded-lg bg-gray-700/50">
+                    <h3 class="text-xl font-bold text-red-300">Data Explorer</h3>
+                    <p class="mt-2">This is your first stop for responsible AI. It allows you to explore your dataset's statistics and distributions before you even train a model.</p>
+                    <p class="mt-2">By understanding your data's characteristics and potential imbalances early, you can proactively address issues that might lead to fairness or performance problems later on.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: The RAI Scorecard -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>The Responsible AI Scorecard</h2>
+            <p>The RAI Scorecard is a PDF report that serves as a compliance and governance tool. It provides a comprehensive summary of your model's responsible AI health.</p>
+             
+            <h3 class="text-xl font-bold text-cyan-300 mt-6">Key Features:</h3>
+            <ul class="list-disc list-inside mt-4 space-y-3">
+                <li><strong>Exportable Summary:</strong> Easily share key fairness, interpretability, and performance metrics with stakeholders (e.g., product managers, compliance officers).</li>
+                <li><strong>Customizable Content:</strong> You can configure the scorecard to include or exclude specific components and metrics relevant to your use case.</li>
+                <li><strong>Fosters Accountability:</strong> Helps document due diligence and facilitates conversations about potential trade-offs and mitigation strategies before model deployment.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Slide 11: The RAI Workflow -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>A Practical Workflow in Azure ML</h2>
+            <p>Integrating the RAI Dashboard into your MLOps pipeline is straightforward.</p>
+            <div class="diagram mt-6">
+                <div class="diagram-box text-lg">1. Train Model<br/><span class="text-sm text-gray-300">Standard Azure ML Training</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg">2. Generate RAI Insights<br/><span class="text-sm text-gray-300">Run the RAI pipeline component</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg">3. Explore Dashboard<br/><span class="text-sm text-gray-300">Interactively debug model</span></div>
+                <div class="diagram-arrow">&rarr;</div>
+                <div class="diagram-box text-lg">4. Generate Scorecard<br/><span class="text-sm text-gray-300">Export PDF for review</span></div>
+            </div>
+            <p class="mt-6 text-center text-lg">This process embeds responsible AI checks directly into the model development and validation lifecycle.</p>
+        </div>
+    </div>
+    
+    <!-- Slide 12: Key Takeaways -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>Key Takeaways</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-cyan-400">&rarr;</div>
+                    <p><strong>RAI is Operationalized.</strong> The dashboard makes Responsible AI a practical, repeatable part of the development process, not just a theoretical concern.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-cyan-400">&rarr;</div>
+                    <p><strong>It's a Unified Debugging Tool.</strong> It connects different aspects of model failure (e.g., an error cohort is also an unfair cohort), providing deeper insights.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-cyan-400">&rarr;</div>
+                    <p><strong>Informed Decision-Making.</strong> It empowers all stakeholders—from data scientists to business leaders—to understand and discuss model behavior and its potential impacts.</p>
+                </div>
+                 <div class="flex items-start space-x-4">
+                    <div class="text-4xl text-cyan-400">&rarr;</div>
+                    <p><strong>Builds Trust.</strong> By providing transparency and tools for fairness, the dashboard is essential for building trust with users, customers, and regulators.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 13: Resources & Q&A -->
+    <div class="slide">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold">Thank You</h1>
+            <h2 class="mt-6 text-4xl">Questions?</h2>
+            
+            <div class="mt-12 text-left max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold text-cyan-300">Resources</h3>
+                <ul class="list-disc list-inside mt-4 space-y-3 text-lg">
+                    <li><strong>Official Documentation:</strong> <a href="https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai-dashboard" target="_blank" class="text-blue-400 hover:underline">Azure ML Responsible AI Dashboard Docs</a></li>
+                    <li><strong>GitHub Repository (Examples):</strong> <a href="https://github.com/Azure/azureml-examples/tree/main/sdk/python/responsible-ai" target="_blank" class="text-blue-400 hover:underline">Azure ML Examples on GitHub</a></li>
+                    <li><strong>Microsoft's Responsible AI Principles:</strong> <a href="https://www.microsoft.com/en-us/ai/responsible-ai" target="_blank" class="text-blue-400 hover:underline">microsoft.com/en-us/ai/responsible-ai</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span id="slide-number-current">1</span>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <span id="slide-number-total"></span>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideEl = document.getElementById('slide-number-current');
+        const totalSlideEl = document.getElementById('slide-number-total');
+        const progressFill = document.getElementById('progress-fill');
+        const prevBtn = document.getElementById('prev-slide-btn');
+        const nextBtn = document.getElementById('next-slide-btn');
+
+        let currentSlide = 0;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            currentSlideEl.textContent = currentSlide + 1;
+            totalSlideEl.textContent = totalSlides;
+            progressFill.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+            
+            // Hide/Show navigation buttons based on slide index
+            prevBtn.style.visibility = currentSlide === 0 ? 'hidden' : 'visible';
+            nextBtn.style.visibility = currentSlide === totalSlides - 1 ? 'hidden' : 'visible';
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide += 1;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide -= 1;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>
