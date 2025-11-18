@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 7 Individual Assignment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark blue-gray background */
+            color: #e2e8f0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .slide-content {
+            background-color: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 85, 104, 0.5);
+            border-radius: 1rem;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f59e0b; /* Amber for academic/assignment theme */
+        }
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #fcd34d; /* Lighter Amber */
+        }
+        p, li {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            color: #cbd5e0;
+        }
+        .diagram {
+            background-color: #2d3748;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #4a5568;
+        }
+        .diagram-arrow {
+            font-size: 2.5rem;
+            color: #f59e0b;
+            margin: 0 1rem;
+        }
+        .diagram-box {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .deliverable {
+            background-color: #374151;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+        }
+        .footer {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #f59e0b;
+            width: 0%;
+            transition: width 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold leading-tight">Module 7 Individual Assignment:<br>Building a Responsible AI Strategy</h1>
+            <p class="mt-6 text-2xl text-amber-200">A Breakdown of Key Deliverables and Expectations.</p>
+             <p class="mt-12 text-lg text-gray-400">Use your arrow keys to navigate</p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Assignment Overview -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="text-center">Assignment Overview & Deliverables</h2>
+            <p>This assignment requires you to create the foundational components of a comprehensive Responsible AI program for a hypothetical organization. You will produce four distinct, interconnected documents.</p>
+            <ul class="list-decimal list-inside mt-8 space-y-4 text-xl">
+                <li><strong>Develop a Responsible Innovation Checklist:</strong> The "How-To" guide for project teams.</li>
+                <li><strong>Create AI Ethics Guidelines:</strong> The "Why" that defines your organization's values.</li>
+                <li><strong>Identify Regulatory Requirements:</strong> The "Must-Do" legal and policy constraints.</li>
+                <li><strong>Design a Compliance Framework:</strong> The "System" that integrates everything.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 3: Deliverable 1 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>1. Develop Responsible Innovation Checklist</h2>
+            <p>This is a practical, actionable tool for data scientists and project managers to use throughout the AI lifecycle. It translates high-level principles into concrete questions and actions.</p>
+            <h3 class="text-xl font-bold text-amber-300 mt-6">Elaboration:</h3>
+            <p>Your checklist should be organized by project phase (e.g., Scoping, Data Collection, Model Building, Deployment & Monitoring). For each phase, list specific questions that a team must consider.</p>
+            <div class="deliverable">
+                <p><strong class="text-amber-300">Deliverable:</strong> A document, likely a table or structured list, containing the checklist. <br><strong>Example Item (Data Collection phase):</strong> <em>"Have we analyzed the dataset for potential sources of historical bias against protected groups? What steps were taken to mitigate this?"</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Deliverable 2 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>2. Create AI Ethics Guidelines</h2>
+            <p>This is a high-level, principle-based document that serves as the "constitution" for AI development at your organization. It sets the tone and articulates core values.</p>
+            <h3 class="text-xl font-bold text-amber-300 mt-6">Elaboration:</h3>
+            <p>Unlike the tactical checklist, this document is strategic. It should define a set of core principles your organization commits to. Common principles include Fairness, Accountability, Transparency, Privacy, and Human Oversight.</p>
+            <div class="deliverable">
+                 <p><strong class="text-amber-300">Deliverable:</strong> A formal document outlining 5-7 core ethical principles. For each principle, provide a 2-3 sentence explanation of what it means in the context of your organization.
+                 <br><strong>Example Principle:</strong> <em>"<strong>Accountability:</strong> We are accountable for the outcomes of our AI systems. Every AI system will have a designated human owner responsible for its continuous monitoring and performance."</em></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 5: Deliverable 3 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>3. Identify Regulatory Requirements</h2>
+            <p>This task requires you to ground your strategy in real-world legal obligations. You must analyze the requirements for a <strong class="text-amber-300">specific, hypothetical AI system.</strong></p>
+            <h3 class="text-xl font-bold text-amber-300 mt-6">Elaboration:</h3>
+            <p>First, invent a plausible AI application (e.g., an AI-powered hiring tool for a global company, a clinical diagnostic tool for use in the EU, a facial recognition system for retail security). Then, research and identify 2-3 major regulations that would apply to it (e.g., GDPR, EU AI Act, HIPAA, state-level biometric privacy laws).</p>
+            <div class="deliverable">
+                 <p><strong class="text-amber-300">Deliverable:</strong> A brief report that:
+                    <ol class="list-decimal list-inside ml-4">
+                        <li>Defines your chosen hypothetical AI system.</li>
+                        <li>Lists the relevant regulations.</li>
+                        <li>For each regulation, explains *why* it applies and summarizes 1-2 key obligations (e.g., "The EU AI Act classifies this hiring tool as 'high-risk', requiring a conformity assessment before deployment.").</li>
+                    </ol>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Deliverable 4 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>4. Design a Compliance Framework</h2>
+            <p>This is the capstone deliverable. It's the operational blueprint that shows how your organization will actually implement the ethics guidelines, use the checklist, and adhere to regulations.</p>
+            <h3 class="text-xl font-bold text-amber-300 mt-6">Elaboration:</h3>
+            <p>This framework connects your people, processes, and technology. You should outline the key components of your compliance system. Think about the structure and workflow needed to ensure responsible AI in practice.</p>
+            <div class="deliverable">
+                 <p><strong class="text-amber-300">Deliverable:</strong> A diagram or detailed outline of your framework. It should include sections for:
+                    <ul class="list-disc list-inside ml-4">
+                       <li><strong>Governance Body:</strong> Who is on the AI Review Board? What are their responsibilities?</li>
+                       <li><strong>Risk Assessment Process:</strong> How will projects be classified (e.g., low, medium, high risk)?</li>
+                       <li><strong>MLOps Integration Points:</strong> Where in the development cycle will your checklist be enforced? (e.g., mandatory fairness audit before deployment).</li>
+                       <li><strong>Documentation Standards:</strong> What documentation is required for high-risk models (e.g., Model Cards, Datasheets)?</li>
+                    </ul>
+                 </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: How It All Fits Together -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>How It All Fits Together</h2>
+            <p>Your four deliverables are not separate tasks; they form a cohesive and reinforcing strategy for responsible AI.</p>
+            
+            <div class="diagram mt-6 text-sm">
+                <div class="diagram-box !bg-yellow-800/80 p-4">
+                    <strong>AI Ethics Guidelines</strong><br/>(The 'Why' / Our Values)
+                </div>
+                <div class="diagram-arrow">&darr;</div>
+                <div class="diagram-box !bg-blue-800/80 p-4">
+                    <strong>Regulatory Requirements</strong><br/>(The 'What' / The Rules)
+                </div>
+                <div class="diagram-arrow">&darr;</div>
+                <div class="diagram-box !bg-green-800/80 p-4">
+                    <strong>Innovation Checklist</strong><br/>(The 'How' / Daily Actions)
+                </div>
+                 <div class="diagram-arrow">&darr;</div>
+                 <div class="diagram-box !bg-purple-800/80 p-4">
+                    <strong>Compliance Framework</strong><br/>(The 'System' / Governance)
+                </div>
+            </div>
+            <p class="mt-4 text-center">Your guidelines and regulations inform the practical steps in your checklist, and the compliance framework provides the structure to enforce it all.</p>
+        </div>
+    </div>
+    
+    <!-- Slide 8: Final Questions -->
+    <div class="slide">
+        <div class="slide-content text-center">
+            <h1 class="text-6xl font-bold">Assignment Complete</h1>
+            <h2 class="mt-6 text-4xl">Questions?</h2>
+            
+            <p class="mt-12 text-lg">This presentation has broken down the four key deliverables for your Module 7 assignment. <br>Focus on creating four distinct but thematically linked documents that demonstrate a comprehensive understanding of operationalizing AI ethics.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span id="slide-number-current">1</span>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <span id="slide-number-total"></span>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideEl = document.getElementById('slide-number-current');
+        const totalSlideEl = document.getElementById('slide-number-total');
+        const progressFill = document.getElementById('progress-fill');
+        let currentSlide = 0;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            currentSlideEl.textContent = currentSlide + 1;
+            totalSlideEl.textContent = totalSlides;
+            progressFill.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>
